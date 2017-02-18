@@ -3,7 +3,7 @@ package com.raquo.snabbdom.collections.attrs
 import com.raquo.snabbdom.collections.CollectionOps
 import com.raquo.snabbdom.setters.Attr
 
-// @TODO[API][cleanup] Why is this separate from Attrs? How is it different?
+// @TODO[API][cleanup] Why is this separate from Attrs? How is it different? We're following ScalaTags on collections
 
 /**
   * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
@@ -31,6 +31,11 @@ trait GlobalAttrs extends CollectionOps {
     * Alias for the `cls` attribute
     */
   lazy val `class`: Attr[String] = cls
+
+  /**
+    * Alias for the `cls` attribute for React.js people
+    */
+  lazy val className: Attr[String] = cls
 
   /**
     * Specifies whether the content of an element is editable or not

@@ -44,6 +44,7 @@ package object snabbdom {
     */
   @ScalaJSDefined
   object NoModifier extends Modifier {
+    // @TODO Should this apply a Null child instead?
     @inline def applyTo(vnode: VNode): Unit = ()
   }
 
