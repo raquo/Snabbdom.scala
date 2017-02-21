@@ -8,4 +8,4 @@ trait UnitSpec extends FunSpec
   with MountSpec
   with RuleImplicits
   with DomEventSimulatorSpec
-  with RandomSpec
+  with UtilSpec

@@ -1,6 +1,7 @@
 package com.raquo.snabbdom.helpers.matching
 
 import com.raquo.snabbdom.setters.Attr
+import com.raquo.snabbdom.helpers.UtilSpec.repr
 import org.scalajs.dom
 
 class AttrRuleOps[V](val attr: Attr[V]) extends AnyVal {
@@ -17,12 +18,12 @@ class AttrRuleOps[V](val attr: Attr[V]) extends AnyVal {
     }
   }
 
-  private def nodeAttrIs(attr: Attr[V], maybeExpectedValue: Option[V])(node: dom.Node): Option[String] = {
+  private def nodeAttrIs(attr: Attr[V], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
     (node, maybeExpectedValue) match {
       case (element: dom.Element, None) =>
         if (element.hasAttribute(attr.name)) {
           val actual = element.getAttribute(attr.name)
-          Some(s"Attr `${attr.name}` should not be present: actual value $actual, expected to be missing")
+          Some(s"Attr `${attr.name}` should not be present: actual value ${repr(actual)}, expected to be missing")
         } else {
           None
         }
@@ -30,18 +31,18 @@ class AttrRuleOps[V](val attr: Attr[V]) extends AnyVal {
         val hasAttribute = element.hasAttribute(attr.name)
         val attributeValue = element.getAttribute(attr.name)
         (hasAttribute, expectedValue) match {
-          case (true, false) => Some(s"Boolean attr `${attr.name}` mismatch: attribute value is $attributeValue, expected attribute to be missing")
+          case (true, false) => Some(s"Boolean attr `${attr.name}` mismatch: attribute value is ${repr(attributeValue)}, expected attribute to be missing")
           case (false, true) => Some(s"Boolean attr `${attr.name}` mismatch: attribute is missing, expected to be present")
-          case (true, true) if attributeValue != "true" => Some(s"Boolean attr `${attr.name}` value mismatch: actual $attributeValue, expected true")
+          case (true, true) if attributeValue != "true" => Some(s"Boolean attr `${attr.name}` value mismatch: actual ${repr(attributeValue)}, expected true")
           case _ => None
         }
       case (element: dom.Element, Some(expectedValue)) =>
         if (!element.hasAttribute(attr.name)) {
-          Some(s"Attr `${attr.name}` is missing, expected $expectedValue")
+          Some(s"Attr `${attr.name}` is missing, expected ${repr(expectedValue)}")
         } else {
           val actualValue = element.getAttribute(attr.name)
           if (actualValue != expectedValue.toString) {
-            Some(s"Attr `${attr.name}` value is incorrect: actual value $actualValue, expected value $expectedValue")
+            Some(s"Attr `${attr.name}` value is incorrect: actual value ${repr(actualValue)}, expected value ${repr(expectedValue)}")
           } else {
             None
           }

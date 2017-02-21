@@ -1,6 +1,7 @@
 package com.raquo.snabbdom.helpers.matching
 
 import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.helpers.UtilSpec.repr
 import org.scalajs.dom
 
 import scala.collection.mutable
@@ -41,7 +42,7 @@ object ExpectedElement {
 
   def checkTagName(element: dom.Element, expectedElement: ExpectedElement): MaybeError = {
     if (element.tagName.toLowerCase != expectedElement.emptyVNode.sel) {
-      Some(s"Element tag name is incorrect: actual ${element.tagName.toLowerCase}, expected ${expectedElement.emptyVNode.sel}")
+      Some(s"Element tag name is incorrect: actual ${repr(element.tagName.toLowerCase)}, expected ${repr(expectedElement.emptyVNode.sel)}")
     } else {
       None
     }
@@ -62,8 +63,8 @@ object ExpectedElement {
 
     val childErrors = if (actualNumChildren != expectedNumChildren) {
       List(
-        withClue(clue = clue, s"Child nodes length mismatch: actual $actualNumChildren, expected $expectedNumChildren"),
-        withClue(clue = clue, s"- Detailed comparison:\n    actual - ${nodeListToList(element.childNodes)},\n  expected - ${expectedElement.expectedChildren}")
+        withClue(clue = clue, s"Child nodes length mismatch: actual ${repr(actualNumChildren)}, expected ${repr(expectedNumChildren)}"),
+        withClue(clue = clue, s"- Detailed comparison:\n    actual - ${repr(nodeListToList(element.childNodes))},\n  expected - ${repr(expectedElement.expectedChildren)}")
       )
     } else {
       expectedElement.expectedChildren.zipWithIndex.flatMap {
@@ -96,7 +97,7 @@ object ExpectedElement {
       case _ =>
         List(withClue(
           clue = childClue,
-          s"Node type mismatch: actual node $childNode, expected an instance of dom.Element"
+          s"Node type mismatch: actual node ${repr(childNode)}, expected an instance of dom.Element"
         ))
     }
   }
@@ -105,12 +106,12 @@ object ExpectedElement {
     if (childNode.nodeType != dom.Node.TEXT_NODE) {
       List(withClue(
         clue = childClue,
-        s"Node type mismatch: actual ${childNode.nodeType}, expected ${dom.Node.TEXT_NODE} (Text Node)"
+        s"Node type mismatch: actual ${repr(childNode.nodeType)}, expected ${repr(dom.Node.TEXT_NODE)} (Text Node)"
       ))
     } else if (childNode.textContent != expectedText.toString) {
       List(withClue(
         clue = childClue,
-        s"Text node textContent mismatch: actual ${childNode.textContent}, expected $expectedText"
+        s"Text node textContent mismatch: actual ${repr(childNode.textContent)}, expected ${repr(expectedText)}"
       ))
     } else {
       Nil

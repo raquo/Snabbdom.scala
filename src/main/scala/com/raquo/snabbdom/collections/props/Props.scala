@@ -170,7 +170,7 @@ trait Props extends CollectionOps {
     *
     * MDN
     */
-  lazy val colSpan: Prop[Int] = prop("colspan")
+  lazy val colSpan: Prop[Int] = prop("colSpan")
 
   /**
     * This attribute contains a non-negative integer value that indicates for how many
@@ -180,7 +180,7 @@ trait Props extends CollectionOps {
     *
     * MDN
     */
-  lazy val rowSpan: Prop[Int] = prop("rowspan")
+  lazy val rowSpan: Prop[Int] = prop("rowSpan")
 
   /**
     * ARIA is a set of special accessibility attributes which can be added

@@ -1,7 +1,7 @@
 package com.raquo.snabbdom.helpers.matching
 
 import com.raquo.snabbdom.VNode
-import com.raquo.snabbdom.setters.Attr
+import com.raquo.snabbdom.setters.{Attr, Prop}
 
 trait RuleImplicits {
 
@@ -11,6 +11,10 @@ trait RuleImplicits {
 
   implicit def withAttrRuleOps[V](attr: Attr[V]): AttrRuleOps[V] = {
     new AttrRuleOps(attr)
+  }
+
+  implicit def withPropRuleOps[V](prop: Prop[V]): PropRuleOps[V] = {
+    new PropRuleOps(prop)
   }
 
   implicit def childElementToRule(child: ExpectedElement): Rule = new Rule {
