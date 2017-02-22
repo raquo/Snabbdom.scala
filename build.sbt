@@ -34,7 +34,19 @@ useYarn := true
 
 requiresDOM in Test := true
 
-enableReloadWorkflow in Test := false
+// @TODO[Integrity] Selenium does not work because of @see https://github.com/scalacenter/scalajs-bundler/issues/89
+// jsEnv in Test := new org.scalajs.jsenv.selenium.SeleniumJSEnv(org.scalajs.jsenv.selenium.Chrome())
+
+// @TODO[Convenience] run Chrome headlessly (or maybe try firefox-x11) (or maybe just switch to ubuntu...)
+
+// Workaround for this bug (I think?): @see https://github.com/scalacenter/scalajs-bundler/issues/89
+//fastOptJS in Test := {
+//  val f = (fastOptJS in Test).value
+//  val fd = new File(f.data.getPath.stripSuffix(".js") + "-bundle.js")
+//  f.copy(fd)(f.metadata)
+//}
+
+//parallelExecution in Test := false
 
 // Webpack bundle is not being generated?
 // Remember that you need to run `sbt fastOptJS::webpack`, not just `sbt fastOptJS`.
