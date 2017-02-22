@@ -1,6 +1,6 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.props.{colSpan, href, rowSpan, disabled, rel}
+import com.raquo.snabbdom.props.{alt, colSpan, disabled, href, rel, rowSpan}
 import com.raquo.snabbdom.helpers.UnitSpec
 import com.raquo.snabbdom.tags.{div, input, span, td}
 
@@ -12,27 +12,28 @@ class PropSpec extends UnitSpec {
 
   it("sets props") {
     val expectedRel = randomString("rel_")
-    val expectedColSpan = Random.nextInt(15)
-    val expectedRowSpan = 15 + Random.nextInt(7)
+    val expectedHref = randomString("href_")
+    val expectedAlt = randomString("alt_")
 
     mount("div", div(rel := expectedRel))
     expectElement(div like (rel is expectedRel))
     unmount()
 
     mount("td [colSpan, rowSpan]", td(
-      colSpan := expectedColSpan,
-      rowSpan := expectedRowSpan
+      href := expectedHref,
+      alt := expectedAlt
     ))
     expectElement(
       td like(
-        colSpan is expectedColSpan,
-        rowSpan is expectedRowSpan,
+        href is expectedHref,
+        alt is expectedAlt,
         rel isEmpty
       )
     )
     unmount()
   }
 
+  // @TODO[Integrity] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
   it("sets non-string props") {
     mount("input [disabled=false]", input(disabled := false))
     expectElement(input like(disabled is false, colSpan isEmpty))
@@ -79,6 +80,7 @@ class PropSpec extends UnitSpec {
     unmount()
   }
 
+  // @TODO[Integrity] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
   it("sets props in nested elements") {
     val expectedRel1 = randomString("rel1_")
     val expectedRel2 = randomString("rel2_")
