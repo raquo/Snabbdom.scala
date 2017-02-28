@@ -26,7 +26,7 @@ class PropRuleOps[V](val prop: Prop[V]) extends AnyVal {
       (maybeActualValue, maybeExpectedValue) match {
         case (None, None) => None
         case (None, Some(expectedValue)) =>
-          Some(s"Prop `${prop.name}` is missing, expected $expectedValue")
+          Some(s"Prop `${prop.name}` is missing, expected ${repr(expectedValue)}")
         case (Some(actualValue), None) =>
           Some(s"Prop `${prop.name}` should not be present: actual value ${repr(actualValue)}, expected to be missing")
         case (Some(actualValue), Some(expectedValue)) =>
