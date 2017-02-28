@@ -20,7 +20,7 @@ licenses += ("MIT", url("https://github.com/raquo/snabbdom-scala/blob/master/LIC
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
+  "org.scalatest" %%% "scalatest" % "3.0.1" // % "test" @TODO[Elegance] We have reusable test helpers. Create a separate SnabbdomTestUtils package.
 )
 
 persistLauncher in Test := false

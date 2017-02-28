@@ -1,7 +1,7 @@
-package com.raquo.snabbdom.helpers.matching
+package com.raquo.snabbdom.utils.testing.matching
 
 import com.raquo.snabbdom.VNode
-import com.raquo.snabbdom.helpers.UtilSpec.repr
+import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
 import scala.collection.mutable

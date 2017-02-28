@@ -1,6 +1,6 @@
-package com.raquo.snabbdom.helpers.matching
+package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.helpers.UtilSpec.repr
+import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import com.raquo.snabbdom.setters.Style
 import org.scalajs.dom
 

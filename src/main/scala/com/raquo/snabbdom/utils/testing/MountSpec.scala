@@ -1,7 +1,7 @@
-package com.raquo.snabbdom.helpers
+package com.raquo.snabbdom.utils.testing
 
 import com.raquo.snabbdom.Snabbdom.PatchFn
-import com.raquo.snabbdom.helpers.matching.ExpectedElement
+import com.raquo.snabbdom.utils.testing.matching.ExpectedElement
 import com.raquo.snabbdom.tags.div
 import com.raquo.snabbdom.{AttrsModule, EventsModule, Module, PropsModule, Snabbdom, StyleModule, VNode}
 import org.scalajs.dom

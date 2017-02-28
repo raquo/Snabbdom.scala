@@ -1,6 +1,6 @@
-package com.raquo.snabbdom.helpers
+package com.raquo.snabbdom.utils.testing
 
-import com.raquo.snabbdom.helpers.matching.RuleImplicits
+import com.raquo.snabbdom.utils.testing.matching.RuleImplicits
 import org.scalatest.{FunSpec, Matchers}
 
 trait UnitSpec extends FunSpec

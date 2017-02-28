@@ -1,4 +1,4 @@
-package com.raquo.snabbdom.helpers.matching
+package com.raquo.snabbdom.utils.testing.matching
 
 import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.setters.{Attr, Prop, Style}

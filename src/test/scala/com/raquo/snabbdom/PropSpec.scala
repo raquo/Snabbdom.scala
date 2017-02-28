@@ -1,8 +1,8 @@
 package com.raquo.snabbdom
 
 import com.raquo.snabbdom.props.{alt, colSpan, disabled, href, rel, rowSpan}
-import com.raquo.snabbdom.helpers.UnitSpec
 import com.raquo.snabbdom.tags.{div, input, span, td}
+import com.raquo.snabbdom.utils.testing.UnitSpec
 
 import scala.util.Random
 

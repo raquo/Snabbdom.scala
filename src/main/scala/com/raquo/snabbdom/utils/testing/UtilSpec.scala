@@ -1,4 +1,4 @@
-package com.raquo.snabbdom.helpers
+package com.raquo.snabbdom.utils.testing
 
 import scala.util.Random
 

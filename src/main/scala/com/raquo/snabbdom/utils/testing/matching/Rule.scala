@@ -1,4 +1,4 @@
-package com.raquo.snabbdom.helpers.matching
+package com.raquo.snabbdom.utils.testing.matching
 
 trait Rule {
   def applyTo(testNode: ExpectedElement): Unit
