@@ -2,7 +2,6 @@ package com.raquo.snabbdom
 
 import com.raquo.snabbdom.tags.div
 import com.raquo.snabbdom.styles._
-import com.raquo.snabbdom.utils.testing.UnitSpec
 
 import scala.util.Random
 

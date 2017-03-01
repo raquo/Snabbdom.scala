@@ -1,7 +1,6 @@
 package com.raquo.snabbdom
 
 import com.raquo.snabbdom.allTags.{article, div, hr, p, span}
-import com.raquo.snabbdom.utils.testing.UnitSpec
 
 class ElementSpec extends UnitSpec {
 

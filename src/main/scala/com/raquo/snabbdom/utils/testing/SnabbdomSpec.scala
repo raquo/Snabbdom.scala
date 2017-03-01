@@ -1,11 +1,10 @@
 package com.raquo.snabbdom.utils.testing
 
 import com.raquo.snabbdom.utils.testing.matching.RuleImplicits
-import org.scalatest.{FunSpec, Matchers}
+import org.scalatest.Suite
 
-trait UnitSpec extends FunSpec
-  with Matchers
-  with MountSpec
+trait SnabbdomSpec
+  extends MountSpec
   with RuleImplicits
   with DomEventSimulatorSpec
-  with UtilSpec
+  with UtilSpec { this: Suite => }

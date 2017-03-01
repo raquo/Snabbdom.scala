@@ -4,13 +4,11 @@ import org.scalajs.dom
 import org.scalajs.dom.raw.MouseEvent
 import org.scalatest.{FunSpec, Matchers}
 
-import scala.util.Random
-
 /**
   * Sanity checks on the testing environment.
   * This does not use Snabbdom library at all.
   */
-class DomEnvSpec extends UnitSpec {
+class DomEnvSpec extends FunSpec with Matchers with DomEventSimulatorSpec with UtilSpec {
 
   it("renders elements with attributes") {
     val spanId = randomString("spanId_")

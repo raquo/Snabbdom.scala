@@ -3,7 +3,6 @@ package com.raquo.snabbdom
 import com.raquo.snabbdom.attrs.cls
 import com.raquo.snabbdom.events.onClick
 import com.raquo.snabbdom.tags.{div, span}
-import com.raquo.snabbdom.utils.testing.UnitSpec
 import org.scalajs.dom.raw.MouseEvent
 
 class EventPropSpec extends UnitSpec {

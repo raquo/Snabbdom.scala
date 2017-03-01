@@ -2,7 +2,6 @@ package com.raquo.snabbdom
 
 import com.raquo.snabbdom.attrs.{colSpan, href, rowSpan, selected, title}
 import com.raquo.snabbdom.tags.{div, input, span, td}
-import com.raquo.snabbdom.utils.testing.UnitSpec
 
 import scala.util.Random
 
