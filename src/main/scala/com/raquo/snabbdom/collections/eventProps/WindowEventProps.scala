@@ -1,13 +1,14 @@
 package com.raquo.snabbdom.collections.eventProps
 
 import com.raquo.snabbdom.GenericEventCallback
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Prop
 
 /**
   * Window Events
   *
   */
-trait WindowEventProps extends SharedEventProps {
+trait WindowEventProps extends SharedEventProps { self: Builders =>
 
   /**
     * The load event fires at the end of the document loading process. At this

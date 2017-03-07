@@ -1,9 +1,9 @@
 package com.raquo.snabbdom.collections.props
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Prop
 
-trait Props extends CollectionOps {
+trait Props { self: Builders =>
 
   /**
     * Space-separated list of CSS class names

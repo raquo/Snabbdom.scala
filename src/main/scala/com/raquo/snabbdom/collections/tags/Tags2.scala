@@ -1,13 +1,13 @@
 package com.raquo.snabbdom.collections.tags
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.VNode
 
 /**
   * Contains HTML tags which are used less frequently. These are generally
   * imported individually as needed.
   */
-trait Tags2 extends CollectionOps {
+trait Tags2 { self: Builders =>
 
   // Document Metadata
 

@@ -1,9 +1,9 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait Attrs extends CollectionOps {
+trait Attrs { self: Builders =>
 
   /**
     * This is the single required attribute for anchors defining a hypertext

@@ -1,13 +1,13 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.MouseEventCallback
 import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Mouse Events: triggered by a mouse, or similar user actions.
   */
-trait MouseEventProps extends CollectionOps {
+trait MouseEventProps { self: Builders =>
 
   /**
     * The click event is raised when the user clicks on an element. The click

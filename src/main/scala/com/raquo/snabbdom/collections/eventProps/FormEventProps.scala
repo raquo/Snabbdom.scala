@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.GenericEventCallback
 import com.raquo.snabbdom.setters.EventProp
 
-trait FormEventProps extends CollectionOps {
+trait FormEventProps { self: Builders =>
 
   /**
     * The blur event is raised when an element loses focus.

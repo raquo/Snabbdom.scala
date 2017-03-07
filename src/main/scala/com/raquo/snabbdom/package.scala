@@ -1,5 +1,6 @@
 package com.raquo
 
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
 import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardEventProps, MouseEventProps}
 import com.raquo.snabbdom.collections.props.Props
@@ -27,17 +28,17 @@ package object snabbdom {
 
   type MouseEventCallback = EventCallback[MouseEvent]
 
-  object tags extends Tags
+  object tags extends Tags with Builders
 
-  object allTags extends Tags with Tags2
+  object allTags extends Tags with Tags2 with Builders
 
-  object attrs extends Attrs with InputAttrs with GlobalAttrs
+  object attrs extends Attrs with InputAttrs with GlobalAttrs with Builders
 
-  object props extends Props // @TODO add `with`?
+  object props extends Props with Builders // @TODO add more `with`?
 
-  object events extends MouseEventProps with KeyboardEventProps with ClipboardEventProps
+  object events extends MouseEventProps with KeyboardEventProps with ClipboardEventProps with Builders
 
-  object styles extends Styles
+  object styles extends Styles with Builders
 
   /**
     * Represents lack of a modifier

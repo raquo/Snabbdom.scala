@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
 // @TODO[API][cleanup] Why is this separate from Attrs? How is it different? We're following ScalaTags on collections
@@ -9,7 +9,7 @@ import com.raquo.snabbdom.setters.Attr
   * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
   * derive from this trait since all groupings of attributes should include these global ones.
   */
-trait GlobalAttrs extends CollectionOps {
+trait GlobalAttrs { self: Builders =>
 
   /**
     * Specifies a shortcut key to activate/focus an element

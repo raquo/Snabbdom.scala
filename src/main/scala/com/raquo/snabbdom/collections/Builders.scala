@@ -5,7 +5,7 @@ import com.raquo.snabbdom.setters.{Attr, EventProp, Prop, Style}
 
 import scala.scalajs.js
 
-trait CollectionOps {
+trait Builders {
 
   @inline def attr[Value](key: String): Attr[Value] = {
     new Attr[Value](key)
@@ -19,6 +19,7 @@ trait CollectionOps {
     new Prop[Value](key)
   }
 
+  // @TODO[Integrity] we still use `new Style` in some places to support additional traits e.g. `with MarginAuto`
   @inline def style[Value](jsKey: String, cssKey: String): Style[Value] = {
     new Style[Value](jsKey, cssKey)
   }

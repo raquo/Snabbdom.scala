@@ -1,12 +1,13 @@
 package com.raquo.snabbdom.collections.eventProps
 
 import com.raquo.snabbdom.GenericEventCallback
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Miscellaneous Events
   */
-trait MiscellaneousEventProps extends SharedEventProps {
+trait MiscellaneousEventProps extends SharedEventProps { self: Builders =>
 
   /**
     * Fires when a <menu> element is shown as a context menu

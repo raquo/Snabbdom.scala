@@ -1,9 +1,9 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait InputAttrs extends CollectionOps {
+trait InputAttrs { self: Builders =>
 
   /**
     * The URI of a program that processes the information submitted via the form.

@@ -9,8 +9,6 @@ trait VNodeData extends js.Object {
 
   // @TODO[Elegance] Separate raw JS trait and implicit value class
 
-  // @TODO[Integrity] use js.Dictionary instead of js.Dynamic
-
   var attrs: js.UndefOr[js.Dictionary[Boolean | String]] = js.undefined
 
   var on: js.UndefOr[js.Dictionary[js.Function]] = js.undefined

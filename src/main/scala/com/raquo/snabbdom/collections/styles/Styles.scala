@@ -1,5 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.{Style, StyleSetter}
 
 import scala.scalajs.js.|
@@ -8,7 +9,7 @@ import scala.scalajs.js.|
   * Trait that contains the contents of the `Styles` object, so they can
   * be mixed in to other objects if needed.
   */
-trait Styles extends StyleMisc {
+trait Styles extends StyleMisc { self: Builders =>
 
   /**
     * If a background-image is specified, the background-attachment CSS
@@ -55,7 +56,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val background = new Style[String]("background", "background")
+  lazy val background = style[String]("background", "background")
 
   /**
     * The background-repeat CSS property defines how background images are repeated.
@@ -68,7 +69,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val backgroundRepeat = new Style[String]("backgroundRepeat", "background-repeat")
+  lazy val backgroundRepeat = style[String]("backgroundRepeat", "background-repeat")
 
 
   /**
@@ -78,7 +79,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val backgroundPosition = new Style[String]("backgroundPosition", "background-position")
+  lazy val backgroundPosition = style[String]("backgroundPosition", "background-position")
 
   /**
     * The background-color CSS property sets the background color of an element,
@@ -86,7 +87,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val backgroundColor = new Style[String]("backgroundColor", "background-color")
+  lazy val backgroundColor = style[String]("backgroundColor", "background-color")
 
   /**
     * The background-origin CSS property determines the background positioning
@@ -214,7 +215,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderTopColor = new Style[String]("borderTopColor", "border-top-color")
+  lazy val borderTopColor = style[String]("borderTopColor", "border-top-color")
 
   /**
     * The border-style CSS property is a shorthand property for setting the line
@@ -222,7 +223,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderStyle = new Style[String]("borderStyle", "border-style")
+  lazy val borderStyle = style[String]("borderStyle", "border-style")
 
   /**
     * The border-top-style CSS property sets the line style of the top border of a box.
@@ -273,7 +274,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderRightColor = new Style[String]("borderRightColor", "border-right-color")
+  lazy val borderRightColor = style[String]("borderRightColor", "border-right-color")
 
   /**
     * The border-bottom CSS property is a shorthand that sets the values of
@@ -282,7 +283,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderBottom = new Style[String]("borderBottom", "border-bottom")
+  lazy val borderBottom = style[String]("borderBottom", "border-bottom")
 
   /**
     * The border CSS property is a shorthand property for setting the individual
@@ -292,7 +293,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val border = new Style[String]("border", "border")
+  lazy val border = style[String]("border", "border")
 
   /**
     * The border-bottom-width CSS property sets the width of the bottom border of
@@ -309,7 +310,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderLeftColor = new Style[String]("borderLeftColor", "border-left-color")
+  lazy val borderLeftColor = style[String]("borderLeftColor", "border-left-color")
 
   /**
     * The border-bottom-color CSS property sets the color of the bottom border of
@@ -318,7 +319,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderBottomColor = new Style[String]("borderBottomColor", "border-bottom-color")
+  lazy val borderBottomColor = style[String]("borderBottomColor", "border-bottom-color")
 
   /**
     * The border-collapse CSS property selects a table's border model. This has
@@ -355,7 +356,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderLeft = new Style[String]("borderLeft", "border-left")
+  lazy val borderLeft = style[String]("borderLeft", "border-left")
 
   /**
     * The border-left-style CSS property sets the line style of the left border
@@ -372,7 +373,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderRight = new Style[String]("borderRight", "border-right")
+  lazy val borderRight = style[String]("borderRight", "border-right")
 
   /**
     * The border-bottom-style CSS property sets the line style of the bottom
@@ -403,7 +404,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderTop = new Style[String]("borderTop", "border-top")
+  lazy val borderTop = style[String]("borderTop", "border-top")
 
   /**
     * The border-spacing CSS property specifies the distance between the borders
@@ -424,7 +425,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderRadius = new Style[String]("borderRadius", "border-radius")
+  lazy val borderRadius = style[String]("borderRadius", "border-radius")
 
   /**
     * The border-width CSS property sets the width of the border of a box. Using
@@ -432,7 +433,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderWidth = new Style[String]("borderWidth", "border-width")
+  lazy val borderWidth = style[String]("borderWidth", "border-width")
 
   /**
     * The border-bottom-right-radius CSS property sets the rounding of the
@@ -461,7 +462,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val borderColor = new Style[String]("borderColor", "border-color")
+  lazy val borderColor = style[String]("borderColor", "border-color")
 
   /**
     * The box-sizing CSS property is used to alter the default CSS box model used
@@ -1120,7 +1121,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val opacity = new Style[Double]("opacity", "opacity")
+  lazy val opacity = style[Double]("opacity", "opacity")
 
 
   /**
@@ -1252,7 +1253,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val paddingRight = new Style[String]("paddingRight", "padding-right")
+  lazy val paddingRight = style[String]("paddingRight", "padding-right")
 
   /**
     * The padding-top CSS property of an element sets the padding space required
@@ -1262,7 +1263,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val paddingTop = new Style[String]("paddingTop", "padding-top")
+  lazy val paddingTop = style[String]("paddingTop", "padding-top")
 
   /**
     * The padding-left CSS property of an element sets the padding space required
@@ -1271,7 +1272,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val paddingLeft = new Style[String]("paddingLeft", "padding-left")
+  lazy val paddingLeft = style[String]("paddingLeft", "padding-left")
 
   /**
     * The padding CSS property sets the required padding space on all sides of an
@@ -1283,7 +1284,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val padding = new Style[String]("padding", "padding")
+  lazy val padding = style[String]("padding", "padding")
 
   /**
     * The padding-bottom CSS property of an element sets the height of the padding
@@ -1293,7 +1294,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val paddingBottom = new Style[String]("paddingBottom", "padding-bottom")
+  lazy val paddingBottom = style[String]("paddingBottom", "padding-bottom")
 
   /**
     * The right CSS property specifies part of the position of positioned elements.
@@ -1488,7 +1489,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val listStyle = new Style[String]("listStyle", "list-style")
+  lazy val listStyle = style[String]("listStyle", "list-style")
 
   /**
     * The overflow-y CSS property specifies whether to clip content, render a
@@ -1530,7 +1531,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val boxShadow = new Style[String]("boxShadow", "box-shadow")
+  lazy val boxShadow = style[String]("boxShadow", "box-shadow")
 
 
   /**
@@ -1660,7 +1661,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val fontSizeAdjust = new Style[Double | String]("fontSizeAdjust", "font-size-adjust")
+  lazy val fontSizeAdjust = style[Double | String]("fontSizeAdjust", "font-size-adjust")
 
   /**
     * The font-family CSS property allows for a prioritized list of font family
@@ -1672,7 +1673,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val fontFamily = new Style[String]("fontFamily", "font-family")
+  lazy val fontFamily = style[String]("fontFamily", "font-family")
 
 
   /**
@@ -1728,7 +1729,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val font = new Style[String]("font", "font")
+  lazy val font = style[String]("font", "font")
 
   /**
     * The font-feature-settings CSS property allows control over advanced
@@ -1736,7 +1737,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val fontFeatureSettings = new Style[String]("fontFeatureSettings", "font-feature-settings")
+  lazy val fontFeatureSettings = style[String]("fontFeatureSettings", "font-feature-settings")
 
   /**
     * The font-style CSS property allows italic or oblique faces to be selected
@@ -1962,7 +1963,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val outline = new Style[String]("outline", "outline")
+  lazy val outline = style[String]("outline", "outline")
 
   /**
     * The outline-style CSS property is used to set the style of the outline of
@@ -2131,7 +2132,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val textIndent = new Style[String]("textIndent", "text-indent")
+  lazy val textIndent = style[String]("textIndent", "text-indent")
 
   /**
     * The text-overflow CSS property determines how overflowed content that is
@@ -2290,7 +2291,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val transition = new Style[String]("transition", "transition")
+  lazy val transition = style[String]("transition", "transition")
 
   /**
     * The CSS transition-timing-function property is used to describe how the
@@ -2300,7 +2301,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val transitionTimingFunction = new Style[String]("transitionTimingFunction", "transition-timing-function")
+  lazy val transitionTimingFunction = style[String]("transitionTimingFunction", "transition-timing-function")
 
   /**
     * The transition-duration CSS property specifies the number of seconds or
@@ -2324,7 +2325,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  lazy val transitionProperty = new Style[String]("transitionProperty", "transition-property")
+  lazy val transitionProperty = style[String]("transitionProperty", "transition-property")
 
 
   object visibility extends Style[String]("visibility", "visibility") {
@@ -2423,7 +2424,7 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  final lazy val flex = new Style[String]("flex", "flex")
+  final lazy val flex = style[String]("flex", "flex")
 
   /**
     * The CSS flex-basis property specifies the flex basis which is the initial main size of a flex item.
@@ -2431,21 +2432,21 @@ trait Styles extends StyleMisc {
     *
     * MDN
     */
-  final lazy val flexBasis = new Style[String]("flexBasis", "flex-basis")
+  final lazy val flexBasis = style[String]("flexBasis", "flex-basis")
 
   /**
     * The CSS flex-grow property specifies the flex grow factor of a flex item.
     *
     * MDN
     */
-  final lazy val flexGrow = new Style[Double]("flexGrow", "flex-grow")
+  final lazy val flexGrow = style[Double]("flexGrow", "flex-grow")
 
   /**
     * The CSS flex-shrink property specifies the flex shrink factor of a flex item.
     *
     * MDN
     */
-  final lazy val flexShrink = new Style[Double]("flexShrink", "flex-shrink")
+  final lazy val flexShrink = style[Double]("flexShrink", "flex-shrink")
 
   /**
     * The CSS align-content property aligns a flex container's lines within the flex container when there is extra

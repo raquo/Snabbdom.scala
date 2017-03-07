@@ -1,13 +1,13 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.collections.CollectionOps
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.GenericEventCallback
 import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Clipboard Events
   */
-trait ClipboardEventProps extends CollectionOps {
+trait ClipboardEventProps { self: Builders =>
 
   /**
     * Fires when the user copies the content of an element
