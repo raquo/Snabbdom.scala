@@ -1,12 +1,12 @@
 package com.raquo
 
-import com.raquo.snabbdom.collections.{BaseBuilders, Builders}
+import com.raquo.snabbdom.collections.{BaseBuilders}
 import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
 import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardEventProps, MouseEventProps}
 import com.raquo.snabbdom.collections.props.Props
 import com.raquo.snabbdom.collections.styles.Styles
 import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
-import com.raquo.snabbdom.nodes.{IterableNode, RichNode, TextNode, VNode}
+import com.raquo.snabbdom.nodes.{IterableNode, TextNode, VNode}
 import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
@@ -67,9 +67,5 @@ package object snabbdom {
 
   implicit def toIterableNode(modifiers: Iterable[Modifier]): IterableNode = {
     new IterableNode(modifiers)
-  }
-
-  implicit def toRichNode(vnode: VNode): RichNode = {
-    new RichNode(vnode)
   }
 }
