@@ -9,7 +9,7 @@ import scala.scalajs.js.|
   * Trait that contains the contents of the `Styles` object, so they can
   * be mixed in to other objects if needed.
   */
-trait Styles extends StyleMisc { self: Builders =>
+trait Styles extends StyleMisc { self: Builders[_] =>
 
   /**
     * If a background-image is specified, the background-attachment CSS

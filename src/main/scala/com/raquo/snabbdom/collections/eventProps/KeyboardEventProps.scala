@@ -8,7 +8,7 @@ import org.scalajs.dom.KeyboardEvent
 /**
   * Keyboard Events - triggered by user action son the keyboard or similar user actions
   */
-trait KeyboardEventProps { self: Builders =>
+trait KeyboardEventProps { self: Builders[_] =>
 
   /**
     * The keydown event is raised when the user presses a keyboard key.

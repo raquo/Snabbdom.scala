@@ -9,7 +9,7 @@ import com.raquo.snabbdom.setters.Attr
   * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
   * derive from this trait since all groupings of attributes should include these global ones.
   */
-trait GlobalAttrs { self: Builders =>
+trait GlobalAttrs { self: Builders[_] =>
 
   /**
     * Specifies a shortcut key to activate/focus an element

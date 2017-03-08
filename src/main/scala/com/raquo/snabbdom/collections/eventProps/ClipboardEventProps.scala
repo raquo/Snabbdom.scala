@@ -7,7 +7,7 @@ import com.raquo.snabbdom.setters.EventProp
 /**
   * Clipboard Events
   */
-trait ClipboardEventProps { self: Builders =>
+trait ClipboardEventProps { self: Builders[_] =>
 
   /**
     * Fires when the user copies the content of an element

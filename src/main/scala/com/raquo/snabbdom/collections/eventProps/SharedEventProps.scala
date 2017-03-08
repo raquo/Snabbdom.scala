@@ -5,7 +5,7 @@ import com.raquo.snabbdom.EventCallback
 import com.raquo.snabbdom.setters.EventProp
 import org.scalajs.dom.ErrorEvent
 
-trait SharedEventProps { self: Builders =>
+trait SharedEventProps { self: Builders[_] =>
 
   /**
     * Script to be run when an error occurs when the file is being loaded

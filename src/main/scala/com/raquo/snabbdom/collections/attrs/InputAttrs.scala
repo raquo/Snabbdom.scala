@@ -3,7 +3,7 @@ package com.raquo.snabbdom.collections.attrs
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait InputAttrs { self: Builders =>
+trait InputAttrs { self: Builders[_] =>
 
   /**
     * The URI of a program that processes the information submitted via the form.

@@ -1,6 +1,6 @@
 package com.raquo
 
-import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.collections.{BaseBuilders, Builders}
 import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
 import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardEventProps, MouseEventProps}
 import com.raquo.snabbdom.collections.props.Props
@@ -16,6 +16,7 @@ import scala.scalajs.js.|
 
 package object snabbdom {
 
+  // @TODO Remove this alias
   type VNode = nodes.VNode
 
   type Child = VNode | TextNode
@@ -28,17 +29,17 @@ package object snabbdom {
 
   type MouseEventCallback = EventCallback[MouseEvent]
 
-  object tags extends Tags with Builders
+  object tags extends Tags[VNode] with BaseBuilders
 
-  object allTags extends Tags with Tags2 with Builders
+  object allTags extends Tags[VNode] with Tags2[VNode] with BaseBuilders
 
-  object attrs extends Attrs with InputAttrs with GlobalAttrs with Builders
+  object attrs extends Attrs with InputAttrs with GlobalAttrs with BaseBuilders
 
-  object props extends Props with Builders // @TODO add more `with`?
+  object props extends Props with BaseBuilders // @TODO add more `with`?
 
-  object events extends MouseEventProps with KeyboardEventProps with ClipboardEventProps with Builders
+  object events extends MouseEventProps with KeyboardEventProps with ClipboardEventProps with BaseBuilders
 
-  object styles extends Styles with Builders
+  object styles extends Styles with BaseBuilders
 
   /**
     * Represents lack of a modifier
@@ -56,6 +57,9 @@ package object snabbdom {
       case None => NoModifier
     }
   }
+
+  // @TODO This conversion should not exist, it allows implicit conversion of String to js.Any which is boo
+  // @TODO I think similarly for other ones. Move such things into applyTo of VNode and/or RNode
 
   implicit def toTextNode(text: String): TextNode = {
     new TextNode(text)

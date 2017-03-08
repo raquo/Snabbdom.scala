@@ -9,7 +9,7 @@ import scala.scalajs.js.|
   * Contains CSS styles which are used less frequently. These are not imported by
   * default to avoid namespace pollution.
   */
-trait Styles2 extends StyleMisc { self: Builders =>
+trait Styles2 extends StyleMisc { self: Builders[_] =>
 
   /**
     * The animation-direction CSS property indicates whether the animation should

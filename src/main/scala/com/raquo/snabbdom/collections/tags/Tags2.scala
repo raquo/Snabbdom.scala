@@ -7,7 +7,7 @@ import com.raquo.snabbdom.VNode
   * Contains HTML tags which are used less frequently. These are generally
   * imported individually as needed.
   */
-trait Tags2 { self: Builders =>
+trait Tags2[N <: VNode] { self: Builders[N] =>
 
   // Document Metadata
 
@@ -18,14 +18,14 @@ trait Tags2 { self: Builders =>
     *
     * MDN
     */
-  def title: VNode = vnode("title")
+  def title: N = vnode("title")
 
   /**
     * Used to write inline CSS.
     *
     *  MDN
     */
-  def style: VNode = vnode("style")
+  def style: N = vnode("style")
 
   // Scripting
 
@@ -35,7 +35,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def noScript: VNode = vnode("noscript")
+  def noScript: N = vnode("noscript")
 
   // Sections
 
@@ -45,7 +45,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def section: VNode = vnode("section")
+  def section: N = vnode("section")
 
   /**
     * Represents a section of a page that links to other pages or to parts within
@@ -53,7 +53,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def nav: VNode = vnode("nav")
+  def nav: N = vnode("nav")
 
   /**
     * Defines self-contained content that could exist independently of the rest
@@ -61,7 +61,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def article: VNode = vnode("article")
+  def article: N = vnode("article")
 
   /**
     * Defines some content loosely related to the page content. If it is removed,
@@ -69,14 +69,14 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def aside: VNode = vnode("aside")
+  def aside: N = vnode("aside")
 
   /**
     * Defines a section containing contact information.
     *
     *  MDN
     */
-  def address: VNode = vnode("address")
+  def address: N = vnode("address")
 
   /**
     * Defines the main or important content in the document. There is only one
@@ -84,7 +84,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def main: VNode = vnode("main")
+  def main: N = vnode("main")
 
   // Text level semantics
 
@@ -93,7 +93,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def q: VNode = vnode("q")
+  def q: N = vnode("q")
 
   /**
     * Represents a term whose definition is contained in its nearest ancestor
@@ -101,7 +101,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def dfn: VNode = vnode("dfn")
+  def dfn: N = vnode("dfn")
 
   /**
     * An abbreviation or acronym; the expansion of the abbreviation can be
@@ -109,14 +109,14 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def abbr: VNode = vnode("abbr")
+  def abbr: N = vnode("abbr")
 
   /**
     * Associates to its content a machine-readable equivalent.
     *
     *  MDN
     */
-  def data: VNode = vnode("data")
+  def data: N = vnode("data")
 
   /**
     * Represents a date and time value; the machine-readable equivalent can be
@@ -124,35 +124,35 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def time: VNode = vnode("time")
+  def time: N = vnode("time")
 
   /**
     * Represents a variable.
     *
     *  MDN
     */
-  def `var`: VNode = vnode("var")
+  def `var`: N = vnode("var")
 
   /**
     * Represents the output of a program or a computer.
     *
     *  MDN
     */
-  def samp: VNode = vnode("samp")
+  def samp: N = vnode("samp")
 
   /**
     * Represents user input, often from a keyboard, but not necessarily.
     *
     *  MDN
     */
-  def kbd: VNode = vnode("kbd")
+  def kbd: N = vnode("kbd")
 
   /**
     * Defines a mathematical formula.
     *
     *  MDN
     */
-  def math: VNode = vnode("math")
+  def math: N = vnode("math")
 
   /**
     * Represents text highlighted for reference purposes, that is for its
@@ -160,7 +160,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def mark: VNode = vnode("mark")
+  def mark: N = vnode("mark")
 
   /**
     * Represents content to be marked with ruby annotations, short runs of text
@@ -170,14 +170,14 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def ruby: VNode = vnode("ruby")
+  def ruby: N = vnode("ruby")
 
   /**
     * Represents the text of a ruby annotation.
     *
     *  MDN
     */
-  def rt: VNode = vnode("rt")
+  def rt: N = vnode("rt")
 
   /**
     * Represents parenthesis around a ruby annotation, used to display the
@@ -186,7 +186,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def rp: VNode = vnode("rp")
+  def rp: N = vnode("rp")
 
   /**
     * Represents text that must be isolated from its surrounding for bidirectional
@@ -195,7 +195,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def bdi: VNode = vnode("bdi")
+  def bdi: N = vnode("bdi")
 
   /**
     * Represents the directionality of its children, in order to explicitly
@@ -203,7 +203,7 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def bdo: VNode = vnode("bdo")
+  def bdo: N = vnode("bdo")
 
   // Forms
 
@@ -212,28 +212,28 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def keyGen: VNode = vnode("keygen")
+  def keyGen: N = vnode("keygen")
 
   /**
     * The result of a calculation
     *
     *  MDN
     */
-  def output: VNode = vnode("output")
+  def output: N = vnode("output")
 
   /**
     * A progress completion bar
     *
     *  MDN
     */
-  def progress: VNode = vnode("progress")
+  def progress: N = vnode("progress")
 
   /**
     * A scalar measurement within a known range.
     *
     *  MDN
     */
-  def meter: VNode = vnode("meter")
+  def meter: N = vnode("meter")
 
   // Interactive elements
 
@@ -243,26 +243,26 @@ trait Tags2 { self: Builders =>
     *
     *  MDN
     */
-  def details: VNode = vnode("details")
+  def details: N = vnode("details")
 
   /**
     * A summary, caption, or legend for a given details.
     *
     *  MDN
     */
-  def summary: VNode = vnode("summary")
+  def summary: N = vnode("summary")
 
   /**
     * A command that the user can invoke.
     *
     *  MDN
     */
-  def command: VNode = vnode("command")
+  def command: N = vnode("command")
 
   /**
     * A list of commands
     *
     *  MDN
     */
-  def menu: VNode = vnode("menu")
+  def menu: N = vnode("menu")
 }

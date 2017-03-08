@@ -7,7 +7,7 @@ import com.raquo.snabbdom.setters.EventProp
 /**
   * Mouse Events: triggered by a mouse, or similar user actions.
   */
-trait MouseEventProps { self: Builders =>
+trait MouseEventProps { self: Builders[_] =>
 
   /**
     * The click event is raised when the user clicks on an element. The click

@@ -9,7 +9,7 @@ import com.raquo.snabbdom.setters.EventProp
   * all HTML elements, but they are most common in media elements, like <audio>,
   * <embed>, <img>, <object>, and <video>.
   */
-trait MediaEventProps extends SharedEventProps { self: Builders =>
+trait MediaEventProps extends SharedEventProps { self: Builders[_] =>
 
   /**
     * Script to be run on abort

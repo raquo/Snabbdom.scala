@@ -3,7 +3,7 @@ package com.raquo.snabbdom.collections.attrs
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait Attrs { self: Builders =>
+trait Attrs { self: Builders[_] =>
 
   /**
     * This is the single required attribute for anchors defining a hypertext

@@ -3,7 +3,7 @@ package com.raquo.snabbdom.collections.props
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Prop
 
-trait Props { self: Builders =>
+trait Props { self: Builders[_] =>
 
   /**
     * Space-separated list of CSS class names

@@ -8,7 +8,7 @@ import com.raquo.snabbdom.setters.Prop
   * Window Events
   *
   */
-trait WindowEventProps extends SharedEventProps { self: Builders =>
+trait WindowEventProps extends SharedEventProps { self: Builders[_] =>
 
   /**
     * The load event fires at the end of the document loading process. At this

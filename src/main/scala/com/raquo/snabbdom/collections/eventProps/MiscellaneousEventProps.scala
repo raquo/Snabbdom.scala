@@ -7,7 +7,7 @@ import com.raquo.snabbdom.setters.EventProp
 /**
   * Miscellaneous Events
   */
-trait MiscellaneousEventProps extends SharedEventProps { self: Builders =>
+trait MiscellaneousEventProps extends SharedEventProps { self: Builders[_] =>
 
   /**
     * Fires when a <menu> element is shown as a context menu
