@@ -3,7 +3,6 @@ package com.raquo.snabbdom.setters
 import com.raquo.snabbdom.{Modifier, VNode}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.ScalaJSDefined
 import scala.scalajs.js.|
 
 /**
@@ -11,13 +10,11 @@ import scala.scalajs.js.|
   *
   * This is in contrast to e.g. a VNode, which does not *set* anything, but *appends* to Children
   */
-@ScalaJSDefined
 trait Setter[K <: Key[V, Self], V, Self <: Setter[K, V, Self]] extends Modifier {
   val key: K
   val value: V
 }
 
-@ScalaJSDefined
 class AttrSetter[V] (
   val key: Attr[V],
   val value: V
@@ -37,7 +34,6 @@ class AttrSetter[V] (
   }
 }
 
-@ScalaJSDefined
 class EventPropSetter[V <: js.Function] (
   val key: EventProp[V],
   val value: V
@@ -52,7 +48,6 @@ class EventPropSetter[V <: js.Function] (
   }
 }
 
-@ScalaJSDefined
 class PropSetter[V] (
   val key: Prop[V],
   val value: V
@@ -67,7 +62,6 @@ class PropSetter[V] (
   }
 }
 
-@ScalaJSDefined
 class StyleSetter[V] (
   val key: Style[V],
   val value: V

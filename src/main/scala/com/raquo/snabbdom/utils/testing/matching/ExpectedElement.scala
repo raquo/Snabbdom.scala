@@ -72,13 +72,13 @@ object ExpectedElement {
           checkChildElement(
             element.childNodes(index),
             expectedChildElement,
-            childClue = s"$clue-$index"
+            childClue = s"$clue --- @$index"
           )
         case (expectedText, index) =>
           checkChildText(
             element.childNodes(index),
             expectedText.toString, // @TODO[Integrity] Assert that expectedText is already a string?
-            childClue = s"$clue-$index"
+            childClue = s"$clue --- @$index"
           )
       }
     }
@@ -108,7 +108,7 @@ object ExpectedElement {
         clue = childClue,
         s"Node type mismatch: actual ${repr(childNode.nodeType)}, expected ${repr(dom.Node.TEXT_NODE)} (Text Node)"
       ))
-    } else if (childNode.textContent != expectedText.toString) {
+    } else if (childNode.textContent != expectedText) {
       List(withClue(
         clue = childClue,
         s"Text node textContent mismatch: actual ${repr(childNode.textContent)}, expected ${repr(expectedText)}"

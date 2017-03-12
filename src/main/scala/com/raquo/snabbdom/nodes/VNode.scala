@@ -7,9 +7,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 
 @ScalaJSDefined
-class VNode(tagName: String) extends Modifier {
-
-  import VNode.addChildToList
+class VNode(tagName: String) extends js.Object {
 
   var elm: js.UndefOr[Node] = js.undefined
 
@@ -22,14 +20,6 @@ class VNode(tagName: String) extends Modifier {
   var text: js.UndefOr[String] = js.undefined
 
   var children: js.UndefOr[Children] = js.undefined
-
-  override def applyTo(vnode: VNode): Unit = {
-    if (text.isDefined) {
-      addChildToList(parent = vnode, child = new TextNode(text.get))
-      text = js.undefined
-    }
-    addChildToList(parent = vnode, child = this)
-  }
 
   /** Apply the given modifiers (e.g. additional children, or new attributes) to the [[VNode]]. */
   @JSName("applyModifiers")

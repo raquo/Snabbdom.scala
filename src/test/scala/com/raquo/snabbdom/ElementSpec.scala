@@ -61,10 +61,18 @@ class ElementSpec extends UnitSpec {
 
     mount(
       "div > span, (p > #text, span, span), hr",
-      div(span(text1), p(text2, span(text2), span(text3)), hr)
+      div(
+        span(text1),
+        p(text2, span(text2), span(text3)),
+        hr
+      )
     )
-    expectElement(div like(span like text1, p like (text2, span like text2, span like text3), hr likeEmpty))
+
+    expectElement(div like(
+      span like text1,
+      p like (text2, span like text2, span like text3),
+      hr likeEmpty
+    ))
     unmount()
   }
-
 }

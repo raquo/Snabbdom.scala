@@ -1,17 +1,16 @@
 package com.raquo
 
-import com.raquo.snabbdom.collections.{BaseBuilders}
+import com.raquo.snabbdom.collections.BaseBuilders
 import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
 import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardEventProps, MouseEventProps}
 import com.raquo.snabbdom.collections.props.Props
 import com.raquo.snabbdom.collections.styles.Styles
 import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
-import com.raquo.snabbdom.nodes.{IterableNode, TextNode, VNode}
+import com.raquo.snabbdom.nodes.{ChildNode, IterableNode, TextNode, VNode}
 import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.ScalaJSDefined
 import scala.scalajs.js.|
 
 package object snabbdom {
@@ -44,7 +43,6 @@ package object snabbdom {
   /**
     * Represents lack of a modifier
     */
-  @ScalaJSDefined
   object NoModifier extends Modifier {
     // @TODO Should this apply a Null child instead?
     @inline def applyTo(vnode: VNode): Unit = ()
@@ -58,11 +56,14 @@ package object snabbdom {
     }
   }
 
-  // @TODO This conversion should not exist, it allows implicit conversion of String to js.Any which is boo
-  // @TODO I think similarly for other ones. Move such things into applyTo of VNode and/or RNode
+  // @TODO add similar conversions for numbers and nulls – see what snabbdom supports
 
   implicit def toTextNode(text: String): TextNode = {
     new TextNode(text)
+  }
+
+  implicit def toChildNode(vnode: VNode): ChildNode = {
+    new ChildNode(vnode)
   }
 
   implicit def toIterableNode(modifiers: Iterable[Modifier]): IterableNode = {
