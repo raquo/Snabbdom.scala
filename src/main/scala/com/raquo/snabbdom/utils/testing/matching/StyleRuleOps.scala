@@ -1,12 +1,13 @@
 package com.raquo.snabbdom.utils.testing.matching
 
+import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import com.raquo.snabbdom.setters.Style
 import org.scalajs.dom
 
 import scala.scalajs.js
 
-class StyleRuleOps[V](val style: Style[V]) extends AnyVal {
+class StyleRuleOps[V, N <: VNode](val style: Style[V, N]) extends AnyVal {
 
   def is(expected: V): Rule = new Rule {
     def applyTo(testNode: ExpectedElement): Unit = {
@@ -14,7 +15,7 @@ class StyleRuleOps[V](val style: Style[V]) extends AnyVal {
     }
   }
 
-  private def nodeStyleIs(style: Style[V], expectedValue: V)(node: dom.Node): MaybeError = {
+  private def nodeStyleIs(style: Style[V, N], expectedValue: V)(node: dom.Node): MaybeError = {
     val maybeActualValue = node.asInstanceOf[js.Dynamic]
       .selectDynamic("style")
       .selectDynamic(style.name)
@@ -31,7 +32,7 @@ class StyleRuleOps[V](val style: Style[V]) extends AnyVal {
     }
   }
 
-  private def getStyle(element: dom.Element, style: Style[V]): Option[String] = {
+  private def getStyle(element: dom.Element, style: Style[V, N]): Option[String] = {
     element.asInstanceOf[js.Dynamic]
       .selectDynamic("style")
       .selectDynamic(style.name)

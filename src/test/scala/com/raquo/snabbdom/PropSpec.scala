@@ -103,6 +103,7 @@ class PropSpec extends UnitSpec {
         span()
       )
     )
+
     expectElement(
       td like(
         colSpan is expectedColSpan,

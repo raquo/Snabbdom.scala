@@ -9,15 +9,15 @@ trait RuleImplicits {
     new EmptyVNodeOps(emptyVNode)
   }
 
-  implicit def withAttrRuleOps[V](attr: Attr[V]): AttrRuleOps[V] = {
+  implicit def withAttrRuleOps[V, N <: VNode](attr: Attr[V, N]): AttrRuleOps[V, N] = {
     new AttrRuleOps(attr)
   }
 
-  implicit def withPropRuleOps[V](prop: Prop[V]): PropRuleOps[V] = {
+  implicit def withPropRuleOps[V, N <: VNode](prop: Prop[V, N]): PropRuleOps[V, N] = {
     new PropRuleOps(prop)
   }
 
-  implicit def withStyleRuleOps[V](style: Style[V]): StyleRuleOps[V] = {
+  implicit def withStyleRuleOps[V, N <: VNode](style: Style[V, N]): StyleRuleOps[V, N] = {
     new StyleRuleOps(style)
   }
 

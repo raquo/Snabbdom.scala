@@ -1,10 +1,11 @@
 package com.raquo.snabbdom.utils.testing.matching
 
+import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.setters.Attr
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
-class AttrRuleOps[V](val attr: Attr[V]) extends AnyVal {
+class AttrRuleOps[V, N <: VNode](val attr: Attr[V, N]) extends AnyVal {
 
   def is(expected: V): Rule = new Rule {
     def applyTo(testNode: ExpectedElement): Unit = {
@@ -18,7 +19,7 @@ class AttrRuleOps[V](val attr: Attr[V]) extends AnyVal {
     }
   }
 
-  private def nodeAttrIs(attr: Attr[V], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
+  private def nodeAttrIs(attr: Attr[V, N], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
     (node, maybeExpectedValue) match {
       case (element: dom.Element, None) =>
         if (element.hasAttribute(attr.name)) {

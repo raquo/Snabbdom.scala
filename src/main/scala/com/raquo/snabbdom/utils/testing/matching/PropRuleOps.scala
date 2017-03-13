@@ -1,12 +1,15 @@
 package com.raquo.snabbdom.utils.testing.matching
 
+import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.setters.Prop
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
 import scala.scalajs.js
 
-class PropRuleOps[V](val prop: Prop[V]) extends AnyVal {
+// @TODO Create EventPropOps
+
+class PropRuleOps[V, N <: VNode](val prop: Prop[V, N]) extends AnyVal {
 
   def is(expected: V): Rule = new Rule {
     def applyTo(testNode: ExpectedElement): Unit = {
@@ -20,7 +23,7 @@ class PropRuleOps[V](val prop: Prop[V]) extends AnyVal {
     }
   }
 
-  private def nodePropIs(prop: Prop[V], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
+  private def nodePropIs(prop: Prop[V, N], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
     val maybeActualValue = getProp(node, prop)
     if (node.isInstanceOf[dom.Element]) {
       (maybeActualValue, maybeExpectedValue) match {
@@ -41,7 +44,7 @@ class PropRuleOps[V](val prop: Prop[V]) extends AnyVal {
     }
   }
 
-  private def getProp(element: dom.Node, prop: Prop[V]): Option[V] = {
+  private def getProp(element: dom.Node, prop: Prop[V, N]): Option[V] = {
     val propValue = element.asInstanceOf[js.Dynamic].selectDynamic(prop.name)
     val jsUndef = js.undefined
     propValue.asInstanceOf[Any] match {
