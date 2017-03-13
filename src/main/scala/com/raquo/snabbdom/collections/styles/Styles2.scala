@@ -1,5 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
+import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.{Style, StyleSetter}
 
@@ -9,7 +10,7 @@ import scala.scalajs.js.|
   * Contains CSS styles which are used less frequently. These are not imported by
   * default to avoid namespace pollution.
   */
-trait Styles2 extends StyleMisc { self: Builders[_] =>
+trait Styles2[N <: VNode] extends StyleMisc[N] { self: Builders[N] =>
 
   /**
     * The animation-direction CSS property indicates whether the animation should
@@ -129,7 +130,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object backfaceVisibility extends Style[String]("backfaceVisibility", "backface-visibility") {
+  object backfaceVisibility extends Style[String, N]("backfaceVisibility", "backface-visibility") {
     /**
       * The back face is visible.
       *
@@ -151,8 +152,8 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object columns extends Style[String]("columns", "columns") {
-    def :=(number: Int, width: String): StyleSetter[String] = this := s"$number $width"
+  object columns extends Style[String, N]("columns", "columns") {
+    def :=(number: Int, width: String): StyleSetter[String, N] = this := s"$number $width"
   }
 
   /**
@@ -170,7 +171,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object columnFill extends Style[String]("columnFill", "column-fill") {
+  object columnFill extends Style[String, N]("columnFill", "column-fill") {
     /**
       * Is a keyword indicating that columns are filled sequentially.
       *
@@ -211,7 +212,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object columnSpan extends Style[Int | String]("columnSpan", "column-span") {
+  object columnSpan extends Style[Int | String, N]("columnSpan", "column-span") {
     /**
       * The element does not span multiple columns.
       *
@@ -257,7 +258,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object columnRuleWidth extends Style[String]("columnRuleWidth", "column-rule-width") {
+  object columnRuleWidth extends Style[String, N]("columnRuleWidth", "column-rule-width") {
     lazy val thin = this := "thin"
     lazy val medium = this := "medium"
     lazy val thick = this := "thick"
@@ -407,7 +408,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object transformStyle extends Style[String]("transformStyle", "transform-style") {
+  object transformStyle extends Style[String, N]("transformStyle", "transform-style") {
     /**
       * Indicates that the children of the element should be positioned in the
       * 3D-space.
@@ -434,7 +435,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object unicodeBidi extends Style[String]("unicodeBidi", "unicode-bidi") {
+  object unicodeBidi extends Style[String, N]("unicodeBidi", "unicode-bidi") {
     /**
       * The element does not offer a additional level of embedding with respect
       * to the bidirectional algorithm. For inline elements implicit reordering
@@ -470,7 +471,7 @@ trait Styles2 extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object wordBreak extends Style[String]("wordBreak", "word-break") {
+  object wordBreak extends Style[String, N]("wordBreak", "word-break") {
     /**
       * Use the default line break rule.
       *

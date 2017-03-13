@@ -2,7 +2,9 @@ package com.raquo.snabbdom.nodes
 
 import com.raquo.snabbdom.Modifier
 
-class IterableNode(val modifiers: Iterable[Modifier]) extends Modifier {
+class IterableNode[N <: VNode](val modifiers: Iterable[Modifier[N]]) extends Modifier[N] {
 
-  @inline def applyTo(vnode: VNode): Unit = vnode.apply(modifiers.toSeq: _*)
+  @inline def applyTo(vnode: N): Unit = {
+    new RichNode(vnode).apply(modifiers.toSeq: _*)
+  }
 }

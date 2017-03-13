@@ -10,17 +10,17 @@ import scala.scalajs.js.|
   *
   * This is in contrast to e.g. a VNode, which does not *set* anything, but *appends* to Children
   */
-trait Setter[K <: Key[V, Self], V, Self <: Setter[K, V, Self]] extends Modifier {
+trait Setter[K <: Key[V, N, Self], V, N <: VNode, Self <: Setter[K, V, N, Self]] extends Modifier[N] {
   val key: K
   val value: V
 }
 
-class AttrSetter[V] (
-  val key: Attr[V],
+class AttrSetter[V, N <: VNode] (
+  val key: Attr[V, N],
   val value: V
-) extends Setter[Attr[V], V, AttrSetter[V]] {
+) extends Setter[Attr[V, N], V, N, AttrSetter[V, N]] {
 
-  def applyTo(vnode: VNode): Unit = {
+  def applyTo(vnode: N): Unit = {
     val attrKey = key.name
     val attrValue: Boolean | String = value match {
       case booleanValue: Boolean => booleanValue
@@ -34,12 +34,12 @@ class AttrSetter[V] (
   }
 }
 
-class EventPropSetter[V <: js.Function] (
-  val key: EventProp[V],
+class EventPropSetter[V <: js.Function, N <: VNode] (
+  val key: EventProp[V, N],
   val value: V
-) extends Setter[EventProp[V], V, EventPropSetter[V]] {
+) extends Setter[EventProp[V, N], V, N, EventPropSetter[V, N]] {
 
-  def applyTo(vnode: VNode): Unit = {
+  def applyTo(vnode: N): Unit = {
     if (vnode.data.on.isEmpty) {
       vnode.data.on = js.Dictionary[js.Function](key.name -> value)
     } else {
@@ -48,12 +48,12 @@ class EventPropSetter[V <: js.Function] (
   }
 }
 
-class PropSetter[V] (
-  val key: Prop[V],
+class PropSetter[V, N <: VNode] (
+  val key: Prop[V, N],
   val value: V
-) extends Setter[Prop[V], V, PropSetter[V]] {
+) extends Setter[Prop[V, N], V, N, PropSetter[V, N]] {
 
-  def applyTo(vnode: VNode): Unit = {
+  def applyTo(vnode: N): Unit = {
     if (vnode.data.props.isEmpty) {
       vnode.data.props = js.Dictionary[Any](key.name -> value)
     } else {
@@ -62,12 +62,12 @@ class PropSetter[V] (
   }
 }
 
-class StyleSetter[V] (
-  val key: Style[V],
+class StyleSetter[V, N <: VNode] (
+  val key: Style[V, N],
   val value: V
-) extends Setter[Style[V], V, StyleSetter[V]] {
+) extends Setter[Style[V, N], V, N, StyleSetter[V, N]] {
 
-  def applyTo(vnode: VNode): Unit = {
+  def applyTo(vnode: N): Unit = {
     if (vnode.data.styles.isEmpty) {
       vnode.data.styles = js.Dictionary[Any](key.name -> value)
     } else {

@@ -1,12 +1,13 @@
 package com.raquo.snabbdom.nodes
 
 import com.raquo.interfaces.objectAssign
-import com.raquo.snabbdom.Children
 
 import scala.scalajs.js
 import scala.scalajs.js.|
 
 object VNodeOps {
+
+  // @TODO move all this to VNode so that we can extend this behaviour
 
   def copy(vnode: VNode): VNode = {
     // @TODO[NOW] Replace with two-level object-assign
@@ -53,7 +54,7 @@ object VNodeOps {
     }
   }
 
-  def copyChildren(children: Children): Children = {
+  def copyChildren[N <: VNode](children: js.Array[N]): js.Array[N] = {
     children.jsSlice()
   }
 }

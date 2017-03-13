@@ -9,10 +9,10 @@ import scala.scalajs.js.annotation.ScalaJSDefined
   * which will add itself to the node's attributes but not appear in the final
   * `children` list.
   */
-trait Modifier {
+trait Modifier[-N <: VNode] {
   /**
     * Applies this modifier to the specified [[VNode]], such that when
     * rendering is complete the effect of adding this modifier can be seen.
     */
-  def applyTo(vnode: VNode): Unit
+  def applyTo(vnode: N): Unit
 }

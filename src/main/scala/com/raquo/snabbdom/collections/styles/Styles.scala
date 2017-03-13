@@ -1,5 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
+import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.{Style, StyleSetter}
 
@@ -9,7 +10,7 @@ import scala.scalajs.js.|
   * Trait that contains the contents of the `Styles` object, so they can
   * be mixed in to other objects if needed.
   */
-trait Styles extends StyleMisc { self: Builders[_] =>
+trait Styles[N <: VNode] extends StyleMisc[N] { self: Builders[N] =>
 
   /**
     * If a background-image is specified, the background-attachment CSS
@@ -18,7 +19,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object backgroundAttachment extends Style[String]("backgroundAttachment", "background-attachment") {
+  object backgroundAttachment extends Style[String, N]("backgroundAttachment", "background-attachment") {
 
     /**
       * This keyword means that the background image will scroll within the
@@ -98,7 +99,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object backgroundOrigin extends Style[String]("backgroundOrigin", "background-origin") {
+  object backgroundOrigin extends Style[String, N]("backgroundOrigin", "background-origin") {
 
     /**
       * The background extends to the outside edge of the border (but underneath
@@ -134,7 +135,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object backgroundClip extends Style[String]("backgroundClip", "background-clip") {
+  object backgroundClip extends Style[String, N]("backgroundClip", "background-clip") {
 
     /**
       * The background extends to the outside edge of the border (but underneath
@@ -167,7 +168,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object backgroundSize extends Style[String]("backgroundSize", "background-size") {
+  object backgroundSize extends Style[String, N]("backgroundSize", "background-size") {
 
     /**
       * The auto keyword that scales the background image in the corresponding
@@ -327,7 +328,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object borderCollapse extends Style[String]("borderCollapse", "border-collapse") {
+  object borderCollapse extends Style[String, N]("borderCollapse", "border-collapse") {
 
     /**
       * Is a keyword requesting the use of the separated-border table rendering
@@ -414,8 +415,8 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object borderSpacing extends Style[String]("borderSpacing", "border-spacing") {
-    def :=(horizontal: String, vertical: String): StyleSetter[String] = this := s"$horizontal $vertical"
+  object borderSpacing extends Style[String, N]("borderSpacing", "border-spacing") {
+    def :=(horizontal: String, vertical: String): StyleSetter[String, N] = this := s"$horizontal $vertical"
   }
 
   /**
@@ -472,7 +473,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object boxSizing extends Style[String]("boxSizing", "box-sizing") {
+  object boxSizing extends Style[String, N]("boxSizing", "box-sizing") {
 
     /**
       * This is the default style as specified by the CSS standard. The width and
@@ -526,7 +527,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object clip extends Style[String]("clip", "clip") {
+  object clip extends Style[String, N]("clip", "clip") {
     def rect(top: String, right: String, bottom: String, left: String) =
       this := s"rect($top, $right, $bottom, $left)"
 
@@ -539,7 +540,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object cursor extends Style[String]("cursor", "cursor") {
+  object cursor extends Style[String, N]("cursor", "cursor") {
 
     /**
       * The browser determines the cursor to display based on the current context.
@@ -754,7 +755,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object float extends Style[String]("cssFloat", "float") {
+  object float extends Style[String, N]("cssFloat", "float") {
     /**
       * Is a keyword indicating that the element must float on the left side of
       * its containing block.
@@ -799,7 +800,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object direction extends Style[String]("direction", "direction") {
+  object direction extends Style[String, N]("direction", "direction") {
     /**
       * The initial value of direction (that is, if not otherwise specified). Text
       * and other elements go from left to right.
@@ -828,7 +829,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object display extends Style[String]("display", "display") {
+  object display extends Style[String, N]("display", "display") {
     /**
       * Turns off the display of an element (it has no effect on layout); all
       * descendant elements also have their display turned off. The document is
@@ -957,7 +958,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object pointerEvents extends Style[String]("pointerEvents", "pointer-events") {
+  object pointerEvents extends Style[String, N]("pointerEvents", "pointer-events") {
     /**
       * The element behaves as it would if the pointer-events property was not
       * specified. In SVG content, this value and the value visiblePainted have
@@ -1060,7 +1061,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object listStyleImage extends Style[String]("listStyleImage", "list-style-image") {
+  object listStyleImage extends Style[String, N]("listStyleImage", "list-style-image") {
 
     def none = this := "none"
   }
@@ -1073,7 +1074,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object listStylePosition extends Style[String]("listStylePosition", "list-style-position") {
+  object listStylePosition extends Style[String, N]("listStylePosition", "list-style-position") {
     /**
       * The marker box is outside the principal block box.
       *
@@ -1089,7 +1090,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     lazy val inside = this := "inside"
   }
 
-  object wordWrap extends Style[String]("wordWrap", "word-wrap") {
+  object wordWrap extends Style[String, N]("wordWrap", "word-wrap") {
     /**
       * Indicates that lines may only break at normal word break points.
       *
@@ -1142,7 +1143,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object verticalAlign extends Style[String]("verticalAlign", "vertical-align") {
+  object verticalAlign extends Style[String, N]("verticalAlign", "vertical-align") {
     /**
       * Aligns the baseline of the element with the baseline of its parent. The
       * baseline of some replaced elements, like textarea is not specified by
@@ -1203,7 +1204,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object mask extends Style[String]("mask", "mask") {
+  object mask extends Style[String, N]("mask", "mask") {
     lazy val none = this := "none"
 
     def uri(s: String) = this := s"uri($s)"
@@ -1216,7 +1217,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object emptyCells extends Style[String]("emptyCells", "empty-cells") {
+  object emptyCells extends Style[String, N]("emptyCells", "empty-cells") {
     /**
       * Is a keyword indicating that borders and backgrounds should be drawn like
       * in a normal cells.
@@ -1349,7 +1350,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object listStyleType extends Style[String]("listStyleType", "list-style-type") {
+  object listStyleType extends Style[String, N]("listStyleType", "list-style-type") {
     /**
       * No item marker is shown
       *
@@ -1506,7 +1507,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object captionSide extends Style[String]("captionSide", "caption-side") {
+  object captionSide extends Style[String, N]("captionSide", "caption-side") {
     /**
       * The caption box will be above the table.
       *
@@ -1540,7 +1541,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object position extends Style[String]("position", "position") {
+  object position extends Style[String, N]("position", "position") {
     /**
       * This keyword let the element use the normal behavior, that is it is laid
       * out in its current position in the flow.  The top, right, bottom, and left
@@ -1580,7 +1581,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
   }
 
 
-  object quotes extends Style[String]("quotes", "quotes") {
+  object quotes extends Style[String, N]("quotes", "quotes") {
     /**
       * The open-quote and close-quote values of the content property produce no
       * quotation marks.
@@ -1595,7 +1596,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
 
   }
 
-  object tableLayout extends Style[String]("tableLayout", "table-layout") {
+  object tableLayout extends Style[String, N]("tableLayout", "table-layout") {
     /**
       * An automatic table layout algorithm is commonly used by most browsers for
       * table layout. The width of the table and its cells depends on the content
@@ -1623,7 +1624,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object fontSize extends Style[String]("fontSize", "font-size") {
+  object fontSize extends Style[String, N]("fontSize", "font-size") {
     lazy val xxSmall = this := "xx-small"
     lazy val xSmall = this := "x-small"
     lazy val small = this := "small"
@@ -1692,7 +1693,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     * MDN
     */
   // @TODO[API] This should accept numbers as well! XStream probably needs implicit conversions for |
-  object fontWeight extends Style[/*Int | */String]("fontWeight", "font-weight") {
+  object fontWeight extends Style[/*Int | */String, N]("fontWeight", "font-weight") {
     /**
       * Normal font weight. Same as 400.
       *
@@ -1745,7 +1746,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object fontStyle extends Style[String]("fontStyle", "font-style") {
+  object fontStyle extends Style[String, N]("fontStyle", "font-style") {
     /**
       * Selects a font that is classified as normal within a font-family
       *
@@ -1774,7 +1775,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object clear extends Style[String]("clear", "clear") {
+  object clear extends Style[String, N]("clear", "clear") {
     /**
       * The element is not moved down to clear past floating elements.
       *
@@ -1815,7 +1816,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val marginRight = new Style[String]("marginRight", "margin-right") with MarginAuto
+  lazy val marginRight = new Style[String, N]("marginRight", "margin-right") with MarginAuto
 
 
   /**
@@ -1824,7 +1825,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val marginTop = new Style[String]("marginTop", "margin-top") with MarginAuto
+  lazy val marginTop = new Style[String, N]("marginTop", "margin-top") with MarginAuto
 
 
   /**
@@ -1837,7 +1838,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val marginLeft = new Style[String]("marginLeft", "margin-left") with MarginAuto
+  lazy val marginLeft = new Style[String, N]("marginLeft", "margin-left") with MarginAuto
 
   /**
     * The margin CSS property sets the margin for all four sides. It is a
@@ -1848,7 +1849,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object margin extends Style[String]("margin", "margin") {
+  object margin extends Style[String, N]("margin", "margin") {
     /**
       * auto is replaced by some suitable value, e.g. it can be used for
       * centering of blocks.
@@ -1981,7 +1982,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object outlineWidth extends Style[String]("outlineWidth", "outline-width") {
+  object outlineWidth extends Style[String, N]("outlineWidth", "outline-width") {
     /**
       * Typically 1px in desktop browsers like Firefox.
       *
@@ -2009,7 +2010,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object outlineColor extends Style[String]("outlineColor", "outline-color") {
+  object outlineColor extends Style[String, N]("outlineColor", "outline-color") {
     /**
       * To ensure the outline is visible, performs a color inversion of the
       * background. This makes the focus border more salient, regardless of the
@@ -2038,9 +2039,9 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val textAlignLast = new Style[String]("textAlignLast", "text-align-last") with TextAlign
+  lazy val textAlignLast = new Style[String, N]("textAlignLast", "text-align-last") with TextAlign
 
-  trait TextAlign extends Style[String] {
+  trait TextAlign extends Style[String, N] {
     /**
       * The same as left if direction is left-to-right and right if direction is
       * right-to-left.
@@ -2089,7 +2090,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val textAlign = new Style[String]("textAlign", "text-align") with TextAlign
+  lazy val textAlign = new Style[String, N]("textAlign", "text-align") with TextAlign
 
   /**
     * The text-decoration CSS property is used to set the text formatting to
@@ -2097,7 +2098,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object textDecoration extends Style[String]("textDecoration", "text-decoration") {
+  object textDecoration extends Style[String, N]("textDecoration", "text-decoration") {
     /**
       * Produces no text decoration.
       *
@@ -2141,7 +2142,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object textOverflow extends Style[String]("textOverflow", "text-overflow") {
+  object textOverflow extends Style[String, N]("textOverflow", "text-overflow") {
     /**
       * This keyword value indicates to truncate the text at the limit of the
       * content area, therefore the truncation can happen in the middle of a
@@ -2172,7 +2173,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object textUnderlinePosition extends Style[String]("textUnderlinePosition", "text-underline-position") {
+  object textUnderlinePosition extends Style[String, N]("textUnderlinePosition", "text-underline-position") {
     /**
       * This keyword allows the browser to use an algorithm to choose between
       * under and alphabetic.
@@ -2216,7 +2217,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object textTransform extends Style[String]("textTransform", "text-transform") {
+  object textTransform extends Style[String, N]("textTransform", "text-transform") {
     /**
       * Forces the first letter of each word to be converted to
       * uppercase. Other characters are unchanged.
@@ -2328,7 +2329,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
   lazy val transitionProperty = style[String]("transitionProperty", "transition-property")
 
 
-  object visibility extends Style[String]("visibility", "visibility") {
+  object visibility extends Style[String, N]("visibility", "visibility") {
     /**
       * Default value, the box is visible
       *
@@ -2360,7 +2361,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object whiteSpace extends Style[String]("whiteSpace", "white-space") {
+  object whiteSpace extends Style[String, N]("whiteSpace", "white-space") {
     /**
       * Sequences of whitespace are collapsed. Newline characters in the source
       * are handled as other whitespace. Breaks lines as necessary to fill line
@@ -2454,7 +2455,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object alignContent extends Style[String]("alignContent", "align-content") {
+  object alignContent extends Style[String, N]("alignContent", "align-content") {
 
     /**
       * Lines are packed starting from the cross-start. Cross-start edge of the first line and cross-start edge of
@@ -2512,7 +2513,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object alignSelf extends Style[String]("alignSelf", "align-self") {
+  object alignSelf extends Style[String, N]("alignSelf", "align-self") {
     /**
       * Computes to parent's align-items value or stretch if the element has no parent.
       *
@@ -2565,7 +2566,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object flexWrap extends Style[String]("flexWrap", "flex-wrap") {
+  object flexWrap extends Style[String, N]("flexWrap", "flex-wrap") {
 
     /**
       * The flex items are laid out in a single line which may cause the flex container to overflow. The cross-start
@@ -2598,7 +2599,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object alignItems extends Style[String]("alignItems", "align-items") {
+  object alignItems extends Style[String, N]("alignItems", "align-items") {
 
     /**
       * The cross-start margin edge of the flex item is flushed with the cross-start edge of the line.
@@ -2649,7 +2650,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object justifyContent extends Style[String]("justifyContent", "justify-content") {
+  object justifyContent extends Style[String, N]("justifyContent", "justify-content") {
 
     /**
       * The flex items are packed starting from the main-start. Margins of the first flex item is flushed with the
@@ -2705,7 +2706,7 @@ trait Styles extends StyleMisc { self: Builders[_] =>
     *
     * MDN
     */
-  object flexDirection extends Style[String]("flexDirection", "flex-direction") {
+  object flexDirection extends Style[String, N]("flexDirection", "flex-direction") {
 
     /**
       * The flex container's main-axis is the same as the block-axis.

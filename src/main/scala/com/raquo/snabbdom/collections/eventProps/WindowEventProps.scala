@@ -1,14 +1,13 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.GenericEventCallback
+import com.raquo.snabbdom.{GenericEventCallback, VNode}
 import com.raquo.snabbdom.collections.Builders
-import com.raquo.snabbdom.setters.Prop
+import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Window Events
-  *
   */
-trait WindowEventProps extends SharedEventProps { self: Builders[_] =>
+trait WindowEventProps[N <: VNode] extends SharedEventProps[N] { self: Builders[N] =>
 
   /**
     * The load event fires at the end of the document loading process. At this
@@ -17,70 +16,70 @@ trait WindowEventProps extends SharedEventProps { self: Builders[_] =>
     *
     * MDN
     */
-  lazy val onLoad: Prop[GenericEventCallback] = prop("onload")
+  lazy val onLoad: EventProp[GenericEventCallback, N] = eventProp("onload")
 
   /**
     * Script to be run after the document is printed
     */
-  lazy val onAfterPrint: Prop[GenericEventCallback] = prop("onafterprint")
+  lazy val onAfterPrint: EventProp[GenericEventCallback, N] = eventProp("onafterprint")
 
   /**
     * Script to be run before the document is printed
     */
-  lazy val onBeforePrint: Prop[GenericEventCallback] = prop("onbeforeprint")
+  lazy val onBeforePrint: EventProp[GenericEventCallback, N] = eventProp("onbeforeprint")
 
   /**
     * Script to be run when the document is about to be unloaded
     */
-  lazy val onBeforeUnload: Prop[GenericEventCallback] = prop("onbeforeunload")
+  lazy val onBeforeUnload: EventProp[GenericEventCallback, N] = eventProp("onbeforeunload")
 
   /**
     * Script to be run when there has been changes to the anchor part of the a URL
     */
-  lazy val onHashChange: Prop[GenericEventCallback] = prop("onhashchange")
+  lazy val onHashChange: EventProp[GenericEventCallback, N] = eventProp("onhashchange")
 
   /**
     * Script to be run when the message is triggered
     */
-  lazy val onMessage: Prop[GenericEventCallback] = prop("onmessage")
+  lazy val onMessage: EventProp[GenericEventCallback, N] = eventProp("onmessage")
 
   /**
     * Script to be run when the browser starts to work offline
     */
-  lazy val onOffline: Prop[GenericEventCallback] = prop("onoffline")
+  lazy val onOffline: EventProp[GenericEventCallback, N] = eventProp("onoffline")
 
   /**
     * Script to be run when the browser starts to work online
     */
-  lazy val onOnline: Prop[GenericEventCallback] = prop("ononline")
+  lazy val onOnline: EventProp[GenericEventCallback, N] = eventProp("ononline")
 
   /**
     * Script to be run when a user navigates away from a page
     */
-  lazy val onPageHide: Prop[GenericEventCallback] = prop("onpagehide")
+  lazy val onPageHide: EventProp[GenericEventCallback, N] = eventProp("onpagehide")
 
   /**
     * Script to be run when a user navigates to a page
     */
-  lazy val onPageShow: Prop[GenericEventCallback] = prop("onpageshow")
+  lazy val onPageShow: EventProp[GenericEventCallback, N] = eventProp("onpageshow")
 
   /**
     * Script to be run when the window's history changes
     */
-  lazy val onPopState: Prop[GenericEventCallback] = prop("onpopstate")
+  lazy val onPopState: EventProp[GenericEventCallback, N] = eventProp("onpopstate")
 
   /**
     * Fires when the browser window is resized
     */
-  lazy val onResize: Prop[GenericEventCallback] = prop("onresize")
+  lazy val onResize: EventProp[GenericEventCallback, N] = eventProp("onresize")
 
   /**
     * Script to be run when a Web Storage area is updated
     */
-  lazy val onStorage: Prop[GenericEventCallback] = prop("onstorage")
+  lazy val onStorage: EventProp[GenericEventCallback, N] = eventProp("onstorage")
 
   /**
     * Fires once a page has unloaded (or the browser window has been closed)
     */
-  lazy val onUnload: Prop[GenericEventCallback] = prop("onunload")
+  lazy val onUnload: EventProp[GenericEventCallback, N] = eventProp("onunload")
 }

@@ -1,19 +1,12 @@
 package com.raquo.snabbdom.nodes
 
 import com.raquo.snabbdom.Modifier
-
-import scala.scalajs.js
+import com.raquo.snabbdom.collections.Builders
 
 // @TODO[Perf] Can we avoid allocating one ChildNode per VNode? Seems like a value class won't help here.
-class ChildNode(val vnode: VNode) extends Modifier {
+class ChildNode[N <: VNode](val vnode: N)(implicit builders: Builders[N]) extends Modifier[N] {
 
-  import VNode.addChildToList
-
-  override def applyTo(parentNode: VNode): Unit = {
-    if (parentNode.text.isDefined) {
-      addChildToList(parent = parentNode, child = new TextNode(parentNode.text.get))
-      parentNode.text = js.undefined
-    }
-    addChildToList(parent = parentNode, child = vnode)
+  @inline override def applyTo(parent: N): Unit = {
+    new RichNode(parent).addChild(vnode)
   }
 }

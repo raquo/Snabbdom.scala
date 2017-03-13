@@ -1,20 +1,20 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.GenericEventCallback
+import com.raquo.snabbdom.{GenericEventCallback, VNode}
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Miscellaneous Events
   */
-trait MiscellaneousEventProps extends SharedEventProps { self: Builders[_] =>
+trait MiscellaneousEventProps[N <: VNode] extends SharedEventProps[N] { self: Builders[N] =>
 
   /**
     * Fires when a <menu> element is shown as a context menu
     */
-  lazy val onShow: EventProp[GenericEventCallback] = eventProp("show")
+  lazy val onShow: EventProp[GenericEventCallback, N] = eventProp("show")
   /**
     * Fires when the user opens or closes the <details> element
     */
-  lazy val onToggle: EventProp[GenericEventCallback] = eventProp("toggle")
+  lazy val onToggle: EventProp[GenericEventCallback, N] = eventProp("toggle")
 }
