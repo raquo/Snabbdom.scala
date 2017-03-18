@@ -8,5 +8,4 @@ trait SnabbdomSpec
   extends MountSpec[VNode]
   with VNodeBuilders
   with RuleImplicits[VNode]
-  with DomEventSimulatorSpec
-  with UtilSpec { this: Suite => }
+  with DomEventSimulatorSpec { this: Suite => }
