@@ -20,7 +20,7 @@ class Node[N <: Node[N]](tagName: js.UndefOr[String]) extends js.Object { self: 
 
   var key: js.UndefOr[String] = js.undefined
 
-  var data: VNodeData[N] = new VNodeData[N] {} // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
+  var data: NodeData[N] = new NodeData[N] {} // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
 
   var text: js.UndefOr[String] = js.undefined
 
@@ -80,8 +80,8 @@ class Node[N <: Node[N]](tagName: js.UndefOr[String]) extends js.Object { self: 
     newNode
   }
 
-  def copyData(data: VNodeData[N]): VNodeData[N] = {
-    val newData = new VNodeData[N] {}
+  def copyData(data: NodeData[N]): NodeData[N] = {
+    val newData = new NodeData[N] {}
     data.attrs.foreach { attrs =>
       newData.attrs = objectAssign(js.Dictionary[Boolean | String](), attrs)
     }

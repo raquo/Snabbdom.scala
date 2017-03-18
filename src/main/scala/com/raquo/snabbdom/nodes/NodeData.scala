@@ -5,7 +5,7 @@ import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
-trait VNodeData[N <: Node[N]] extends js.Object {
+trait NodeData[N <: Node[N]] extends js.Object {
 
   // @TODO[Elegance] Separate raw JS trait and implicit value class
 

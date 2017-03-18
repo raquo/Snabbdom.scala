@@ -25,6 +25,6 @@ trait Builders[N <: Node[N]] {
     new Style[Value, N](jsKey, cssKey)
   }
 
-  /** We don't actually have an [[N]]-agnostic implementation of this. See [[VNodeBuilders]] */
+  /** We don't actually have an N-agnostic implementation of this. See [[com.raquo.snabbdom.VNodeBuilders]] */
   @inline def vnode(tagName: js.UndefOr[String]): N
 }
