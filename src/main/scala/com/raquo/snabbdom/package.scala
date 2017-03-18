@@ -11,13 +11,8 @@ import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.ScalaJSDefined
 
 package object snabbdom extends {
-
-  // @TODO[WTF] this should be in a separate file but it doesn't want to compile :(
-  @ScalaJSDefined
-  class VNode(tagName: js.UndefOr[String]) extends Node[VNode](tagName)
 
   type EventCallback[TEvent <: Event] = js.Function1[TEvent, Unit]
 
@@ -25,14 +20,7 @@ package object snabbdom extends {
 
   type MouseEventCallback = EventCallback[MouseEvent]
 
-  // @TODO[WTF] this should be in a separate file but it doesn't want to compile :(
-  trait VNodeBuilders extends Builders[VNode] {
-    override def vnode(tagName: js.UndefOr[String]): VNode = {
-      new VNode(tagName)
-    }
-  }
-
-  val vnodeBuilders = new VNodeBuilders {}
+  implicit val vnodeBuilders = new VNodeBuilders {}
 
   object tags extends Tags[VNode] with VNodeBuilders
 
@@ -46,17 +34,12 @@ package object snabbdom extends {
 
   object styles extends Styles[VNode] with VNodeBuilders
 
-
-  // @TODO[API] This is probably avoidable, but I can't get generic versions of these implicit conversions to be picked up
-
-  private implicit val builders: Builders[VNode] = vnodeBuilders
-
   @inline implicit def textToChildNode(text: String): ChildNode[VNode] = {
-    Conversions.textToChildNode(text)
+    Conversions.textToChildNode(text)(vnodeBuilders)
   }
 
   @inline implicit def nodeToChildNode(vnode: VNode): ChildNode[VNode] = {
-    Conversions.nodeToChildNode(vnode)
+    Conversions.nodeToChildNode(vnode)(vnodeBuilders)
   }
 
   @inline implicit def toIterableNode(modifiers: Iterable[Modifier[VNode]]): IterableNode[VNode] = {
