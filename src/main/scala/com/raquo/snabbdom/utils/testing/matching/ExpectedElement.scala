@@ -1,13 +1,13 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
 import scala.collection.mutable
 import scala.scalajs.js.|
 
-class ExpectedElement(private val emptyVNode: VNode) {
+class ExpectedElement[N <: Node[N]](private val emptyVNode: N) {
 
   import ExpectedElement._
 
@@ -18,21 +18,21 @@ class ExpectedElement(private val emptyVNode: VNode) {
     element => checkTagName(element, this)
   )
 
-  private val expectedChildrenBuffer: mutable.Buffer[ExpectedElement | String] = mutable.Buffer()
+  private val expectedChildrenBuffer: mutable.Buffer[ExpectedElement[N] | String] = mutable.Buffer()
 
   def checks: List[Check] = checksBuffer.toList
 
-  def expectedChildren: List[ExpectedElement | String] = expectedChildrenBuffer.toList
+  def expectedChildren: List[ExpectedElement[N] | String] = expectedChildrenBuffer.toList
 
   def addCheck(check: Check): Unit = {
     checksBuffer.append(check)
   }
 
-  def addExpectedChild(child: ExpectedElement | String): Unit = {
+  def addExpectedChild(child: ExpectedElement[N] | String): Unit = {
     expectedChildrenBuffer.append(child)
   }
 
-  def like(rules: Rule*): ExpectedElement = {
+  def like(rules: Rule[N]*): ExpectedElement[N] = {
     rules.foreach(_.applyTo(this))
     this
   }
@@ -40,8 +40,8 @@ class ExpectedElement(private val emptyVNode: VNode) {
 
 object ExpectedElement {
 
-  def checkTagName(element: dom.Element, expectedElement: ExpectedElement): MaybeError = {
-    if (element.tagName.toLowerCase != expectedElement.emptyVNode.sel) {
+  def checkTagName[N <: Node[N]](element: dom.Element, expectedElement: ExpectedElement[N]): MaybeError = {
+    if (element.tagName.toLowerCase != expectedElement.emptyVNode.sel.get) {
       Some(s"Element tag name is incorrect: actual ${repr(element.tagName.toLowerCase)}, expected ${repr(expectedElement.emptyVNode.sel)}")
     } else {
       None
@@ -52,7 +52,7 @@ object ExpectedElement {
     s"[$clue]: $message"
   }
 
-  def checkElement(element: dom.Element, expectedElement: ExpectedElement, clue: String): ErrorList = {
+  def checkElement[N <: Node[N]](element: dom.Element, expectedElement: ExpectedElement[N], clue: String): ErrorList = {
 
     val checksErrors: List[String] = expectedElement.checks
       .flatMap(check => check(element))
@@ -68,7 +68,8 @@ object ExpectedElement {
       )
     } else {
       expectedElement.expectedChildren.zipWithIndex.flatMap {
-        case (expectedChildElement: ExpectedElement, index) =>
+        // @TODO[Integrity] N is unchecked here. Grab it using ClassTag.
+        case (expectedChildElement: ExpectedElement[N], index) =>
           checkChildElement(
             element.childNodes(index),
             expectedChildElement,
@@ -86,7 +87,7 @@ object ExpectedElement {
     checksErrors ++ childErrors
   }
 
-  def checkChildElement(childNode: dom.Node, expectedChildElement: ExpectedElement, childClue: String): ErrorList = {
+  def checkChildElement[N <: Node[N]](childNode: dom.Node, expectedChildElement: ExpectedElement[N], childClue: String): ErrorList = {
     childNode match {
       case childElement: dom.Element =>
         checkElement(

@@ -1,12 +1,12 @@
 package com.raquo.snabbdom.collections
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.{Attr, EventProp, Prop, Style}
 
 import scala.scalajs.js
 
 // @TODO[Api] Do we need type params for other stuff? So far we only wanted to customize the nodes...
-trait Builders[N <: VNode] {
+trait Builders[N <: Node[N]] {
 
   @inline def attr[Value](key: String): Attr[Value, N] = {
     new Attr[Value, N](key)

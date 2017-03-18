@@ -5,7 +5,7 @@ import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
-trait VNodeData extends js.Object {
+trait VNodeData[N <: Node[N]] extends js.Object {
 
   // @TODO[Elegance] Separate raw JS trait and implicit value class
 
@@ -19,5 +19,5 @@ trait VNodeData extends js.Object {
   var styles: js.UndefOr[js.Dictionary[Any]] = js.undefined
 
   @JSName("hook")
-  var hooks: js.UndefOr[Hooks] = js.undefined
+  var hooks: js.UndefOr[Hooks[N]] = js.undefined
 }

@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.{Style, StyleSetter}
 
@@ -10,7 +10,7 @@ import scala.scalajs.js.|
   * Contains CSS styles which are used less frequently. These are not imported by
   * default to avoid namespace pollution.
   */
-trait Styles2[N <: VNode] extends StyleMisc[N] { self: Builders[N] =>
+trait Styles2[N <: Node[N]] extends StyleMisc[N] { self: Builders[N] =>
 
   /**
     * The animation-direction CSS property indicates whether the animation should

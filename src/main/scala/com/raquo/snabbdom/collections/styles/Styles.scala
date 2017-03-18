@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.{Style, StyleSetter}
 
@@ -10,7 +10,7 @@ import scala.scalajs.js.|
   * Trait that contains the contents of the `Styles` object, so they can
   * be mixed in to other objects if needed.
   */
-trait Styles[N <: VNode] extends StyleMisc[N] { self: Builders[N] =>
+trait Styles[N <: Node[N]] extends StyleMisc[N] { self: Builders[N] =>
 
   /**
     * If a background-image is specified, the background-attachment CSS

@@ -3,7 +3,6 @@ package com.raquo.snabbdom.utils
 import com.raquo.snabbdom.nodes.Hooks
 import com.raquo.snabbdom.VNode
 import org.scalajs.dom
-import org.scalajs.dom.raw.Node
 
 import scala.scalajs.js
 import scala.util.Random
@@ -17,14 +16,14 @@ object HookLogger {
     logger: Any => Unit = consoleLog,
     logNode: Boolean = false,
     logVNode: Boolean = false,
-    logNodeFn: Option[Node => Any] = None,
+    logNodeFn: Option[dom.Node => Any] = None,
     logVNodeFn: Option[VNode => Any] = None
-  ): Hooks = {
+  ): Hooks[VNode] = {
 
     // @TODO[Convenience] Provide an easy way to add HookLogger to an existing VNode
     // @TODO[Convenience] Optionally propagate hook logger to new nodes
 
-    new Hooks {
+    new Hooks[VNode] {
       if (enabled) {
         addInitHook { (vnode: VNode) =>
           logger(prefix + ":hook:init")
@@ -75,7 +74,7 @@ object HookLogger {
     vnode: VNode,
     logNode: Boolean = false,
     logVNode: Boolean = false,
-    logNodeFn: Option[Node => Any] = None,
+    logNodeFn: Option[dom.Node => Any] = None,
     logVNodeFn: Option[VNode => Any] = None
   ): Unit = {
     if (message.nonEmpty && (logNode || logVNode || logNodeFn.isDefined || logVNodeFn.isDefined)) {

@@ -1,13 +1,13 @@
 package com.raquo.snabbdom.collections.tags
 
 import com.raquo.snabbdom.collections.Builders
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 
 /**
   * Trait that contains the contents of the `Tags` object, so they can be mixed
   * in to other objects if needed.
   */
-trait Tags[N <: VNode] { self: Builders[N] =>
+trait Tags[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * Represents the root of an HTML or XHTML document. All other elements must

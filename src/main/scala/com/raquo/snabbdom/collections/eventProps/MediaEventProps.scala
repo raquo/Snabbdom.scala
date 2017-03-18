@@ -1,7 +1,8 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.{GenericEventCallback, VNode}
+import com.raquo.snabbdom.GenericEventCallback
 import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.EventProp
 
 /**
@@ -9,7 +10,7 @@ import com.raquo.snabbdom.setters.EventProp
   * all HTML elements, but they are most common in media elements, like <audio>,
   * <embed>, <img>, <object>, and <video>.
   */
-trait MediaEventProps[N <: VNode] extends SharedEventProps[N] { self: Builders[N] =>
+trait MediaEventProps[N <: Node[N]] extends SharedEventProps[N] { self: Builders[N] =>
 
   /**
     * Script to be run on abort

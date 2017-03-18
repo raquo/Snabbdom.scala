@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait InputAttrs[N <: VNode] { self: Builders[N] =>
+trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * The URI of a program that processes the information submitted via the form.

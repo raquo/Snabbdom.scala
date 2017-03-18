@@ -1,16 +1,16 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import com.raquo.snabbdom.setters.Style
 import org.scalajs.dom
 
 import scala.scalajs.js
 
-class StyleRuleOps[V, N <: VNode](val style: Style[V, N]) extends AnyVal {
+class StyleRuleOps[V, N <: Node[N]](val style: Style[V, N]) extends AnyVal {
 
-  def is(expected: V): Rule = new Rule {
-    def applyTo(testNode: ExpectedElement): Unit = {
+  def is(expected: V): Rule[N] = new Rule[N] {
+    def applyTo(testNode: ExpectedElement[N]): Unit = {
       testNode.addCheck(nodeStyleIs(style, expected))
     }
   }

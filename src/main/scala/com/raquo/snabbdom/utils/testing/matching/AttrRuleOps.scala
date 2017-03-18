@@ -1,20 +1,20 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.Attr
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
-class AttrRuleOps[V, N <: VNode](val attr: Attr[V, N]) extends AnyVal {
+class AttrRuleOps[V, N <: Node[N]](val attr: Attr[V, N]) extends AnyVal {
 
-  def is(expected: V): Rule = new Rule {
-    def applyTo(testNode: ExpectedElement): Unit = {
+  def is(expected: V): Rule[N] = new Rule[N] {
+    def applyTo(testNode: ExpectedElement[N]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, Some(expected)))
     }
   }
 
-  def isEmpty: Rule = new Rule {
-    def applyTo(testNode: ExpectedElement): Unit = {
+  def isEmpty: Rule[N] = new Rule[N] {
+    def applyTo(testNode: ExpectedElement[N]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, None))
     }
   }

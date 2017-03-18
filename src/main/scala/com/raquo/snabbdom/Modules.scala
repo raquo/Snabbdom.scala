@@ -1,28 +1,32 @@
 package com.raquo.snabbdom
 
+import com.raquo.snabbdom.nodes.Node
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
+
+// @TODO[API] Seems like Module itself should be of N
 
 @js.native
 trait Module extends js.Object {
 
   /** the patch process begins */
-  def pre: js.UndefOr[js.Function2[VNode, VNode, Unit]] = js.native
+  def pre[N <: Node[N]](): js.UndefOr[js.Function2[N, N, Unit]] = js.native
 
   /** a DOM element has been created based on a vnode [emptyVnode, vnode] */
-  def create: js.UndefOr[js.Function2[VNode, VNode, Unit]] = js.native
+  def create[N <: Node[N]](): js.UndefOr[js.Function2[N, N, Unit]] = js.native
 
   /** an element is being updated [oldVnode, vnode] */
-  def update: js.UndefOr[js.Function2[VNode, VNode, Unit]] = js.native
+  def update[N <: Node[N]](): js.UndefOr[js.Function2[N, N, Unit]] = js.native
 
   /** an element is directly or indirectly being removed [vnode] */
-  def destroy: js.UndefOr[js.Function1[VNode, Unit]] = js.native
+  def destroy[N <: Node[N]](): js.UndefOr[js.Function1[N, Unit]] = js.native
 
   /** an element is directly being removed from the DOM [vnode, removeCallback] */
-  def remove: js.UndefOr[js.Function2[VNode, js.Function0[Unit], Unit]] = js.native
+  def remove[N <: Node[N]](): js.UndefOr[js.Function2[N, js.Function0[Unit], Unit]] = js.native
 
   /** the patch process is done */
-  def post: js.UndefOr[js.Function0[Unit]] = js.native
+  def post[N <: Node[N]](): js.UndefOr[js.Function0[Unit]] = js.native
 }
 
 @JSImport("snabbdom/modules/attributes.js", JSImport.Default)

@@ -25,9 +25,9 @@ class EventPropSpec extends UnitSpec {
       )
     )
 
-    val clickableDiv = mountedElement().querySelector(".clickable")
+    val clickableDiv = mountedElement.querySelector(".clickable")
     val spanInClickableDiv = clickableDiv.querySelector("span")
-    val unrelatedDiv = mountedElement().querySelector(".unrelated")
+    val unrelatedDiv = mountedElement.querySelector(".unrelated")
 
     callbackCount shouldBe 0
 

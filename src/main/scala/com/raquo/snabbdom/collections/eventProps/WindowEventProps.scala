@@ -1,13 +1,14 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.{GenericEventCallback, VNode}
+import com.raquo.snabbdom.GenericEventCallback
 import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.EventProp
 
 /**
   * Window Events
   */
-trait WindowEventProps[N <: VNode] extends SharedEventProps[N] { self: Builders[N] =>
+trait WindowEventProps[N <: Node[N]] extends SharedEventProps[N] { self: Builders[N] =>
 
   /**
     * The load event fires at the end of the document loading process. At this

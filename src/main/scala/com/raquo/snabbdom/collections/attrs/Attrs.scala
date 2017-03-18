@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait Attrs[N <: VNode] { self: Builders[N] =>
+trait Attrs[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * This is the single required attribute for anchors defining a hypertext

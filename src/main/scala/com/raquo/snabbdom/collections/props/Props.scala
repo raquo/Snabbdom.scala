@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.props
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Prop
 
-trait Props[N <: VNode] { self: Builders[N] =>
+trait Props[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * Space-separated list of CSS class names

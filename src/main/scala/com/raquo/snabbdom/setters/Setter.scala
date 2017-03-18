@@ -1,6 +1,7 @@
 package com.raquo.snabbdom.setters
 
-import com.raquo.snabbdom.{Modifier, VNode}
+import com.raquo.snabbdom.Modifier
+import com.raquo.snabbdom.nodes.Node
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -10,12 +11,12 @@ import scala.scalajs.js.|
   *
   * This is in contrast to e.g. a VNode, which does not *set* anything, but *appends* to Children
   */
-trait Setter[K <: Key[V, N, Self], V, N <: VNode, Self <: Setter[K, V, N, Self]] extends Modifier[N] {
+trait Setter[K <: Key[V, N, Self], V, N <: Node[N], Self <: Setter[K, V, N, Self]] extends Modifier[N] {
   val key: K
   val value: V
 }
 
-class AttrSetter[V, N <: VNode] (
+class AttrSetter[V, N <: Node[N]] (
   val key: Attr[V, N],
   val value: V
 ) extends Setter[Attr[V, N], V, N, AttrSetter[V, N]] {
@@ -34,7 +35,7 @@ class AttrSetter[V, N <: VNode] (
   }
 }
 
-class EventPropSetter[V <: js.Function, N <: VNode] (
+class EventPropSetter[V <: js.Function, N <: Node[N]] (
   val key: EventProp[V, N],
   val value: V
 ) extends Setter[EventProp[V, N], V, N, EventPropSetter[V, N]] {
@@ -48,7 +49,7 @@ class EventPropSetter[V <: js.Function, N <: VNode] (
   }
 }
 
-class PropSetter[V, N <: VNode] (
+class PropSetter[V, N <: Node[N]] (
   val key: Prop[V, N],
   val value: V
 ) extends Setter[Prop[V, N], V, N, PropSetter[V, N]] {
@@ -62,7 +63,7 @@ class PropSetter[V, N <: VNode] (
   }
 }
 
-class StyleSetter[V, N <: VNode] (
+class StyleSetter[V, N <: Node[N]] (
   val key: Style[V, N],
   val value: V
 ) extends Setter[Style[V, N], V, N, StyleSetter[V, N]] {

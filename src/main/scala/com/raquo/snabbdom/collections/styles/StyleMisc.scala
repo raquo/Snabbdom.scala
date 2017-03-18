@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.styles
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.Style
 
 import scala.scalajs.js.|
@@ -14,7 +14,7 @@ import scala.scalajs.js.|
   * Everything else is under the MIT License
   * http://opensource.org/licenses/MIT
   */
-trait StyleMisc[N <: VNode] {
+trait StyleMisc[N <: Node[N]] {
 
   /**
     * A Style that takes any value of type T as a parameter and has an auto value

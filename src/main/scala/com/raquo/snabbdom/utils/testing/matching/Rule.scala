@@ -1,5 +1,7 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-trait Rule {
-  def applyTo(testNode: ExpectedElement): Unit
+import com.raquo.snabbdom.nodes.Node
+
+trait Rule[N <: Node[N]] {
+  def applyTo(testNode: ExpectedElement[N]): Unit
 }

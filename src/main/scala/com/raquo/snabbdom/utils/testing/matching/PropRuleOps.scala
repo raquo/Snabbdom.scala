@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.Prop
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
@@ -9,16 +9,16 @@ import scala.scalajs.js
 
 // @TODO Create EventPropOps
 
-class PropRuleOps[V, N <: VNode](val prop: Prop[V, N]) extends AnyVal {
+class PropRuleOps[V, N <: Node[N]](val prop: Prop[V, N]) extends AnyVal {
 
-  def is(expected: V): Rule = new Rule {
-    def applyTo(testNode: ExpectedElement): Unit = {
+  def is(expected: V): Rule[N] = new Rule[N] {
+    def applyTo(testNode: ExpectedElement[N]): Unit = {
       testNode.addCheck(nodePropIs(prop, Some(expected)))
     }
   }
 
-  def isEmpty: Rule = new Rule {
-    def applyTo(testNode: ExpectedElement): Unit = {
+  def isEmpty: Rule[N] = new Rule[N] {
+    def applyTo(testNode: ExpectedElement[N]): Unit = {
       testNode.addCheck(nodePropIs(prop, None))
     }
   }

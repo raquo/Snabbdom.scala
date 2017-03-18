@@ -1,14 +1,15 @@
 package com.raquo.snabbdom.collections.eventProps
 
-import com.raquo.snabbdom.{EventCallback, VNode}
+import com.raquo.snabbdom.EventCallback
 import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.setters.EventProp
 import org.scalajs.dom.KeyboardEvent
 
 /**
   * Keyboard Events - triggered by user action son the keyboard or similar user actions
   */
-trait KeyboardEventProps[N <: VNode] { self: Builders[N] =>
+trait KeyboardEventProps[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * The keydown event is raised when the user presses a keyboard key.

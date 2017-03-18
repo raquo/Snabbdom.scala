@@ -3,42 +3,33 @@ package com.raquo.snabbdom.nodes
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 
+// @TODO[API] >>> Should hooks be covariant?
+
 /** Note: most scaladocs in this class are copied from Snabbdom documentation.
   * Snabbdom is also licensed under MIT license.
   */
 @ScalaJSDefined
-class Hooks extends js.Object {
+class Hooks[N <: Node[N]] extends js.Object {
 
   type RemoveNode = js.Function0[Any]
 
   // @TODO make var fields private? Expose a better API?
 
-  type EmptyVNode = VNode
-  type OldVNode = VNode
+  type EmptyVNode = N
+  type OldVNode = N
+  type NewVNode = N
 
 //  type RawPreHook = js.Function0[Any]
-  type RawInitHook = js.Function1[VNode, Any]
-  type RawCreateHook = js.Function2[EmptyVNode, VNode, Any]
-  type RawInsertHook = js.Function1[VNode, Any]
-  type RawPrePatchHook = js.Function2[OldVNode, VNode, Any]
-  type RawUpdateHook = js.Function2[OldVNode, VNode, Any]
-  type RawPostPatchHook = js.Function2[OldVNode, VNode, Any]
-  type RawDestroyHook = js.Function1[VNode, Any]
+  type RawInitHook = js.Function1[NewVNode, Any]
+  type RawCreateHook = js.Function2[EmptyVNode, NewVNode, Any]
+  type RawInsertHook = js.Function1[NewVNode, Any]
+  type RawPrePatchHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawUpdateHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawPostPatchHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawDestroyHook = js.Function1[OldVNode, Any]
 
   /** Note: you must eventually call RemoveNode callback to remove the node from the DOM */
-  type RawRemoveHook = js.Function2[VNode, RemoveNode, Any]
-
-//  type InitHook = VNode => Any
-//  type CreateHook = (EmptyVNode, VNode) => Any
-//  type InsertHook = VNode => Any
-//  type PrePatchHook = (OldVNode, VNode) => Any
-//  type UpdateHook = (OldVNode, VNode) => Any
-//  type PostPatchHook = (OldVNode, VNode) => Any
-//  type DestroyHook = VNode => Any
-
-  /** Note: you must eventually call RemoveNode callback to remove the node from the DOM */
-//  type RemoveHook = (VNode, RemoveNode) => Any
-//  type RawPostHook = js.Function0[Any]
+  type RawRemoveHook = js.Function2[OldVNode, RemoveNode, Any]
 
 //  /** the patch process begins */
 //  var pre: js.UndefOr[RawPreHook] = js.undefined
@@ -118,8 +109,8 @@ class Hooks extends js.Object {
 //  var post: js.UndefOr[RawPostHook] = js.undefined
 
   /**
-    * @param newHook - hook to use if there is currently no hook set
-    * @param makeNewHook - function that creates a new hook given a current hook
+    * param newHook - hook to use if there is currently no hook set
+    * param makeNewHook - function that creates a new hook given a current hook
     */
 //  def combineHooks[H](currentHook: js.UndefOr[H], newHook: H, makeNewHook: H => H): js.UndefOr[H] = {
 //    js.defined(if (currentHook.isDefined) {
@@ -135,11 +126,11 @@ class Hooks extends js.Object {
 //    newHook(vnode)
 //  }
 
-  def addInitHook(hook: VNode => Any): this.type = {
+  def addInitHook(hook: N => Any): this.type = {
     init = js.defined(
       if (init.isDefined) {
         val oldHook = init.get
-        (vnode: VNode) => {
+        (vnode: N) => {
           oldHook(vnode)
           hook(vnode)
         }
@@ -150,11 +141,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addCreateHook(hook: (EmptyVNode, VNode) => Any): this.type = {
+  def addCreateHook(hook: (EmptyVNode, NewVNode) => Any): this.type = {
     create = js.defined(
       if (create.isDefined) {
         val oldHook = create.get
-        (emptyVNode: VNode, vnode: VNode) => {
+        (emptyVNode: N, vnode: N) => {
           oldHook(emptyVNode, vnode)
           hook(emptyVNode, vnode)
         }
@@ -165,11 +156,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addInsertHook(hook: VNode => Any): this.type = {
+  def addInsertHook(hook: NewVNode => Any): this.type = {
     insert = js.defined(
       if (insert.isDefined) {
         val oldHook = insert.get
-        (vnode: VNode) => {
+        (vnode: N) => {
           oldHook(vnode)
           hook(vnode)
         }
@@ -180,11 +171,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addPrePatchHook(hook: (OldVNode, VNode) => Any): this.type = {
+  def addPrePatchHook(hook: (OldVNode, NewVNode) => Any): this.type = {
     prePatch = js.defined(
       if (prePatch.isDefined) {
         val oldHook = prePatch.get
-        (oldVNode: VNode, vnode: VNode) => {
+        (oldVNode: N, vnode: N) => {
           oldHook(oldVNode, vnode)
           hook(oldVNode, vnode)
         }
@@ -195,11 +186,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addUpdateHook(hook: (OldVNode, VNode) => Any): this.type = {
+  def addUpdateHook(hook: (OldVNode, NewVNode) => Any): this.type = {
     update = js.defined(
       if (update.isDefined) {
         val oldHook = update.get
-        (oldVNode: VNode, vnode: VNode) => {
+        (oldVNode: N, vnode: N) => {
           oldHook(oldVNode, vnode)
           hook(oldVNode, vnode)
         }
@@ -210,11 +201,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addPostPatchHook(hook: (OldVNode, VNode) => Any): this.type = {
+  def addPostPatchHook(hook: (OldVNode, NewVNode) => Any): this.type = {
     postPatch = js.defined(
       if (postPatch.isDefined) {
         val oldHook = postPatch.get
-        (oldVNode: VNode, vnode: VNode) => {
+        (oldVNode: N, vnode: N) => {
           oldHook(oldVNode, vnode)
           hook(oldVNode, vnode)
         }
@@ -225,11 +216,11 @@ class Hooks extends js.Object {
     this
   }
 
-  def addDestroyHook(hook: VNode => Any): this.type = {
+  def addDestroyHook(hook: OldVNode => Any): this.type = {
     destroy = js.defined(
       if (destroy.isDefined) {
         val oldHook = destroy.get
-        (vnode: VNode) => {
+        (vnode: N) => {
           oldHook(vnode)
           hook(vnode)
         }
@@ -241,11 +232,11 @@ class Hooks extends js.Object {
   }
 
   /** Note: you MUST eventually call [[RemoveNode]] callback to remove the node from the DOM */
-  def addRemoveHook(hook: (VNode, RemoveNode) => Any): this.type = {
+  def addRemoveHook(hook: (OldVNode, RemoveNode) => Any): this.type = {
     remove = js.defined(
       if (remove.isDefined) {
         val oldHook = remove.get
-        (vnode: VNode, removeNode: RemoveNode) => {
+        (vnode: N, removeNode: RemoveNode) => {
           oldHook(vnode, removeNode)
           hook(vnode, removeNode)
         }

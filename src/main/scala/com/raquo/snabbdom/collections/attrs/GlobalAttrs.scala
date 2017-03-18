@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.nodes.Node
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
@@ -10,7 +10,7 @@ import com.raquo.snabbdom.setters.Attr
   * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
   * derive from this trait since all groupings of attributes should include these global ones.
   */
-trait GlobalAttrs[N <: VNode] { self: Builders[N] =>
+trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
 
   /**
     * Specifies a shortcut key to activate/focus an element
