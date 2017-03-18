@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.utils
 
-import com.raquo.snabbdom.nodes.Hooks
+import com.raquo.snabbdom.nodes.{Hooks, Node}
 import com.raquo.snabbdom.VNode
 import org.scalajs.dom
 
@@ -9,7 +9,7 @@ import scala.util.Random
 
 object HookLogger {
 
-  def apply(
+  def apply[N <: Node[N]](
     callRemoveNode: Boolean,
     enabled: Boolean = true,
     prefix: String = Random.nextInt(99).toString,
@@ -18,46 +18,46 @@ object HookLogger {
     logVNode: Boolean = false,
     logNodeFn: Option[dom.Node => Any] = None,
     logVNodeFn: Option[VNode => Any] = None
-  ): Hooks[VNode] = {
+  ): Hooks[N] = {
 
     // @TODO[Convenience] Provide an easy way to add HookLogger to an existing VNode
     // @TODO[Convenience] Optionally propagate hook logger to new nodes
 
-    new Hooks[VNode] {
+    new Hooks[N] {
       if (enabled) {
-        addInitHook { (vnode: VNode) =>
+        addInitHook { (vnode: N) =>
           logger(prefix + ":hook:init")
           log(logger, "node:", vnode)
         }
-        addCreateHook { (emptyVNode: VNode, vnode: VNode) =>
+        addCreateHook { (emptyVNode: N, vnode: N) =>
           logger(prefix + ":hook:create")
           log(logger, "empty node:", emptyVNode)
           log(logger, "node:", vnode)
         }
-        addInsertHook { (vnode: VNode) =>
+        addInsertHook { (vnode: N) =>
           logger(prefix + ":hook:insert")
           log(logger, "node:", vnode)
         }
-        addPrePatchHook { (oldVNode: VNode, vnode: VNode) =>
+        addPrePatchHook { (oldVNode: N, vnode: N) =>
           logger(prefix + ":hook:prePatch")
           log(logger, "old node:", oldVNode)
           log(logger, "node:", vnode)
         }
-        addUpdateHook { (oldVNode: VNode, vnode: VNode) =>
+        addUpdateHook { (oldVNode: N, vnode: N) =>
           logger(prefix + ":hook:udpate")
           log(logger, "old node:", oldVNode)
           log(logger, "node:", vnode)
         }
-        addPostPatchHook { (oldVNode: VNode, vnode: VNode) =>
+        addPostPatchHook { (oldVNode: N, vnode: N) =>
           logger(prefix + ":hook:postPatch")
           log(logger, "old node:", oldVNode)
           log(logger, "node:", vnode)
         }
-        addDestroyHook { (vnode: VNode) =>
+        addDestroyHook { (vnode: N) =>
           logger(prefix + ":hook:destroy")
           log(logger, "node:", vnode)
         }
-        addRemoveHook { (vnode: VNode, removeNode: js.Function0[Any]) =>
+        addRemoveHook { (vnode: N, removeNode: js.Function0[Any]) =>
           logger(prefix + ":hook:remove")
           log(logger, "node:", vnode)
           if (callRemoveNode) {
@@ -68,14 +68,14 @@ object HookLogger {
     }
   }
 
-  def log(
+  def log[N <: Node[N]](
     logger: Any => Unit,
     message: String,
-    vnode: VNode,
+    vnode: N,
     logNode: Boolean = false,
     logVNode: Boolean = false,
     logNodeFn: Option[dom.Node => Any] = None,
-    logVNodeFn: Option[VNode => Any] = None
+    logVNodeFn: Option[N => Any] = None
   ): Unit = {
     if (message.nonEmpty && (logNode || logVNode || logNodeFn.isDefined || logVNodeFn.isDefined)) {
       logger(message)
