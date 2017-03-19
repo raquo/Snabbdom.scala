@@ -2,28 +2,28 @@ package com.raquo.snabbdom.collections.eventProps
 
 import com.raquo.snabbdom.EventCallback
 import com.raquo.snabbdom.collections.Builders
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.setters.EventProp
 import org.scalajs.dom.KeyboardEvent
 
 /**
   * Keyboard Events - triggered by user action son the keyboard or similar user actions
   */
-trait KeyboardEventProps[N <: Node[N]] { self: Builders[N] =>
+trait KeyboardEventProps[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
   /**
     * The keydown event is raised when the user presses a keyboard key.
     *
     * MDN
     */
-  lazy val onKeyDown: EventProp[EventCallback[KeyboardEvent], N] = eventProp("keydown")
+  lazy val onKeyDown: EventProp[EventCallback[KeyboardEvent], N, D] = eventProp("keydown")
 
   /**
     * The keyup event is raised when the user releases a key that's been pressed.
     *
     * MDN
     */
-  lazy val onKeyUp: EventProp[EventCallback[KeyboardEvent], N] = eventProp("keyup")
+  lazy val onKeyUp: EventProp[EventCallback[KeyboardEvent], N, D] = eventProp("keyup")
 
   /**
     * The keypress event should be raised when the user presses a key on the keyboard.
@@ -34,5 +34,5 @@ trait KeyboardEventProps[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val onKeyPress: EventProp[EventCallback[KeyboardEvent], N] = eventProp("keypress")
+  lazy val onKeyPress: EventProp[EventCallback[KeyboardEvent], N, D] = eventProp("keypress")
 }

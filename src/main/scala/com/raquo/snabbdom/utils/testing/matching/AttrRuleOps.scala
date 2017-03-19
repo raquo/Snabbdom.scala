@@ -1,25 +1,25 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.setters.Attr
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import org.scalajs.dom
 
-class AttrRuleOps[V, N <: Node[N]](val attr: Attr[V, N]) extends AnyVal {
+class AttrRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val attr: Attr[V, N, D]) extends AnyVal {
 
-  def is(expected: V): Rule[N] = new Rule[N] {
-    def applyTo(testNode: ExpectedElement[N]): Unit = {
+  def is(expected: V): Rule[N, D] = new Rule[N, D] {
+    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, Some(expected)))
     }
   }
 
-  def isEmpty: Rule[N] = new Rule[N] {
-    def applyTo(testNode: ExpectedElement[N]): Unit = {
+  def isEmpty: Rule[N, D] = new Rule[N, D] {
+    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, None))
     }
   }
 
-  private def nodeAttrIs(attr: Attr[V, N], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
+  private def nodeAttrIs(attr: Attr[V, N, D], maybeExpectedValue: Option[V])(node: dom.Node): MaybeError = {
     (node, maybeExpectedValue) match {
       case (element: dom.Element, None) =>
         if (element.hasAttribute(attr.name)) {

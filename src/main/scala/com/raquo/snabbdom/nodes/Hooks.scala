@@ -1,5 +1,7 @@
 package com.raquo.snabbdom.nodes
 
+import org.scalajs.dom
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 
@@ -9,11 +11,9 @@ import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
   * Snabbdom is also licensed under MIT license.
   */
 @ScalaJSDefined
-class Hooks[N <: Node[N]] extends js.Object {
+class Hooks[N <: Node[N, _]] extends js.Object { self =>
 
   type RemoveNode = js.Function0[Any]
-
-  // @TODO make var fields private? Expose a better API?
 
   type EmptyVNode = N
   type OldVNode = N
@@ -35,6 +35,19 @@ class Hooks[N <: Node[N]] extends js.Object {
 //  var pre: js.UndefOr[RawPreHook] = js.undefined
 
   // !!! Don't forget to update the COPY method if adding fields!
+  @JSName("__scala_copy")
+  def copy(): Hooks[N] = {
+    new Hooks[N] {
+      init = self.init
+      create = self.create
+      insert = self.insert
+      prePatch = self.prePatch
+      update = self.update
+      postPatch = self.postPatch
+      destroy = self.destroy
+      remove = self.remove
+    }
+  }
 
   /** Init hook – a vnode has been added
     *

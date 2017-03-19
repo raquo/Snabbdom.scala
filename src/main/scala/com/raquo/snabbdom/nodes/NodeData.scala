@@ -1,13 +1,16 @@
 package com.raquo.snabbdom.nodes
 
+import com.raquo.interfaces.objectAssign
+import com.raquo.snabbdom.collections.Builders
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
-trait NodeData[N <: Node[N]] extends js.Object {
-
-  // @TODO[Elegance] Separate raw JS trait and implicit value class
+class NodeData[N <: Node[N, D], D <: NodeData[N, D]](
+  implicit builders: Builders[N, D]
+) extends js.Object { self: D =>
 
   var attrs: js.UndefOr[js.Dictionary[Boolean | String]] = js.undefined
 
@@ -20,4 +23,26 @@ trait NodeData[N <: Node[N]] extends js.Object {
 
   @JSName("hook")
   var hooks: js.UndefOr[Hooks[N]] = js.undefined
+
+  @JSName("__scala_copy")
+  def copy(): D = {
+    val newData = builders.vnodeData()
+    attrs.foreach { _attrs =>
+      newData.attrs = objectAssign(js.Dictionary[Boolean | String](), _attrs)
+    }
+    on.foreach { _on =>
+      newData.on = objectAssign(js.Dictionary[js.Function](), _on)
+    }
+    props.foreach { _props =>
+      newData.props = objectAssign(js.Dictionary[Any](), _props)
+    }
+    styles.foreach { _styles =>
+      newData.styles = objectAssign(js.Dictionary[Any](), _styles)
+    }
+    hooks.foreach { _hooks =>
+      newData.hooks = _hooks.copy()
+    }
+    newData
+  }
 }
+

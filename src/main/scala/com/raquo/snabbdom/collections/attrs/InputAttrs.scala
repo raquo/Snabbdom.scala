@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
+trait InputAttrs[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
   /**
     * The URI of a program that processes the information submitted via the form.
@@ -13,7 +13,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val action: Attr[String, N] = attr("action")
+  lazy val action: Attr[String, N, D] = attr("action")
 
   /**
     * This attribute indicates whether the value of the control can be
@@ -25,7 +25,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val autoComplete: Attr[String, N] = attr("autocomplete")
+  lazy val autoComplete: Attr[String, N, D] = attr("autocomplete")
 
   /**
     * This Boolean attribute lets you specify that a form control should have
@@ -37,7 +37,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val autoFocus: Attr[Boolean, N] = attr("autofocus")
+  lazy val autoFocus: Attr[Boolean, N, D] = attr("autofocus")
 
   /**
     * When the value of the type attribute is radio or checkbox, the presence of
@@ -46,18 +46,18 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val checked: Attr[Boolean, N] = attr("checked")
+  lazy val checked: Attr[Boolean, N, D] = attr("checked")
 
   /**
     * The `enctype` attribute provides the encoding type of the form when it is
     * submitted (for forms with a method of "POST").
     */
-  lazy val encType: Attr[String, N] = attr("enctype")
+  lazy val encType: Attr[String, N, D] = attr("enctype")
 
   /**
     * The form attribute specifies one or more forms an `<input>` element belongs to.
     */
-  lazy val formAttr: Attr[String, N] = attr("form") // TODO: Conflicts with "form" element
+  lazy val formAttr: Attr[String, N, D] = attr("form") // TODO: Conflicts with "form" element
 
   /**
     * The `formaction` attribute provides the URL that will process the input control
@@ -65,7 +65,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * `form` element. This should be used only with `input` elements of `type`
     * submit or image.
     */
-  lazy val formAction: Attr[String, N] = attr("formaction")
+  lazy val formAction: Attr[String, N, D] = attr("formaction")
 
   /**
     * The `formenctype` attribute provides the encoding type of the form when it is
@@ -73,7 +73,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * `enctype` attribute of the `form` element. This should be used only with the
     * `input` elements of `type` "submit" or "image"
     */
-  lazy val formEncType: Attr[String, N] = attr("formenctype")
+  lazy val formEncType: Attr[String, N, D] = attr("formenctype")
 
   /**
     * The `formmethod` attribute specifies the HTTP Method the form should use when
@@ -81,7 +81,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * element. This should be used only with the `input` elements of `type` "submit"
     * or "image".
     */
-  lazy val formMethod: Attr[String, N] = attr("formmethod")
+  lazy val formMethod: Attr[String, N, D] = attr("formmethod")
 
   /**
     * The `formnovalidate` Boolean attribute specifies that the input of the form
@@ -89,7 +89,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * attribute of the `form`. This should only be used with `input` elements of
     * of `type` "submit".
     */
-  lazy val formNoValidate: Attr[String, N] = attr("formnovalidate")
+  lazy val formNoValidate: Attr[String, N, D] = attr("formnovalidate")
 
   /**
     * The `formtarget` provides a name or keyword that indicates where to display
@@ -97,19 +97,19 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * `target` attribute of them `form` element. This should only be used with
     * the `input` elements of `type` "submit" or "image"
     */
-  lazy val formTarget: Attr[String, N] = attr("formtarget")
+  lazy val formTarget: Attr[String, N, D] = attr("formtarget")
 
   /**
     * The `height` attribute specifies the height of an `input` element of
     * `type` "image".
     */
-  lazy val heightAttr: Attr[Int, N] = attr("height") // TODO: Conflicts with "height" in Styles -
+  lazy val heightAttr: Attr[Int, N, D] = attr("height") // TODO: Conflicts with "height" in Styles -
 
   /**
     * The list attribute refers to a <datalist> element that contains the options
     * for an input element the presents a select list.
     */
-  lazy val list: Attr[String, N] = attr("list")
+  lazy val list: Attr[String, N, D] = attr("list")
 
   // @TODO[API][improve] - Can we improve usability of the max/min attributes?
 
@@ -117,13 +117,13 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * The max attribute specifies the maximum value for an <input> element of type
     * number, range, date, datetime, datetime-local, month, time, or week.
     */
-  lazy val max: Attr[String, N] = attr("max")
+  lazy val max: Attr[String, N, D] = attr("max")
 
   /**
     * The min attribute specifies the minimum value for an <input> element of type
     * number, range, date, datetime, datetime-local, month, time, or week.
     */
-  lazy val min: Attr[String, N] = attr("min")
+  lazy val min: Attr[String, N, D] = attr("min")
 
   /**
     * This Boolean attribute specifies, when present/true, that the user is allowed
@@ -131,14 +131,14 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * It can also be provided to the <select> element to allow selecting more than one
     * option.
     */
-  lazy val multiple: Attr[Boolean, N] = attr("multiple")
+  lazy val multiple: Attr[Boolean, N, D] = attr("multiple")
 
   /**
     * The maximum allowed length for the input field. This attribute forces the input control
     * to accept no more than the allowed number of characters. It does not produce any
     * feedback to the user; you must write Javascript to make that happen.
     */
-  lazy val maxLength: Attr[Int, N] = attr("maxlength")
+  lazy val maxLength: Attr[Int, N, D] = attr("maxlength")
 
   /**
     * The HTTP method that the browser uses to submit the form. Possible values are:
@@ -156,7 +156,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val method: Attr[String, N] = attr("method")
+  lazy val method: Attr[String, N, D] = attr("method")
 
   /**
     * On form elements (input etc.):
@@ -170,14 +170,14 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val name: Attr[String, N] = attr("name")
+  lazy val name: Attr[String, N, D] = attr("name")
 
   /**
     * Specifies a regular expression to validate the input. The pattern attribute
     * works with the following input types: text, search, url, tel, email, and
     * password. Use the `title` attribute to describe the pattern to the user.
     */
-  lazy val pattern: Attr[String, N] = attr("pattern")
+  lazy val pattern: Attr[String, N, D] = attr("pattern")
 
   /**
     * A hint to the user of what can be entered in the control. The placeholder
@@ -187,7 +187,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val placeholder: Attr[String, N] = attr("placeholder")
+  lazy val placeholder: Attr[String, N, D] = attr("placeholder")
 
   /**
     * This Boolean attribute indicates that the user cannot modify the value of
@@ -196,7 +196,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val readOnly: Attr[Boolean, N] = attr("readonly")
+  lazy val readOnly: Attr[Boolean, N, D] = attr("readonly")
 
   /**
     * This attribute specifies that the user must fill in a value before
@@ -206,7 +206,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val required: Attr[Boolean, N] = attr("required")
+  lazy val required: Attr[Boolean, N, D] = attr("required")
 
   /**
     * The initial size of the control. This value is in pixels unless the value
@@ -218,7 +218,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val size: Attr[Int, N] = attr("size")
+  lazy val size: Attr[Int, N, D] = attr("size")
 
   /**
     * The step attribute specifies the numeric intervals for an <input> element
@@ -229,7 +229,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     * The step attribute is applicable to <input> elements of the following
     * types: number, range, date, datetime, datetime-local, month, time and week.
     */
-  lazy val step: Attr[String, N] = attr("step")
+  lazy val step: Attr[String, N, D] = attr("step")
 
   /**
     * A name or keyword indicating where to display the response that is received
@@ -253,7 +253,7 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *   same way as _self.
     * - iframename: The response is displayed in a named iframe.
     */
-  lazy val target: Attr[String, N] = attr("target")
+  lazy val target: Attr[String, N, D] = attr("target")
 
   /**
     * This attribute is used to define the type of the content linked to. The
@@ -265,17 +265,17 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val `type`: Attr[String, N] = attr("type")
+  lazy val `type`: Attr[String, N, D] = attr("type")
 
   /**
     * Shorthand for the `type` attribute
     */
-  lazy val tpe: Attr[String, N] = `type`
+  lazy val tpe: Attr[String, N, D] = `type`
 
   /**
     * Shorthand for the `type` attribute
     */
-  lazy val typ: Attr[String, N] = `type`
+  lazy val typ: Attr[String, N, D] = `type`
 
   /**
     * The initial value of the control. This attribute is optional except when
@@ -283,11 +283,11 @@ trait InputAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val value: Attr[String, N] = attr("value")
+  lazy val value: Attr[String, N, D] = attr("value")
 
   /**
     * The `width` attribute specifies the width of an `input` element of
     * `type` "image".
     */
-  lazy val widthAttr: Attr[Int, N] = attr("width") // TODO: Conflicts with "width" in Styles
+  lazy val widthAttr: Attr[Int, N, D] = attr("width") // TODO: Conflicts with "width" in Styles
 }

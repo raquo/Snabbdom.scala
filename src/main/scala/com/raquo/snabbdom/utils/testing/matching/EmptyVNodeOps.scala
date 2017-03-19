@@ -1,14 +1,16 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 
-class EmptyVNodeOps[N <: Node[N]](val emptyVNode: N) extends AnyVal {
+class EmptyVNodeOps[N <: Node[N, D], D <: NodeData[N, D]](
+  val emptyVNode: N
+) extends AnyVal {
 
-  def like(rules: Rule[N]*): ExpectedElement[N] = {
-    new ExpectedElement(emptyVNode).like(rules: _*)
+  def like(rules: Rule[N, D]*): ExpectedElement[N, D] = {
+    new ExpectedElement[N, D](emptyVNode).like(rules: _*)
   }
 
-  def likeEmpty: ExpectedElement[N] = {
-    new ExpectedElement(emptyVNode)
+  def likeEmpty: ExpectedElement[N, D] = {
+    new ExpectedElement[N, D](emptyVNode)
   }
 }

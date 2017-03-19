@@ -1,21 +1,21 @@
 package com.raquo.snabbdom.utils.testing.matching
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.utils.testing.UtilSpec.repr
 import com.raquo.snabbdom.setters.Style
 import org.scalajs.dom
 
 import scala.scalajs.js
 
-class StyleRuleOps[V, N <: Node[N]](val style: Style[V, N]) extends AnyVal {
+class StyleRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val style: Style[V, N, D]) extends AnyVal {
 
-  def is(expected: V): Rule[N] = new Rule[N] {
-    def applyTo(testNode: ExpectedElement[N]): Unit = {
+  def is(expected: V): Rule[N, D] = new Rule[N, D] {
+    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
       testNode.addCheck(nodeStyleIs(style, expected))
     }
   }
 
-  private def nodeStyleIs(style: Style[V, N], expectedValue: V)(node: dom.Node): MaybeError = {
+  private def nodeStyleIs(style: Style[V, N, D], expectedValue: V)(node: dom.Node): MaybeError = {
     val maybeActualValue = node.asInstanceOf[js.Dynamic]
       .selectDynamic("style")
       .selectDynamic(style.name)
@@ -32,7 +32,7 @@ class StyleRuleOps[V, N <: Node[N]](val style: Style[V, N]) extends AnyVal {
     }
   }
 
-  private def getStyle(element: dom.Element, style: Style[V, N]): Option[String] = {
+  private def getStyle(element: dom.Element, style: Style[V, N, D]): Option[String] = {
     element.asInstanceOf[js.Dynamic]
       .selectDynamic("style")
       .selectDynamic(style.name)

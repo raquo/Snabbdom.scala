@@ -1,10 +1,10 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
-trait Attrs[N <: Node[N]] { self: Builders[N] =>
+trait Attrs[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
   /**
     * This is the single required attribute for anchors defining a hypertext
@@ -17,7 +17,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val href: Attr[String, N] = attr("href")
+  lazy val href: Attr[String, N, D] = attr("href")
 
   /**
     * This attribute defines the alternative text describing the image. Users
@@ -26,7 +26,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val alt: Attr[String, N] = attr("alt")
+  lazy val alt: Attr[String, N, D] = attr("alt")
 
   /**
     * This attribute names a relationship of the linked document to the current
@@ -38,7 +38,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val rel: Attr[String, N] = attr("rel")
+  lazy val rel: Attr[String, N, D] = attr("rel")
 
   /**
     * If the value of the type attribute is image, this attribute specifies a URI
@@ -47,12 +47,12 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val src: Attr[String, N] = attr("src")
+  lazy val src: Attr[String, N, D] = attr("src")
 
   /**
     *
     */
-  lazy val xmlns: Attr[String, N] = attr("xmlns")
+  lazy val xmlns: Attr[String, N, D] = attr("xmlns")
 
   /**
     * If the value of the type attribute is file, this attribute indicates the
@@ -60,7 +60,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val accept: Attr[String, N] = attr("accept")
+  lazy val accept: Attr[String, N, D] = attr("accept")
 
   /**
     * Declares the character encoding of the page or script. Used on meta and
@@ -68,7 +68,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val charset: Attr[String, N] = attr("charset")
+  lazy val charset: Attr[String, N, D] = attr("charset")
 
   /**
     * This Boolean attribute indicates that the form control is not available for
@@ -80,7 +80,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val disabled: Attr[Boolean, N] = attr("disabled")
+  lazy val disabled: Attr[Boolean, N, D] = attr("disabled")
 
   /**
     * Describes elements which belongs to this one. Used on labels and output
@@ -88,15 +88,15 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val `for`: Attr[String, N] = attr("for")
-  lazy val forId: Attr[String, N] = `for`
+  lazy val `for`: Attr[String, N, D] = attr("for")
+  lazy val forId: Attr[String, N, D] = `for`
 
   /**
     * The number of visible text lines for the control.
     *
     * MDN
     */
-  lazy val rows: Attr[Int, N] = attr("rows")
+  lazy val rows: Attr[Int, N, D] = attr("rows")
 
   /**
     * The visible width of the text control, in average character widths. If it
@@ -105,7 +105,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val cols: Attr[Int, N] = attr("cols")
+  lazy val cols: Attr[Int, N, D] = attr("cols")
 
   /**
     * The attribute describes the role(s) the current element plays in the
@@ -122,7 +122,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * See: [[http://www.w3.org/TR/role-attribute/#s_role_module_attributes]]
     */
-  lazy val role: Attr[String, N] = attr("role")
+  lazy val role: Attr[String, N, D] = attr("role")
 
   /**
     * This attribute gives the value associated with the http-equiv or name
@@ -130,7 +130,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val content: Attr[String, N] = attr("content")
+  lazy val content: Attr[String, N, D] = attr("content")
 
   /**
     * This enumerated attribute defines the pragma that can alter servers and
@@ -145,7 +145,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val httpEquiv: Attr[String, N] = attr("http-equiv")
+  lazy val httpEquiv: Attr[String, N, D] = attr("http-equiv")
 
   /**
     * This attribute specifies the media which the linked resource applies to.
@@ -155,7 +155,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#attr-media
     */
-  lazy val media: Attr[String, N] = attr("media")
+  lazy val media: Attr[String, N, D] = attr("media")
 
   /**
 
@@ -167,7 +167,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val colSpan: Attr[Int, N] = attr("colspan")
+  lazy val colSpan: Attr[Int, N, D] = attr("colspan")
 
   /**
     * This attribute contains a non-negative integer value that indicates for how many
@@ -177,7 +177,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val rowSpan: Attr[Int, N] = attr("rowspan")
+  lazy val rowSpan: Attr[Int, N, D] = attr("rowspan")
 
   /**
     * ARIA is a set of special accessibility attributes which can be added
@@ -369,7 +369,7 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
   /**
     * Indicates a selected option in an option list of a <select> element.
     */
-  lazy val selected: Attr[Boolean, N] = attr("selected")
+  lazy val selected: Attr[Boolean, N, D] = attr("selected")
 
   /**
     * For use in &lt;style&gt; tags.
@@ -377,29 +377,29 @@ trait Attrs[N <: Node[N]] { self: Builders[N] =>
     * If this attribute is present, then the style applies only to its parent element.
     * If absent, the style applies to the whole document.
     */
-  lazy val scoped: Attr[Boolean, N] = attr("scoped")
+  lazy val scoped: Attr[Boolean, N, D] = attr("scoped")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val high: Attr[Double, N] = attr("high")
+  lazy val high: Attr[Double, N, D] = attr("high")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val low: Attr[Double, N] = attr("low")
+  lazy val low: Attr[Double, N, D] = attr("low")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val optimum: Attr[Double, N] = attr("optimum")
+  lazy val optimum: Attr[Double, N, D] = attr("optimum")
 
   /** IE-specific property to prevent user selection */
-  lazy val unSelectable: Attr[Boolean, N] = attr("unselectable")
+  lazy val unSelectable: Attr[Boolean, N, D] = attr("unselectable")
 }

@@ -1,7 +1,7 @@
 package com.raquo.snabbdom.setters
 
 import com.raquo.snabbdom.Modifier
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -11,15 +11,17 @@ import scala.scalajs.js.|
   *
   * This is in contrast to e.g. a VNode, which does not *set* anything, but *appends* to Children
   */
-trait Setter[K <: Key[V, N, Self], V, N <: Node[N], Self <: Setter[K, V, N, Self]] extends Modifier[N] {
+trait Setter[K <: Key[V, N, D, Self], V, N <: Node[N, D], D <: NodeData[N, D], Self <: Setter[K, V, N, D, Self]]
+  extends Modifier[N, D]
+{
   val key: K
   val value: V
 }
 
-class AttrSetter[V, N <: Node[N]] (
-  val key: Attr[V, N],
+class AttrSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+  val key: Attr[V, N, D],
   val value: V
-) extends Setter[Attr[V, N], V, N, AttrSetter[V, N]] {
+) extends Setter[Attr[V, N, D], V, N, D, AttrSetter[V, N, D]] {
 
   def applyTo(vnode: N): Unit = {
     val attrKey = key.name
@@ -35,10 +37,10 @@ class AttrSetter[V, N <: Node[N]] (
   }
 }
 
-class EventPropSetter[V <: js.Function, N <: Node[N]] (
-  val key: EventProp[V, N],
+class EventPropSetter[V <: js.Function, N <: Node[N, D], D <: NodeData[N, D]] (
+  val key: EventProp[V, N, D],
   val value: V
-) extends Setter[EventProp[V, N], V, N, EventPropSetter[V, N]] {
+) extends Setter[EventProp[V, N, D], V, N, D, EventPropSetter[V, N, D]] {
 
   def applyTo(vnode: N): Unit = {
     if (vnode.data.on.isEmpty) {
@@ -49,10 +51,10 @@ class EventPropSetter[V <: js.Function, N <: Node[N]] (
   }
 }
 
-class PropSetter[V, N <: Node[N]] (
-  val key: Prop[V, N],
+class PropSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+  val key: Prop[V, N, D],
   val value: V
-) extends Setter[Prop[V, N], V, N, PropSetter[V, N]] {
+) extends Setter[Prop[V, N, D], V, N, D, PropSetter[V, N, D]] {
 
   def applyTo(vnode: N): Unit = {
     if (vnode.data.props.isEmpty) {
@@ -63,10 +65,10 @@ class PropSetter[V, N <: Node[N]] (
   }
 }
 
-class StyleSetter[V, N <: Node[N]] (
-  val key: Style[V, N],
+class StyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+  val key: Style[V, N, D],
   val value: V
-) extends Setter[Style[V, N], V, N, StyleSetter[V, N]] {
+) extends Setter[Style[V, N, D], V, N, D, StyleSetter[V, N, D]] {
 
   def applyTo(vnode: N): Unit = {
     if (vnode.data.styles.isEmpty) {

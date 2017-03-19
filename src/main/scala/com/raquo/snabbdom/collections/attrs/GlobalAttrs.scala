@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.collections.attrs
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Attr
 
@@ -10,12 +10,12 @@ import com.raquo.snabbdom.setters.Attr
   * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
   * derive from this trait since all groupings of attributes should include these global ones.
   */
-trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
+trait GlobalAttrs[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
   /**
     * Specifies a shortcut key to activate/focus an element
     */
-  lazy val accessKey: Attr[String, N] = attr("accesskey")
+  lazy val accessKey: Attr[String, N, D] = attr("accesskey")
 
   /**
     * This attribute is a space-separated list of the classes of the element.
@@ -26,28 +26,28 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val cls: Attr[String, N] = attr("class")
+  lazy val cls: Attr[String, N, D] = attr("class")
 
   /**
     * Alias for the `cls` attribute
     */
-  lazy val `class`: Attr[String, N] = cls
+  lazy val `class`: Attr[String, N, D] = cls
 
   /**
     * Alias for the `cls` attribute for React.js people
     */
-  lazy val className: Attr[String, N] = cls
+  lazy val className: Attr[String, N, D] = cls
 
   /**
     * Specifies whether the content of an element is editable or not
     */
-  lazy val contentEditable: Attr[Boolean, N] = attr("contenteditable")
+  lazy val contentEditable: Attr[Boolean, N, D] = attr("contenteditable")
 
   /**
     * Specifies a context menu for an element by its element id.
     * The context menu appears when a user right-clicks on the element
     */
-  lazy val contextMenu: Attr[String, N] = attr("contextmenu")
+  lazy val contextMenu: Attr[String, N, D] = attr("contextmenu")
 
   /**
     * This class of attributes, called custom data attributes, allows proprietary
@@ -77,7 +77,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
 //    def :=[T](v: T)(implicit ev: AttrValue[Builder, T]) =
 //      AttrPair(Attr(sections.reverse.mkString("-")), v, ev)
 //  }
-  def data(suffix: String): Attr[String, N] = attr(s"data-$suffix")
+  def data(suffix: String): Attr[String, N, D] = attr(s"data-$suffix")
 
   /**
     * Specifies the text direction for the content in an element. The valid values are:
@@ -89,24 +89,24 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     * - `auto` Let the browser figure out the text direction, based on the content,
     *          (only recommended if the text direction is unknown)
     */
-  lazy val dir: Attr[String, N] = attr("dir")
+  lazy val dir: Attr[String, N, D] = attr("dir")
 
   /**
     * A Boolean attribute that specifies whether an element is draggable or not
     */
-  lazy val draggable: Attr[Boolean, N] = attr("draggable")
+  lazy val draggable: Attr[Boolean, N, D] = attr("draggable")
 
   /**
     * Specifies whether the dragged data is copied, moved, or linked, when dropped
     * Acceptable values: `copy` | `move` | `link`
     */
-  lazy val dropZone: Attr[String, N] = attr("dropzone")
+  lazy val dropZone: Attr[String, N, D] = attr("dropzone")
 
   /**
     * Specifies that an element is not yet, or is no longer, relevant and
     * consequently hidden from view of the user.
     */
-  lazy val hidden: Attr[Boolean, N] = attr("hidden")
+  lazy val hidden: Attr[Boolean, N, D] = attr("hidden")
 
   /**
     * This attribute defines a unique identifier (ID) which must be unique in
@@ -115,7 +115,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val id: Attr[String, N] = attr("id")
+  lazy val id: Attr[String, N, D] = attr("id")
 
   /**
     * This attribute participates in defining the language of the element, the
@@ -128,7 +128,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val lang: Attr[String, N] = attr("lang")
+  lazy val lang: Attr[String, N, D] = attr("lang")
 
   /**
     * This enumerated attribute defines whether the element may be checked for
@@ -136,7 +136,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val spellCheck: Attr[Boolean, N] = attr("spellcheck")
+  lazy val spellCheck: Attr[Boolean, N, D] = attr("spellcheck")
 
   /**
     * This attribute contains CSS styling declarations to be applied to the
@@ -146,7 +146,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val style: Attr[String, N] = attr("style")
+  lazy val style: Attr[String, N, D] = attr("style")
 
   /**
     * This integer attribute indicates if the element can take input focus (is
@@ -166,7 +166,7 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
     */
-  lazy val tabIndex: Attr[Int, N] = attr("tabindex")
+  lazy val tabIndex: Attr[Int, N, D] = attr("tabindex")
 
   /**
     * This attribute contains a text representing advisory information related to
@@ -175,10 +175,10 @@ trait GlobalAttrs[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val title: Attr[String, N] = attr("title")
+  lazy val title: Attr[String, N, D] = attr("title")
 
   /**
     * Specifies whether the content of an element should be translated or not
     */
-  lazy val translate: Attr[Boolean, N] = attr("translate")
+  lazy val translate: Attr[Boolean, N, D] = attr("translate")
 }

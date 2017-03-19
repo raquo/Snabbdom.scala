@@ -3,13 +3,13 @@ package com.raquo.snabbdom.utils.testing.matching
 import com.raquo.snabbdom.Snabbdom.PatchFn
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.{AttrsModule, EventsModule, Module, PropsModule, Snabbdom, StyleModule}
-import com.raquo.snabbdom.nodes.{Hooks, Node}
+import com.raquo.snabbdom.nodes.{Hooks, Node, NodeData}
 import org.scalajs.dom
 
 import scala.scalajs.js
 import scala.scalajs.js.|
 
-trait MountOps[N <: Node[N]] { this: Builders[N] =>
+trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
 
   val defaultMountedElementClue = "root"
 
@@ -17,7 +17,7 @@ trait MountOps[N <: Node[N]] { this: Builders[N] =>
 
   var mountedVNode: N = null.asInstanceOf[N] // @TODO[Elegance] Muahahaha. Fix this eventually.
 
-  private[this] var jsPatch: PatchFn[N] = noopPatchFn _
+  private[this] var jsPatch: PatchFn[N, D] = noopPatchFn _
 
   var snabbdomModules: js.Array[Module] = js.Array(AttrsModule, PropsModule, EventsModule, StyleModule)
 
@@ -29,7 +29,7 @@ trait MountOps[N <: Node[N]] { this: Builders[N] =>
 
   def doFail(message: String): Nothing
 
-  def expectElement(expectedElement: ExpectedElement[N]): Unit = {
+  def expectElement(expectedElement: ExpectedElement[N, D]): Unit = {
     val errors = ExpectedElement.checkElement(
       mountedElement,
       expectedElement,
@@ -40,7 +40,7 @@ trait MountOps[N <: Node[N]] { this: Builders[N] =>
     }
   }
 
-  def initSnabbdom(): PatchFn[N] = Snabbdom.init(snabbdomModules)
+  def initSnabbdom(): PatchFn[N, D] = Snabbdom.init(snabbdomModules)
 
   def clearDocument(): Unit = {
     removeChildren(dom.document.body)

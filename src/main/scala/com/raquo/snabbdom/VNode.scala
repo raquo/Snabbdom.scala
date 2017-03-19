@@ -6,4 +6,4 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
 
 @ScalaJSDefined
-class VNode(tagName: js.UndefOr[String]) extends Node[VNode](tagName)
+class VNode(tagName: js.UndefOr[String]) extends Node[VNode, VNodeData](tagName)

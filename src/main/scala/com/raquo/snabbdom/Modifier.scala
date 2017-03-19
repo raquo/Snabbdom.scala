@@ -1,6 +1,6 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
@@ -11,7 +11,7 @@ import scala.scalajs.js.annotation.ScalaJSDefined
   * which will add itself to the node's attributes but not appear in the final
   * `children` list.
   */
-trait Modifier[N <: Node[N]] {
+trait Modifier[N <: Node[N, D], D <: NodeData[N, D]] {
   /**
     * Applies this modifier to the specified [[Node]], such that when
     * rendering is complete the effect of adding this modifier can be seen.

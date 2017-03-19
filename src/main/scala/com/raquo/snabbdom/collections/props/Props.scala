@@ -1,15 +1,15 @@
 package com.raquo.snabbdom.collections.props
 
-import com.raquo.snabbdom.nodes.Node
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.setters.Prop
 
-trait Props[N <: Node[N]] { self: Builders[N] =>
+trait Props[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
   /**
     * Space-separated list of CSS class names
     */
-  lazy val className: Prop[String, N] = prop("className")
+  lazy val className: Prop[String, N, D] = prop("className")
 
   /**
     * This is the single required attribute for anchors defining a hypertext
@@ -22,7 +22,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val href: Prop[String, N] = prop("href")
+  lazy val href: Prop[String, N, D] = prop("href")
 
   /**
     * This attribute defines the alternative text describing the image. Users
@@ -31,7 +31,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val alt: Prop[String, N] = prop("alt")
+  lazy val alt: Prop[String, N, D] = prop("alt")
 
   /**
     * This attribute names a relationship of the linked document to the current
@@ -43,7 +43,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val rel: Prop[String, N] = prop("rel")
+  lazy val rel: Prop[String, N, D] = prop("rel")
 
   /**
     * If the value of the type attribute is image, this attribute specifies a URI
@@ -52,12 +52,12 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val src: Prop[String, N] = prop("src")
+  lazy val src: Prop[String, N, D] = prop("src")
 
   /**
     *
     */
-  lazy val xmlns: Prop[String, N] = prop("xmlns")
+  lazy val xmlns: Prop[String, N, D] = prop("xmlns")
 
   /**
     * If the value of the type attribute is file, this attribute indicates the
@@ -65,7 +65,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val accept: Prop[String, N] = prop("accept")
+  lazy val accept: Prop[String, N, D] = prop("accept")
 
   /**
     * Declares the character encoding of the page or script. Used on meta and
@@ -73,7 +73,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val charSet: Prop[String, N] = prop("charset")
+  lazy val charSet: Prop[String, N, D] = prop("charset")
 
   /**
     * This Boolean attribute indicates that the form control is not available for
@@ -85,7 +85,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val disabled: Prop[Boolean, N] = prop("disabled")
+  lazy val disabled: Prop[Boolean, N, D] = prop("disabled")
 
   /**
     * Describes elements which belongs to this one. Used on labels and output
@@ -93,14 +93,14 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val `for`: Prop[String, N] = prop("for")
+  lazy val `for`: Prop[String, N, D] = prop("for")
 
   /**
     * The number of visible text lines for the control.
     *
     * MDN
     */
-  lazy val rows: Prop[Int, N] = prop("rows")
+  lazy val rows: Prop[Int, N, D] = prop("rows")
 
   /**
     * The visible width of the text control, in average character widths. If it
@@ -109,7 +109,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val cols: Prop[Int, N] = prop("cols")
+  lazy val cols: Prop[Int, N, D] = prop("cols")
 
   /**
     * The attribute describes the role(s) the current element plays in the
@@ -126,7 +126,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * See: [[http://www.w3.org/TR/role-attribute/#s_role_module_attributes]]
     */
-  lazy val role: Prop[String, N] = prop("role")
+  lazy val role: Prop[String, N, D] = prop("role")
 
   /**
     * This attribute gives the value associated with the http-equiv or name
@@ -134,7 +134,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val content: Prop[String, N] = prop("content")
+  lazy val content: Prop[String, N, D] = prop("content")
 
   /**
     * This enumerated attribute defines the pragma that can alter servers and
@@ -149,7 +149,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val httpEquiv: Prop[String, N] = prop("httpEquiv")
+  lazy val httpEquiv: Prop[String, N, D] = prop("httpEquiv")
 
   /**
     * This attribute specifies the media which the linked resource applies to.
@@ -159,7 +159,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#attr-media
     */
-  lazy val media: Prop[String, N] = prop("media")
+  lazy val media: Prop[String, N, D] = prop("media")
 
   /**
 
@@ -171,7 +171,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val colSpan: Prop[Int, N] = prop("colSpan")
+  lazy val colSpan: Prop[Int, N, D] = prop("colSpan")
 
   /**
     * This attribute contains a non-negative integer value that indicates for how many
@@ -181,7 +181,7 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     *
     * MDN
     */
-  lazy val rowSpan: Prop[Int, N] = prop("rowSpan")
+  lazy val rowSpan: Prop[Int, N, D] = prop("rowSpan")
 
   /**
     * ARIA is a set of special accessibility attributes which can be added
@@ -375,29 +375,29 @@ trait Props[N <: Node[N]] { self: Builders[N] =>
     * If this attribute is present, then the style applies only to its parent element.
     * If absent, the style applies to the whole document.
     */
-  lazy val scoped: Prop[Boolean, N] = prop("scoped")
+  lazy val scoped: Prop[Boolean, N, D] = prop("scoped")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val high: Prop[Double, N] = prop("high")
+  lazy val high: Prop[Double, N, D] = prop("high")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val low: Prop[Double, N] = prop("low")
+  lazy val low: Prop[Double, N, D] = prop("low")
 
   /**
     * For use in &lt;meter&gt; tags.
     *
     * @see https://css-tricks.com/html5-meter-element/
     */
-  lazy val optimum: Prop[Double, N] = prop("optimum")
+  lazy val optimum: Prop[Double, N, D] = prop("optimum")
 
   /** IE-specific property to prevent user selection */
-  lazy val unSelectable: Prop[Boolean, N] = prop("unselectable")
+  lazy val unSelectable: Prop[Boolean, N, D] = prop("unselectable")
 }

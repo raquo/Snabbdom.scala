@@ -1,6 +1,6 @@
 package com.raquo.snabbdom.utils
 
-import com.raquo.snabbdom.nodes.{Hooks, Node}
+import com.raquo.snabbdom.nodes.{Hooks, Node, NodeData}
 import com.raquo.snabbdom.VNode
 import org.scalajs.dom
 
@@ -9,7 +9,7 @@ import scala.util.Random
 
 object HookLogger {
 
-  def apply[N <: Node[N]](
+  def apply[N <: Node[N, _]](
     callRemoveNode: Boolean,
     enabled: Boolean = true,
     prefix: String = Random.nextInt(99).toString,
@@ -68,7 +68,8 @@ object HookLogger {
     }
   }
 
-  def log[N <: Node[N]](
+  // @TODO[API,Sanity] Use existential types more often to cut down on irrelevant types
+  def log[N <: Node[N, _]](
     logger: Any => Unit,
     message: String,
     vnode: N,
