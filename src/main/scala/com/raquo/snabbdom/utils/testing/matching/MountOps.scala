@@ -2,8 +2,9 @@ package com.raquo.snabbdom.utils.testing.matching
 
 import com.raquo.snabbdom.Snabbdom.PatchFn
 import com.raquo.snabbdom.collections.Builders
-import com.raquo.snabbdom.{AttrsModule, EventsModule, Module, PropsModule, Snabbdom, StyleModule}
-import com.raquo.snabbdom.nodes.{Hooks, Node, NodeData}
+import com.raquo.snabbdom.hooks.{ModuleHooks, NodeHooks}
+import com.raquo.snabbdom.{AttrsModule, EventsModule, NativeModule, PropsModule, Snabbdom, StyleModule}
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import org.scalajs.dom
 
 import scala.scalajs.js
@@ -15,11 +16,11 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
 
   var container: dom.Element = null
 
-  var mountedVNode: N = null.asInstanceOf[N] // @TODO[Elegance] Muahahaha. Fix this eventually.
+  var mountedVNode: N = _
 
   private[this] var jsPatch: PatchFn[N, D] = noopPatchFn _
 
-  var snabbdomModules: js.Array[Module] = js.Array(AttrsModule, PropsModule, EventsModule, StyleModule)
+  var snabbdomModules: js.Array[NativeModule | ModuleHooks[N, D]] = js.Array(AttrsModule, PropsModule, EventsModule, StyleModule)
 
   var mountedElementClue: String = defaultMountedElementClue
 
@@ -104,7 +105,7 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
     // we get a new VNode reference that we need to save if we want to properly unmount it later.
     // @TODO This looks a bit dangerous – is it safe around mount() / unmount() and async operations? Do we need any assert()-s?
     if (newVNode.data.hooks.isEmpty) {
-      newVNode.data.hooks = new Hooks[N]()
+      newVNode.data.hooks = new NodeHooks[N, D]()
     }
     newVNode.data.hooks.get.addPostPatchHook((oldVNode: N, newVNode: N) => {
 //      dom.console.log("updating patched node")

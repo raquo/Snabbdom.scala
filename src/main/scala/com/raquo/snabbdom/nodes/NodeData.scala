@@ -2,6 +2,7 @@ package com.raquo.snabbdom.nodes
 
 import com.raquo.interfaces.objectAssign
 import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.hooks.NodeHooks
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
@@ -22,7 +23,7 @@ class NodeData[N <: Node[N, D], D <: NodeData[N, D]](
   var styles: js.UndefOr[js.Dictionary[Any]] = js.undefined
 
   @JSName("hook")
-  var hooks: js.UndefOr[Hooks[N]] = js.undefined
+  var hooks: js.UndefOr[NodeHooks[N, D]] = js.undefined
 
   @JSName("__scala_copy")
   def copy(): D = {

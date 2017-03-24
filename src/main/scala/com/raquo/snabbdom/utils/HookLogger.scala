@@ -1,7 +1,8 @@
 package com.raquo.snabbdom.utils
 
-import com.raquo.snabbdom.nodes.{Hooks, Node, NodeData}
+import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.VNode
+import com.raquo.snabbdom.hooks.NodeHooks
 import org.scalajs.dom
 
 import scala.scalajs.js
@@ -9,7 +10,7 @@ import scala.util.Random
 
 object HookLogger {
 
-  def apply[N <: Node[N, _]](
+  def apply[N <: Node[N, D], D <: NodeData[N, D]](
     callRemoveNode: Boolean,
     enabled: Boolean = true,
     prefix: String = Random.nextInt(99).toString,
@@ -18,12 +19,12 @@ object HookLogger {
     logVNode: Boolean = false,
     logNodeFn: Option[dom.Node => Any] = None,
     logVNodeFn: Option[VNode => Any] = None
-  ): Hooks[N] = {
+  ): NodeHooks[N, D] = {
 
     // @TODO[Convenience] Provide an easy way to add HookLogger to an existing VNode
     // @TODO[Convenience] Optionally propagate hook logger to new nodes
 
-    new Hooks[N] {
+    new NodeHooks[N, D] {
       if (enabled) {
         addInitHook { (vnode: N) =>
           logger(prefix + ":hook:init")
