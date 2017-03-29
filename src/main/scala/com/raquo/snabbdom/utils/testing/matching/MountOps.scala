@@ -3,7 +3,7 @@ package com.raquo.snabbdom.utils.testing.matching
 import com.raquo.snabbdom.Snabbdom.PatchFn
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.hooks.{ModuleHooks, NodeHooks}
-import com.raquo.snabbdom.{AttrsModule, EventsModule, NativeModule, PropsModule, Snabbdom, StyleModule}
+import com.raquo.snabbdom.{NativeModule, Snabbdom}
 import com.raquo.snabbdom.nodes.{Node, NodeData}
 import org.scalajs.dom
 
@@ -12,15 +12,15 @@ import scala.scalajs.js.|
 
 trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
 
-  val defaultMountedElementClue = "root"
-
   var container: dom.Element = null
 
   var mountedVNode: N = _
 
   private[this] var jsPatch: PatchFn[N, D] = noopPatchFn _
 
-  var snabbdomModules: js.Array[NativeModule | ModuleHooks[N, D]] = js.Array(AttrsModule, PropsModule, EventsModule, StyleModule)
+  val snabbdomModules: js.Array[NativeModule | ModuleHooks[N, D]]
+
+  val defaultMountedElementClue = "root"
 
   var mountedElementClue: String = defaultMountedElementClue
 

@@ -6,11 +6,13 @@ import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardE
 import com.raquo.snabbdom.collections.props.Props
 import com.raquo.snabbdom.collections.styles.Styles
 import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
+import com.raquo.snabbdom.hooks.ModuleHooks
 import com.raquo.snabbdom.nodes.{ChildNode, Conversions, IterableNode, Node, NodeData}
 import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
 import scala.scalajs.js
+import scala.scalajs.js.|
 
 package object snabbdom extends {
 
@@ -21,6 +23,22 @@ package object snabbdom extends {
   type MouseEventCallback = EventCallback[MouseEvent]
 
   implicit val vnodeBuilders = new VNodeBuilders {}
+
+  /** These are snabbdom's built-in modules that Snabbdom.scala supports.
+    * You may choose to pass more modules to [[Snabbdom.init]] (see [[ModuleHooks]]),
+    * and you might want to subclass [[Node]], [[NodeData]] and [[Builders]] if you do that.
+    * For an example of this approach, see my Laminar project.
+    *
+    * Note that if you fail to include any of the following built-in modules
+    * in the init call, the types will not be adjusted to reflect their absence.
+    * I will try to fix that eventually.
+    */
+  val modules: js.Array[NativeModule | ModuleHooks[VNode, VNodeData]] = js.Array(
+    AttrsModule,
+    PropsModule,
+    EventsModule,
+    StyleModule
+  )
 
   object tags extends Tags[VNode, VNodeData] with VNodeBuilders
 
