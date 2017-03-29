@@ -18,14 +18,14 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     * MDN
     */
-  def title: N = vnode("title")
+  def title: N = node("title")
 
   /**
     * Used to write inline CSS.
     *
     *  MDN
     */
-  def style: N = vnode("style")
+  def style: N = node("style")
 
   // Scripting
 
@@ -35,7 +35,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def noScript: N = vnode("noscript")
+  def noScript: N = node("noscript")
 
   // Sections
 
@@ -45,7 +45,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def section: N = vnode("section")
+  def section: N = node("section")
 
   /**
     * Represents a section of a page that links to other pages or to parts within
@@ -53,7 +53,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def nav: N = vnode("nav")
+  def nav: N = node("nav")
 
   /**
     * Defines self-contained content that could exist independently of the rest
@@ -61,7 +61,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def article: N = vnode("article")
+  def article: N = node("article")
 
   /**
     * Defines some content loosely related to the page content. If it is removed,
@@ -69,14 +69,14 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def aside: N = vnode("aside")
+  def aside: N = node("aside")
 
   /**
     * Defines a section containing contact information.
     *
     *  MDN
     */
-  def address: N = vnode("address")
+  def address: N = node("address")
 
   /**
     * Defines the main or important content in the document. There is only one
@@ -84,7 +84,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def main: N = vnode("main")
+  def main: N = node("main")
 
   // Text level semantics
 
@@ -93,7 +93,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def q: N = vnode("q")
+  def q: N = node("q")
 
   /**
     * Represents a term whose definition is contained in its nearest ancestor
@@ -101,7 +101,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def dfn: N = vnode("dfn")
+  def dfn: N = node("dfn")
 
   /**
     * An abbreviation or acronym; the expansion of the abbreviation can be
@@ -109,14 +109,14 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def abbr: N = vnode("abbr")
+  def abbr: N = node("abbr")
 
   /**
     * Associates to its content a machine-readable equivalent.
     *
     *  MDN
     */
-  def data: N = vnode("data")
+  def data: N = node("data")
 
   /**
     * Represents a date and time value; the machine-readable equivalent can be
@@ -124,35 +124,35 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def time: N = vnode("time")
+  def time: N = node("time")
 
   /**
     * Represents a variable.
     *
     *  MDN
     */
-  def `var`: N = vnode("var")
+  def `var`: N = node("var")
 
   /**
     * Represents the output of a program or a computer.
     *
     *  MDN
     */
-  def samp: N = vnode("samp")
+  def samp: N = node("samp")
 
   /**
     * Represents user input, often from a keyboard, but not necessarily.
     *
     *  MDN
     */
-  def kbd: N = vnode("kbd")
+  def kbd: N = node("kbd")
 
   /**
     * Defines a mathematical formula.
     *
     *  MDN
     */
-  def math: N = vnode("math")
+  def math: N = node("math")
 
   /**
     * Represents text highlighted for reference purposes, that is for its
@@ -160,7 +160,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def mark: N = vnode("mark")
+  def mark: N = node("mark")
 
   /**
     * Represents content to be marked with ruby annotations, short runs of text
@@ -170,14 +170,14 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def ruby: N = vnode("ruby")
+  def ruby: N = node("ruby")
 
   /**
     * Represents the text of a ruby annotation.
     *
     *  MDN
     */
-  def rt: N = vnode("rt")
+  def rt: N = node("rt")
 
   /**
     * Represents parenthesis around a ruby annotation, used to display the
@@ -186,7 +186,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def rp: N = vnode("rp")
+  def rp: N = node("rp")
 
   /**
     * Represents text that must be isolated from its surrounding for bidirectional
@@ -195,7 +195,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def bdi: N = vnode("bdi")
+  def bdi: N = node("bdi")
 
   /**
     * Represents the directionality of its children, in order to explicitly
@@ -203,7 +203,7 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def bdo: N = vnode("bdo")
+  def bdo: N = node("bdo")
 
   // Forms
 
@@ -212,28 +212,28 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def keyGen: N = vnode("keygen")
+  def keyGen: N = node("keygen")
 
   /**
     * The result of a calculation
     *
     *  MDN
     */
-  def output: N = vnode("output")
+  def output: N = node("output")
 
   /**
     * A progress completion bar
     *
     *  MDN
     */
-  def progress: N = vnode("progress")
+  def progress: N = node("progress")
 
   /**
     * A scalar measurement within a known range.
     *
     *  MDN
     */
-  def meter: N = vnode("meter")
+  def meter: N = node("meter")
 
   // Interactive elements
 
@@ -243,26 +243,26 @@ trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def details: N = vnode("details")
+  def details: N = node("details")
 
   /**
     * A summary, caption, or legend for a given details.
     *
     *  MDN
     */
-  def summary: N = vnode("summary")
+  def summary: N = node("summary")
 
   /**
     * A command that the user can invoke.
     *
     *  MDN
     */
-  def command: N = vnode("command")
+  def command: N = node("command")
 
   /**
     * A list of commands
     *
     *  MDN
     */
-  def menu: N = vnode("menu")
+  def menu: N = node("menu")
 }

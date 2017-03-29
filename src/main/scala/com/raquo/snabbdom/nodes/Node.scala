@@ -20,7 +20,7 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
 
   var key: js.UndefOr[String] = js.undefined
 
-  var data: D = builders.vnodeData() // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
+  var data: D = builders.nodeData() // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
 
   var text: js.UndefOr[String] = js.undefined
 
@@ -69,7 +69,7 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
 
   def copy(): N = {
     // @TODO[PERF] Use object-assign somehow?
-    val newNode = builders.vnode(tagName = sel)
+    val newNode = builders.node(tagName = sel)
     newNode.sel = sel
     newNode.data = data.copy()
     elm.foreach(_elm => newNode.elm = _elm)

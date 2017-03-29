@@ -26,11 +26,11 @@ trait Builders[N <: Node[N, D], D <: NodeData[N, D]] {
   }
 
   /** We don't actually have an N-agnostic implementation of this. See [[com.raquo.snabbdom.VNodeBuilders]] */
-  @inline def vnode(tagName: js.UndefOr[String]): N
+  @inline def node(tagName: js.UndefOr[String]): N
 
   /** We don't actually have an N-agnostic implementation of this. See [[com.raquo.snabbdom.VNodeBuilders]] */
   @inline def textNode(text: String): N
 
   /** We don't actually have an N-agnostic implementation of this. See [[com.raquo.snabbdom.VNodeBuilders]] */
-  @inline def vnodeData(): D
+  @inline def nodeData(): D
 }

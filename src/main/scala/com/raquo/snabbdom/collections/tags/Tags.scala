@@ -15,7 +15,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def html: N = vnode("html")
+  def html: N = node("html")
 
   /**
     * Represents a collection of metadata about the document, including links to,
@@ -23,28 +23,28 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def head: N = vnode("head")
+  def head: N = node("head")
 
   /**
     * Defines the base URL for relative URLs in the page.
     *
     *  MDN
     */
-  def base: N = vnode("base")
+  def base: N = node("base")
 
   /**
     * Used to link JavaScript and external CSS with the current HTML document.
     *
     *  MDN
     */
-  def link: N = vnode("link")
+  def link: N = node("link")
 
   /**
     * Defines metadata that can't be defined using another HTML element.
     *
     *  MDN
     */
-  def meta: N = vnode("meta")
+  def meta: N = node("meta")
 
   /**
     * Defines either an internal script or a link to an external script. The
@@ -52,7 +52,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def script: N = vnode("script")
+  def script: N = node("script")
 
   /**
     * Represents the content of an HTML document. There is only one body
@@ -60,7 +60,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def body: N = vnode("body")
+  def body: N = node("body")
 
   // Sections
 
@@ -69,42 +69,42 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def h1: N = vnode("h1")
+  def h1: N = node("h1")
 
   /**
     * Heading level 2
     *
     *  MDN
     */
-  def h2: N = vnode("h2")
+  def h2: N = node("h2")
 
   /**
     * Heading level 3
     *
     *  MDN
     */
-  def h3: N = vnode("h3")
+  def h3: N = node("h3")
 
   /**
     * Heading level 4
     *
     *  MDN
     */
-  def h4: N = vnode("h4")
+  def h4: N = node("h4")
 
   /**
     * Heading level 5
     *
     *  MDN
     */
-  def h5: N = vnode("h5")
+  def h5: N = node("h5")
 
   /**
     * Heading level 6
     *
     *  MDN
     */
-  def h6: N = vnode("h6")
+  def h6: N = node("h6")
 
   /**
     * Defines the header of a page or section. It often contains a logo, the
@@ -112,7 +112,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def header: N = vnode("header")
+  def header: N = node("header")
 
   /**
     * Defines the footer for a page or section. It often contains a copyright
@@ -120,7 +120,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def footer: N = vnode("footer")
+  def footer: N = node("footer")
 
   // Grouping content
 
@@ -129,7 +129,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def p: N = vnode("p")
+  def p: N = node("p")
 
   /**
     * Represents a thematic break between paragraphs of a section or article or
@@ -137,7 +137,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def hr: N = vnode("hr")
+  def hr: N = node("hr")
 
   /**
     * Indicates that its content is preformatted and that this format must be
@@ -145,77 +145,77 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def pre: N = vnode("pre")
+  def pre: N = node("pre")
 
   /**
     * Represents a content that is quoted from another source.
     *
     *  MDN
     */
-  def blockQuote: N = vnode("blockquote")
+  def blockQuote: N = node("blockquote")
 
   /**
     * Defines an ordered list of items.
     *
     *  MDN
     */
-  def ol: N = vnode("ol")
+  def ol: N = node("ol")
 
   /**
     * Defines an unordered list of items.
     *
     *  MDN
     */
-  def ul: N = vnode("ul")
+  def ul: N = node("ul")
 
   /**
     * Defines an item of an list.
     *
     *  MDN
     */
-  def li: N = vnode("li")
+  def li: N = node("li")
 
   /**
     * Defines a definition list; a list of terms and their associated definitions.
     *
     *  MDN
     */
-  def dl: N = vnode("dl")
+  def dl: N = node("dl")
 
   /**
     * Represents a term defined by the next dd
     *
     *  MDN
     */
-  def dt: N = vnode("dt")
+  def dt: N = node("dt")
 
   /**
     * Represents the definition of the terms immediately listed before it.
     *
     *  MDN
     */
-  def dd: N = vnode("dd")
+  def dd: N = node("dd")
 
   /**
     * Represents a figure illustrated as part of the document.
     *
     *  MDN
     */
-  def figure: N = vnode("figure")
+  def figure: N = node("figure")
 
   /**
     * Represents the legend of a figure.
     *
     *  MDN
     */
-  def figCaption: N = vnode("figcaption")
+  def figCaption: N = node("figcaption")
 
   /**
     * Represents a generic container with no special meaning.
     *
     *  MDN
     */
-  def div: N = vnode("div")
+  def div: N = node("div")
 
   // Text-level semantics
 
@@ -224,21 +224,21 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def a: N = vnode("a")
+  def a: N = node("a")
 
   /**
     * Represents emphasized text.
     *
     *  MDN
     */
-  def em: N = vnode("em")
+  def em: N = node("em")
 
   /**
     * Represents especially important text.
     *
     *  MDN
     */
-  def strong: N = vnode("strong")
+  def strong: N = node("strong")
 
   /**
     * Represents a side comment; text like a disclaimer or copyright, which is not
@@ -246,63 +246,63 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def small: N = vnode("small")
+  def small: N = node("small")
 
   /**
     * Strikethrough element, used for that is no longer accurate or relevant.
     *
     *  MDN
     */
-  def s: N = vnode("s")
+  def s: N = node("s")
 
   /**
     * Represents the title of a work being cited.
     *
     *  MDN
     */
-  def cite: N = vnode("cite")
+  def cite: N = node("cite")
 
   /**
     * Represents computer code.
     *
     *  MDN
     */
-  def code: N = vnode("code")
+  def code: N = node("code")
 
   /**
     * Subscript tag
     *
     *  MDN
     */
-  def sub: N = vnode("sub")
+  def sub: N = node("sub")
 
   /**
     * Superscript tag.
     *
     *  MDN
     */
-  def sup: N = vnode("sup")
+  def sup: N = node("sup")
 
   /**
     * Italicized text.
     *
     *  MDN
     */
-  def i: N = vnode("i")
+  def i: N = node("i")
 
   /**
     * Bold text.
     *
     *  MDN
     */
-  def b: N = vnode("b")
+  def b: N = node("b")
 
   /**
     * Underlined text.
     *
     *  MDN
     */
-  def u: N = vnode("u")
+  def u: N = node("u")
 
   /**
     * Represents text with no specific meaning. This has to be used when no other
@@ -311,14 +311,14 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def span: N = vnode("span")
+  def span: N = node("span")
 
   /**
     * Represents a line break.
     *
     *  MDN
     */
-  def br: N = vnode("br")
+  def br: N = node("br")
 
   /**
     * Represents a line break opportunity, that is a suggested point for wrapping
@@ -326,7 +326,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def wbr: N = vnode("wbr")
+  def wbr: N = node("wbr")
 
   // Edits
 
@@ -335,14 +335,14 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def ins: N = vnode("ins")
+  def ins: N = node("ins")
 
   /**
     * Defines a remodef from the document.
     *
     *  MDN
     */
-  def del: N = vnode("del")
+  def del: N = node("del")
 
   // Embedded content
 
@@ -351,14 +351,14 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def img: N = vnode("img")
+  def img: N = node("img")
 
   /**
     * Represents a nested browsing context, that is an embedded HTML document.
     *
     *  MDN
     */
-  def iframe: N = vnode("iframe")
+  def iframe: N = node("iframe")
 
   /**
     * Represents a integration point for an external, often non-HTML, application
@@ -366,7 +366,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def embed: N = vnode("embed")
+  def embed: N = node("embed")
 
   /**
     * Represents an external resource, which is treated as an image, an HTML
@@ -374,14 +374,14 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def `object`: N = vnode("object")
+  def `object`: N = node("object")
 
   /**
     * Defines parameters for use by plug-ins invoked by object elements.
     *
     *  MDN
     */
-  def param: N = vnode("param")
+  def param: N = node("param")
 
   /**
     * Represents a video, and its associated audio files and captions, with the
@@ -389,14 +389,14 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def video: N = vnode("video")
+  def video: N = node("video")
 
   /**
     * Represents a sound or an audio stream.
     *
     *  MDN
     */
-  def audio: N = vnode("audio")
+  def audio: N = node("audio")
 
   /**
     * Allows the authors to specify alternate media resources for media elements
@@ -404,7 +404,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def source: N = vnode("source")
+  def source: N = node("source")
 
   /**
     * Allows authors to specify timed text track for media elements like video or
@@ -412,7 +412,7 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def track: N = vnode("track")
+  def track: N = node("track")
 
   /**
     * Represents a bitmap area that scripts can use to render graphics like graphs,
@@ -420,21 +420,21 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def canvas: N = vnode("canvas")
+  def canvas: N = node("canvas")
 
   /**
     * In conjunction with area, defines an image map.
     *
     *  MDN
     */
-  def map: N = vnode("map")
+  def map: N = node("map")
 
   /**
     * In conjunction with map, defines an image map
     *
     *  MDN
     */
-  def area: N = vnode("area")
+  def area: N = node("area")
 
   // Tabular data
 
@@ -443,70 +443,70 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def table: N = vnode("table")
+  def table: N = node("table")
 
   /**
     * The title of a table.
     *
     *  MDN
     */
-  def caption: N = vnode("caption")
+  def caption: N = node("caption")
 
   /**
     * A set of columns.
     *
     *  MDN
     */
-  def colGroup: N = vnode("colgroup")
+  def colGroup: N = node("colgroup")
 
   /**
     * A single column.
     *
     *  MDN
     */
-  def col: N = vnode("col")
+  def col: N = node("col")
 
   /**
     * The table body.
     *
     *  MDN
     */
-  def tbody: N = vnode("tbody")
+  def tbody: N = node("tbody")
 
   /**
     * The table headers.
     *
     *  MDN
     */
-  def thead: N = vnode("thead")
+  def thead: N = node("thead")
 
   /**
     * The table footer.
     *
     *  MDN
     */
-  def tfoot: N = vnode("tfoot")
+  def tfoot: N = node("tfoot")
 
   /**
     * A single row in a table.
     *
     *  MDN
     */
-  def tr: N = vnode("tr")
+  def tr: N = node("tr")
 
   /**
     * A single cell in a table.
     *
     *  MDN
     */
-  def td: N = vnode("td")
+  def td: N = node("td")
 
   /**
     * A header cell in a table.
     *
     *  MDN
     */
-  def th: N = vnode("th")
+  def th: N = node("th")
 
   // Forms
 
@@ -516,75 +516,75 @@ trait Tags[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
     *
     *  MDN
     */
-  def form: N = vnode("form")
+  def form: N = node("form")
 
   /**
     * A set of fields.
     *
     *  MDN
     */
-  def fieldSet: N = vnode("fieldset")
+  def fieldSet: N = node("fieldset")
 
   /**
     * The caption for a fieldset.
     *
     *  MDN
     */
-  def legend: N = vnode("legend")
+  def legend: N = node("legend")
 
   /**
     * The caption of a single field
     *
     *  MDN
     */
-  def label: N = vnode("label")
+  def label: N = node("label")
 
   /**
     * A typed data field allowing the user to input data.
     *
     *  MDN
     */
-  def input: N = vnode("input")
+  def input: N = node("input")
 
   /**
     * A button
     *
     *  MDN
     */
-  def button: N = vnode("button")
+  def button: N = node("button")
 
   /**
     * A control that allows the user to select one of a set of options.
     *
     *  MDN
     */
-  def select: N = vnode("select")
+  def select: N = node("select")
 
   /**
     * A set of predefined options for other controls.
     *
     *  MDN
     */
-  def dataList: N = vnode("datalist")
+  def dataList: N = node("datalist")
 
   /**
     * A set of options, logically grouped.
     *
     *  MDN
     */
-  def optGroup: N = vnode("optgroup")
+  def optGroup: N = node("optgroup")
 
   /**
     * An option in a select element.
     *
     *  MDN
     */
-  def option: N = vnode("option")
+  def option: N = node("option")
 
   /**
     * A multiline text edit control.
     *
     *  MDN
     */
-  def textArea: N = vnode("textarea")
+  def textArea: N = node("textarea")
 }

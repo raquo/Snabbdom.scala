@@ -27,7 +27,7 @@ class NodeData[N <: Node[N, D], D <: NodeData[N, D]](
 
   @JSName("__scala_copy")
   def copy(): D = {
-    val newData = builders.vnodeData()
+    val newData = builders.nodeData()
     attrs.foreach { _attrs =>
       newData.attrs = objectAssign(js.Dictionary[Boolean | String](), _attrs)
     }

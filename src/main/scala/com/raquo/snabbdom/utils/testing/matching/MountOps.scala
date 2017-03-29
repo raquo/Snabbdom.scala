@@ -130,7 +130,7 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
       mountedVNode != null,
       "ASSERT FAIL [unmount]: Nothing to unmount. You need to mount() before trying to unmount()"
     )
-    patchMounted(vnode("div"))
+    patchMounted(node("div"))
     removeChildren(container)
   }
 
