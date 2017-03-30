@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
 persistLauncher in Test := false
 
 npmDependencies in Compile ++= Seq(
-  "snabbdom" -> "0.6.3",
+  "snabbdom" -> "0.6.7",
   "object-assign" -> "4.1.1"
 )
 

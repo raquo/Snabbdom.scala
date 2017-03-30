@@ -32,9 +32,13 @@ class AttrRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val attr: Attr[V, N, 
         val hasAttribute = element.hasAttribute(attr.name)
         val attributeValue = element.getAttribute(attr.name)
         (hasAttribute, expectedValue) match {
-          case (true, false) => Some(s"Boolean attr `${attr.name}` mismatch: attribute value is ${repr(attributeValue)}, expected attribute to be missing")
-          case (false, true) => Some(s"Boolean attr `${attr.name}` mismatch: attribute is missing, expected to be present")
-          case (true, true) if attributeValue != "true" => Some(s"Boolean attr `${attr.name}` value mismatch: actual ${repr(attributeValue)}, expected true")
+          case (true, false) =>
+            Some(s"Boolean attr `${attr.name}` mismatch: attribute is present, its value is ${repr(attributeValue)}, expected attribute to be missing")
+          case (false, true) =>
+            Some(s"Boolean attr `${attr.name}` mismatch: attribute is missing, expected to be present")
+          case (true, true) if attributeValue != "" =>
+            // @see https://github.com/snabbdom/snabbdom/issues/254
+            Some(s"Boolean attr `${attr.name}` value mismatch: attribute present as expected, but actual value ${repr(attributeValue)}, expected no value")
           case _ => None
         }
       case (element: dom.Element, Some(expectedValue)) =>

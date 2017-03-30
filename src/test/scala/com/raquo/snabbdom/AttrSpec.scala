@@ -30,7 +30,7 @@ class AttrSpec extends UnitSpec {
     unmount()
   }
 
-  it("sets non-string attrs") {
+  it("sets boolean attrs") {
     mount("input [selected=false]", input(selected := false))
     expectElement(input like(selected is false, colSpan isEmpty))
     unmount()
@@ -38,7 +38,9 @@ class AttrSpec extends UnitSpec {
     mount("input [selected=true]", input(selected := true))
     expectElement(input like(selected is true, colSpan isEmpty))
     unmount()
+  }
 
+  it("sets integer attrs") {
     val expectedColSpan = Random.nextInt(10)
     mount("td [colSpan]", td(colSpan := expectedColSpan))
     expectElement(td like(colSpan is expectedColSpan, selected isEmpty))
