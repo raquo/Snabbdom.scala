@@ -24,7 +24,8 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
 
   var text: js.UndefOr[String] = js.undefined
 
-  var children: js.UndefOr[js.Array[N]] = js.undefined
+  @JSName("children")
+  var maybeChildren: js.UndefOr[js.Array[N]] = js.undefined
 
   /** Apply the given modifiers (e.g. additional children, or new attributes) to the [[Node]]. */
   @JSName("applyModifiers")
@@ -43,7 +44,7 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
 
     if (addingTextNode) {
       // @TODO avoid this string-concatenation magic, I think
-      val hasChildren = children.isDefined && children.get.length > 0
+      val hasChildren = maybeChildren.isDefined && maybeChildren.get.length > 0
       if (hasChildren) {
         addChildToList(child)
       } else if (text.isEmpty) {
@@ -60,22 +61,22 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
     }
   }
 
-  @inline private def addChildToList(child: N /*Child[N]*/): Unit = {
-    if (children.isEmpty) {
-      children = new js.Array[N]()
+  @inline private def addChildToList(child: N): Unit = {
+    if (maybeChildren.isEmpty) {
+      maybeChildren = new js.Array[N]()
     }
-    children.get.push(child)
+    maybeChildren.get.push(child)
   }
 
   def copy(): N = {
-    // @TODO[PERF] Use object-assign somehow?
+    // @TODO[Perf] Use object-assign somehow?
     val newNode = builders.node(tagName = sel)
     newNode.sel = sel
     newNode.data = data.copy()
     elm.foreach(_elm => newNode.elm = _elm)
     key.foreach(_key => newNode.key = _key)
     text.foreach(_text => newNode.text = _text)
-    children.foreach(_children => newNode.children = copyChildren(_children))
+    maybeChildren.foreach(children => newNode.maybeChildren = copyChildren(children))
     newNode
   }
 
