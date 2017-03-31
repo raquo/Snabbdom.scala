@@ -9,6 +9,17 @@ import com.raquo.snabbdom.nodes.{Node, NodeData}
   */
 trait Tags2[N <: Node[N, D], D <: NodeData[N, D]] { self: Builders[N, D] =>
 
+  /**
+    * The Comment interface represents textual notations within markup; although
+    * it is generally not visually shown, such comments are available to be read
+    * in the source view.
+    *
+    * <!-- HTML comment -->
+    *
+    * MDN
+    */
+  def comment: N = node("!")
+
   // Document Metadata
 
   /**
