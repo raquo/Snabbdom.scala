@@ -40,25 +40,9 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
   }
 
   def addChild(child: N): Unit = {
-    val addingTextNode = child.sel.isEmpty
-
-    if (addingTextNode) {
-      // @TODO avoid this string-concatenation magic, I think
-      val hasChildren = maybeChildren.isDefined && maybeChildren.get.length > 0
-      if (hasChildren) {
-        addChildToList(child)
-      } else if (text.isEmpty) {
-        text = child.text.get // text
-      } else {
-        text += child.text.get // text
-      }
-    } else {
-      text.foreach { _text =>
-        addChildToList(builders.textNode(_text))
-        text = js.undefined
-      }
-      addChildToList(child)
-    }
+    // This `addChild` method used to have a bunch more logic to "optimize" text handling.
+    // I think we're better off without it, so I will remove this now redundant method soon.
+    addChildToList(child)
   }
 
   @inline private def addChildToList(child: N): Unit = {
