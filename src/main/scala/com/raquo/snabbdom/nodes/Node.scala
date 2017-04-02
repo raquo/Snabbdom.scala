@@ -22,6 +22,10 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
 
   var data: D = builders.nodeData() // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
 
+  //@TODO[API] Enforce this with types?
+  /** Note: only text nodes should have [[text]] defined.
+    * Don't create nodes with both [[text]] and [[maybeChildren]] defined.
+    */
   var text: js.UndefOr[String] = js.undefined
 
   @JSName("children")
@@ -52,16 +56,21 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
     maybeChildren.get.push(child)
   }
 
+  // @TODO[API] This should be used only for snabbdom-related stuff, not for biz logic. Protect it or something?
   def copy(): N = {
-    // @TODO[Perf] Use object-assign somehow?
     val newNode = builders.node(tagName = sel)
-    newNode.sel = sel
-    newNode.data = data.copy()
-    elm.foreach(_elm => newNode.elm = _elm)
-    key.foreach(_key => newNode.key = _key)
-    text.foreach(_text => newNode.text = _text)
-    maybeChildren.foreach(children => newNode.maybeChildren = copyChildren(children))
+    copyInto(newNode)
     newNode
+  }
+
+  // @TODO[API] This should be used only for snabbdom-related stuff, not for biz logic. Protect it or something?
+  def copyInto(node: N): Unit = {
+    node.sel = sel
+    node.data = data.copy()
+    elm.foreach(_elm => node.elm = _elm)
+    key.foreach(_key => node.key = _key)
+    text.foreach(_text => node.text = _text)
+    maybeChildren.foreach(children => node.maybeChildren = copyChildren(children))
   }
 
   def copyChildren(children: js.Array[N]): js.Array[N] = {
