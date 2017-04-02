@@ -30,10 +30,9 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
 
   def doFail(message: String): Nothing
 
-  def expectElement(expectedElement: ExpectedElement[N, D]): Unit = {
-    val errors = ExpectedElement.checkElement(
+  def expectNode(expectedNode: ExpectedNode[N, D]): Unit = {
+    val errors = expectedNode.checkNode(
       mountedElement,
-      expectedElement,
       clue = mountedElementClue
     )
     if (errors.nonEmpty) {

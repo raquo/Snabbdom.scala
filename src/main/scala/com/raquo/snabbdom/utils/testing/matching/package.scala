@@ -8,5 +8,5 @@ package object matching {
 
   type ErrorList = List[String]
 
-  type Check = dom.Element => MaybeError
+  type Check = dom.Node => MaybeError
 }

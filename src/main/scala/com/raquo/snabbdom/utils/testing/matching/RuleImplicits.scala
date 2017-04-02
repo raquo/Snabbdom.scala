@@ -1,5 +1,6 @@
 package com.raquo.snabbdom.utils.testing.matching
 
+import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.nodes.{Node, NodeData}
 import com.raquo.snabbdom.setters.{Attr, Prop, Style}
 
@@ -21,15 +22,22 @@ trait RuleImplicits[N <: Node[N, D], D <: NodeData[N, D]] {
     new StyleRuleOps(style)
   }
 
-  implicit def childElementToRule(child: ExpectedElement[N, D]): Rule[N, D] = new Rule[N, D] {
-    def applyTo(expectedElement: ExpectedElement[N, D]): Unit = {
-      expectedElement.addExpectedChild(child)
+  implicit def childElementToRule(child: ExpectedNode[N, D]): Rule[N, D] = {
+    new Rule[N, D] {
+      def applyTo(expectedNode: ExpectedNode[N, D]): Unit = {
+        child.addCheck(child.checkTagName)
+        expectedNode.addExpectedChild(child)
+      }
     }
   }
 
-  implicit def childStringToRule(child: String): Rule[N, D] = new Rule[N, D] {
-    def applyTo(expectedElement: ExpectedElement[N, D]): Unit = {
-      expectedElement.addExpectedChild(child)
+  implicit def childTextToRule(childText: String)(implicit builders: Builders[N, D]): Rule[N, D] = {
+    new Rule[N, D] {
+      def applyTo(expectedNode: ExpectedNode[N, D]): Unit = {
+        val expectedTextChild = new ExpectedNode[N, D](builders.textNode(childText))
+        expectedTextChild.addCheck(ExpectedNode.checkText(childText))
+        expectedNode.addExpectedChild(expectedTextChild)
+      }
     }
   }
 }

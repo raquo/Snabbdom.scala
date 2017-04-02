@@ -8,13 +8,13 @@ import org.scalajs.dom
 class AttrRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val attr: Attr[V, N, D]) extends AnyVal {
 
   def is(expected: V): Rule[N, D] = new Rule[N, D] {
-    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
+    def applyTo(testNode: ExpectedNode[N, D]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, Some(expected)))
     }
   }
 
   def isEmpty: Rule[N, D] = new Rule[N, D] {
-    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
+    def applyTo(testNode: ExpectedNode[N, D]): Unit = {
       testNode.addCheck(nodeAttrIs(attr, None))
     }
   }

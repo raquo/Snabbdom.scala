@@ -1,24 +1,30 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.allTags.{article, div, hr, p, span}
+import com.raquo.snabbdom.allTags.{article, comment, div, hr, p, span}
 
 class ElementSpec extends UnitSpec {
 
   it("renders empty elements") {
     mount("empty <div>", div())
-    expectElement(div likeEmpty)
+    expectNode(div likeEmpty)
     unmount()
 
     mount("empty <span>", span())
-    expectElement(span likeEmpty)
+    expectNode(span likeEmpty)
     unmount()
 
     mount("empty <p>", p)
-    expectElement(p likeEmpty)
+    expectNode(p likeEmpty)
     unmount()
 
     mount("empty <hr>", hr)
-    expectElement(hr likeEmpty)
+    expectNode(hr likeEmpty)
+    unmount()
+  }
+
+  it("renders a comment") {
+    mount(div(comment()))
+    expectNode(div like (comment likeEmpty))
     unmount()
   }
 
@@ -26,11 +32,11 @@ class ElementSpec extends UnitSpec {
     val text = randomString("text_")
 
     mount("span", span(text))
-    expectElement(span like text)
+    expectNode(span like text)
     unmount()
 
     mount("article (fancy element from Tags2)", article(text))
-    expectElement(article like text)
+    expectNode(article like text)
     unmount()
 
     // @TODO[Integrity] Test with two text nodes in one element once we fix that behaviour
@@ -42,21 +48,21 @@ class ElementSpec extends UnitSpec {
     val text3 = randomString("text3_")
 
     mount("div > span", div(span(text1)))
-    expectElement(div like (span like text1))
+    expectNode(div like (span like text1))
     unmount()
 
     mount(
       "div > span, p",
       div(span(text1), p(text2))
     )
-    expectElement(div like(span like text1, p like text2))
+    expectNode(div like(span like text1, p like text2))
     unmount()
 
     mount(
       "div > span, p, p",
       div(span(text1), p(text2), p(text3))
     )
-    expectElement(div like(span like text1, p like text2, p like text3))
+    expectNode(div like(span like text1, p like text2, p like text3))
     unmount()
 
     mount(
@@ -68,7 +74,7 @@ class ElementSpec extends UnitSpec {
       )
     )
 
-    expectElement(div like(
+    expectNode(div like(
       span like text1,
       p like (text2, span like text2, span like text3),
       hr likeEmpty

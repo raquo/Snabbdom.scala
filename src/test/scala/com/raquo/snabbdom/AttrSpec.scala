@@ -13,14 +13,14 @@ class AttrSpec extends UnitSpec {
     val expectedRowSpan = 15 + Random.nextInt(7)
 
     mount("div", div(title := expectedTitle))
-    expectElement(div like (title is expectedTitle))
+    expectNode(div like (title is expectedTitle))
     unmount()
 
     mount("td [colSpan, rowSpan]", td(
       colSpan := expectedColSpan,
       rowSpan := expectedRowSpan
     ))
-    expectElement(
+    expectNode(
       td like(
         colSpan is expectedColSpan,
         rowSpan is expectedRowSpan,
@@ -32,18 +32,18 @@ class AttrSpec extends UnitSpec {
 
   it("sets boolean attrs") {
     mount("input [selected=false]", input(selected := false))
-    expectElement(input like(selected is false, colSpan isEmpty))
+    expectNode(input like(selected is false, colSpan isEmpty))
     unmount()
 
     mount("input [selected=true]", input(selected := true))
-    expectElement(input like(selected is true, colSpan isEmpty))
+    expectNode(input like(selected is true, colSpan isEmpty))
     unmount()
   }
 
   it("sets integer attrs") {
     val expectedColSpan = Random.nextInt(10)
     mount("td [colSpan]", td(colSpan := expectedColSpan))
-    expectElement(td like(colSpan is expectedColSpan, selected isEmpty))
+    expectNode(td like(colSpan is expectedColSpan, selected isEmpty))
     unmount()
   }
 
@@ -62,19 +62,19 @@ class AttrSpec extends UnitSpec {
     val addChild = span(expectedText)
 
     mount("[href], [title], span", div(setHref, setTitle, addChild))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("[title], [href], span", div(setTitle, setHref, addChild))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("[title], span, [href]", div(setTitle, addChild, setHref))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("span, [title], [href]", div(addChild, setTitle, setHref))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
   }
 
@@ -101,7 +101,7 @@ class AttrSpec extends UnitSpec {
         span()
       )
     )
-    expectElement(
+    expectNode(
       td like(
         colSpan is expectedColSpan,
         rowSpan is expectedRowSpan,

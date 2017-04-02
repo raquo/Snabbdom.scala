@@ -15,14 +15,14 @@ class PropSpec extends UnitSpec {
     val expectedAlt = randomString("alt_")
 
     mount("div", div(rel := expectedRel))
-    expectElement(div like (rel is expectedRel))
+    expectNode(div like (rel is expectedRel))
     unmount()
 
     mount("td [colSpan, rowSpan]", td(
       href := expectedHref,
       alt := expectedAlt
     ))
-    expectElement(
+    expectNode(
       td like(
         href is expectedHref,
         alt is expectedAlt,
@@ -35,16 +35,16 @@ class PropSpec extends UnitSpec {
   // @TODO[Integrity] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
   it("sets non-string props") {
     mount("input [disabled=false]", input(disabled := false))
-    expectElement(input like(disabled is false, colSpan isEmpty))
+    expectNode(input like(disabled is false, colSpan isEmpty))
     unmount()
 
     mount("input [disabled=true]", input(disabled := true))
-    expectElement(input like(disabled is true, colSpan isEmpty))
+    expectNode(input like(disabled is true, colSpan isEmpty))
     unmount()
 
     val expectedColSpan = Random.nextInt(10)
     mount("td [colSpan]", td(colSpan := expectedColSpan))
-    expectElement(td like(colSpan is expectedColSpan, disabled isEmpty))
+    expectNode(td like(colSpan is expectedColSpan, disabled isEmpty))
     unmount()
   }
 
@@ -63,19 +63,19 @@ class PropSpec extends UnitSpec {
     val addChild = span(expectedText)
 
     mount("[href], [rel], span", div(setHref, setRel, addChild))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("[rel], [href], span", div(setRel, setHref, addChild))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("[rel], span, [href]", div(setRel, addChild, setHref))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
 
     mount("span, [rel], [href]", div(addChild, setRel, setHref))
-    expectElement(expected)
+    expectNode(expected)
     unmount()
   }
 
@@ -104,7 +104,7 @@ class PropSpec extends UnitSpec {
       )
     )
 
-    expectElement(
+    expectNode(
       td like(
         colSpan is expectedColSpan,
         rowSpan is expectedRowSpan,

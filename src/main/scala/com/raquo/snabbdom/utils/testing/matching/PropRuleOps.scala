@@ -12,13 +12,13 @@ import scala.scalajs.js
 class PropRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val prop: Prop[V, N, D]) extends AnyVal {
 
   def is(expected: V): Rule[N, D] = new Rule[N, D] {
-    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
+    def applyTo(testNode: ExpectedNode[N, D]): Unit = {
       testNode.addCheck(nodePropIs(prop, Some(expected)))
     }
   }
 
   def isEmpty: Rule[N, D] = new Rule[N, D] {
-    def applyTo(testNode: ExpectedElement[N, D]): Unit = {
+    def applyTo(testNode: ExpectedNode[N, D]): Unit = {
       testNode.addCheck(nodePropIs(prop, None))
     }
   }
@@ -44,8 +44,8 @@ class PropRuleOps[V, N <: Node[N, D], D <: NodeData[N, D]](val prop: Prop[V, N, 
     }
   }
 
-  private def getProp(element: dom.Node, prop: Prop[V, N, D]): Option[V] = {
-    val propValue = element.asInstanceOf[js.Dynamic].selectDynamic(prop.name)
+  private def getProp(node: dom.Node, prop: Prop[V, N, D]): Option[V] = {
+    val propValue = node.asInstanceOf[js.Dynamic].selectDynamic(prop.name)
     val jsUndef = js.undefined
     propValue.asInstanceOf[Any] match {
       case str: String if str.length == 0 => None
