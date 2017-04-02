@@ -75,6 +75,19 @@ class ExpectedNode[N <: Node[N, D], D <: NodeData[N, D]](private val emptyVNode:
 
     checksErrors ++ childErrors
   }
+
+  override def toString: String = {
+    emptyVNode.sel.toOption match {
+      case Some(sel) =>
+        s"ExpectedNode[tag=$sel]"
+      case None =>
+        // Must be a text node then
+        val text = emptyVNode.text.orElse(
+          emptyVNode.maybeChildren.filter(_.nonEmpty).map(children => children(0).text)
+        )
+        s"ExpectedNode[text=${repr(text)}]"
+    }
+  }
 }
 
 object ExpectedNode {
