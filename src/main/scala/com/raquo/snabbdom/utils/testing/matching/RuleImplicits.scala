@@ -6,8 +6,8 @@ import com.raquo.snabbdom.setters.{Attr, Prop, Style}
 
 trait RuleImplicits[N <: Node[N, D], D <: NodeData[N, D]] {
 
-  implicit def withEmptyVNodeOps(emptyVNode: N): EmptyVNodeOps[N, D] = {
-    new EmptyVNodeOps[N, D](emptyVNode)
+  implicit def withEmptyNodeOps(emptyNode: N): EmptyNodeOps[N, D] = {
+    new EmptyNodeOps[N, D](emptyNode)
   }
 
   implicit def withAttrRuleOps[V](attr: Attr[V, N, D]): AttrRuleOps[V, N, D] = {

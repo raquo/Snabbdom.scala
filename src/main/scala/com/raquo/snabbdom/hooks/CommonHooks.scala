@@ -13,20 +13,20 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
 
   type RemoveNode = js.Function0[Any]
 
-  type EmptyVNode = N
+  type EmptyNode = N
 
-  type OldVNode = N
+  type OldNode = N
 
-  type NewVNode = N
+  type NewNode = N
 
-  type RawCreateHook = js.Function2[EmptyVNode, NewVNode, Any]
+  type RawCreateHook = js.Function2[EmptyNode, NewNode, Any]
 
-  type RawUpdateHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawUpdateHook = js.Function2[OldNode, NewNode, Any]
 
-  type RawDestroyHook = js.Function1[OldVNode, Any]
+  type RawDestroyHook = js.Function1[OldNode, Any]
 
   /** Note: you must eventually call RemoveNode callback to remove the node from the DOM */
-  type RawRemoveHook = js.Function2[OldVNode, RemoveNode, Any]
+  type RawRemoveHook = js.Function2[OldNode, RemoveNode, Any]
 
   /** Create Hook – a DOM element has been created based on a vnode
     * Note: this hook is not called on comment nodes.
@@ -71,13 +71,13 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
     */
   var remove: js.UndefOr[RawRemoveHook] = js.undefined
 
-  def addCreateHook(hook: (EmptyVNode, NewVNode) => Any): this.type = {
+  def addCreateHook(hook: (EmptyNode, NewNode) => Any): this.type = {
     create = js.defined(
       if (create.isDefined) {
         val oldHook = create.get
-        (emptyVNode: N, vnode: N) => {
-          oldHook(emptyVNode, vnode)
-          hook(emptyVNode, vnode)
+        (emptyNode: N, node: N) => {
+          oldHook(emptyNode, node)
+          hook(emptyNode, node)
         }
       } else {
         hook
@@ -86,13 +86,13 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
     this
   }
 
-  def addUpdateHook(hook: (OldVNode, NewVNode) => Any): this.type = {
+  def addUpdateHook(hook: (OldNode, NewNode) => Any): this.type = {
     update = js.defined(
       if (update.isDefined) {
         val oldHook = update.get
-        (oldVNode: N, vnode: N) => {
-          oldHook(oldVNode, vnode)
-          hook(oldVNode, vnode)
+        (oldNode: N, node: N) => {
+          oldHook(oldNode, node)
+          hook(oldNode, node)
         }
       } else {
         hook
@@ -101,13 +101,13 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
     this
   }
 
-  def addDestroyHook(hook: OldVNode => Any): this.type = {
+  def addDestroyHook(hook: OldNode => Any): this.type = {
     destroy = js.defined(
       if (destroy.isDefined) {
         val oldHook = destroy.get
-        (vnode: N) => {
-          oldHook(vnode)
-          hook(vnode)
+        (node: N) => {
+          oldHook(node)
+          hook(node)
         }
       } else {
         hook
@@ -117,13 +117,13 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
   }
 
   /** Note: you MUST eventually call [[RemoveNode]] callback to remove the node from the DOM */
-  def addRemoveHook(hook: (OldVNode, RemoveNode) => Any): this.type = {
+  def addRemoveHook(hook: (OldNode, RemoveNode) => Any): this.type = {
     remove = js.defined(
       if (remove.isDefined) {
         val oldHook = remove.get
-        (vnode: N, removeNode: RemoveNode) => {
-          oldHook(vnode, removeNode)
-          hook(vnode, removeNode)
+        (node: N, removeNode: RemoveNode) => {
+          oldHook(node, removeNode)
+          hook(node, removeNode)
         }
       } else {
         hook

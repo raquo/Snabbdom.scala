@@ -1,7 +1,6 @@
 package com.raquo.snabbdom.utils
 
 import com.raquo.snabbdom.nodes.{Node, NodeData}
-import com.raquo.snabbdom.VNode
 import com.raquo.snabbdom.hooks.NodeHooks
 import org.scalajs.dom
 
@@ -15,10 +14,10 @@ object HookLogger {
     enabled: Boolean = true,
     prefix: String = Random.nextInt(99).toString,
     logger: Any => Unit = consoleLog,
+    logDOMNode: Boolean = false,
     logNode: Boolean = false,
-    logVNode: Boolean = false,
-    logNodeFn: Option[dom.Node => Any] = None,
-    logVNodeFn: Option[VNode => Any] = None
+    logDOMNodeFn: Option[dom.Node => Any] = None,
+    logNodeFn: Option[N => Any] = None
   ): NodeHooks[N, D] = {
 
     // @TODO[Convenience] Provide an easy way to add HookLogger to an existing VNode
@@ -26,41 +25,41 @@ object HookLogger {
 
     new NodeHooks[N, D] {
       if (enabled) {
-        addInitHook { (vnode: N) =>
+        addInitHook { (node: N) =>
           logger(prefix + ":hook:init")
-          log(logger, "node:", vnode)
+          log(logger, "node:", node)
         }
-        addCreateHook { (emptyVNode: N, vnode: N) =>
+        addCreateHook { (emptyNode: N, node: N) =>
           logger(prefix + ":hook:create")
-          log(logger, "empty node:", emptyVNode)
-          log(logger, "node:", vnode)
+          log(logger, "empty node:", emptyNode)
+          log(logger, "node:", node)
         }
-        addInsertHook { (vnode: N) =>
+        addInsertHook { (node: N) =>
           logger(prefix + ":hook:insert")
-          log(logger, "node:", vnode)
+          log(logger, "node:", node)
         }
-        addPrePatchHook { (oldVNode: N, vnode: N) =>
+        addPrePatchHook { (oldNode: N, node: N) =>
           logger(prefix + ":hook:prePatch")
-          log(logger, "old node:", oldVNode)
-          log(logger, "node:", vnode)
+          log(logger, "old node:", oldNode)
+          log(logger, "node:", node)
         }
-        addUpdateHook { (oldVNode: N, vnode: N) =>
+        addUpdateHook { (oldNode: N, node: N) =>
           logger(prefix + ":hook:udpate")
-          log(logger, "old node:", oldVNode)
-          log(logger, "node:", vnode)
+          log(logger, "old node:", oldNode)
+          log(logger, "node:", node)
         }
-        addPostPatchHook { (oldVNode: N, vnode: N) =>
+        addPostPatchHook { (oldNode: N, node: N) =>
           logger(prefix + ":hook:postPatch")
-          log(logger, "old node:", oldVNode)
-          log(logger, "node:", vnode)
+          log(logger, "old node:", oldNode)
+          log(logger, "node:", node)
         }
-        addDestroyHook { (vnode: N) =>
+        addDestroyHook { (node: N) =>
           logger(prefix + ":hook:destroy")
-          log(logger, "node:", vnode)
+          log(logger, "node:", node)
         }
-        addRemoveHook { (vnode: N, removeNode: js.Function0[Any]) =>
+        addRemoveHook { (node: N, removeNode: js.Function0[Any]) =>
           logger(prefix + ":hook:remove")
-          log(logger, "node:", vnode)
+          log(logger, "node:", node)
           if (callRemoveNode) {
             removeNode()
           }
@@ -73,28 +72,28 @@ object HookLogger {
   def log[N <: Node[N, _]](
     logger: Any => Unit,
     message: String,
-    vnode: N,
+    node: N,
+    logDOMNode: Boolean = false,
     logNode: Boolean = false,
-    logVNode: Boolean = false,
-    logNodeFn: Option[dom.Node => Any] = None,
-    logVNodeFn: Option[N => Any] = None
+    logDOMNodeFn: Option[dom.Node => Any] = None,
+    logNodeFn: Option[N => Any] = None
   ): Unit = {
-    if (message.nonEmpty && (logNode || logVNode || logNodeFn.isDefined || logVNodeFn.isDefined)) {
+    if (message.nonEmpty && (logDOMNode || logNode || logDOMNodeFn.isDefined || logNodeFn.isDefined)) {
       logger(message)
     }
-    if (logNode) {
-      logger(vnode.elm)
+    if (logDOMNode) {
+      logger(node.elm)
     }
-    logNodeFn.foreach { nodeFn =>
-      vnode.elm.toOption.foreach(elm =>
-        logger(nodeFn(elm))
+    logDOMNodeFn.foreach { domNodeFn =>
+      node.elm.toOption.foreach(elm =>
+        logger(domNodeFn(elm))
       )
     }
-    if (logVNode) {
-      logger(vnode)
+    if (logNode) {
+      logger(node)
     }
-    logVNodeFn.foreach { vnodeFn =>
-      logger(vnodeFn(vnode))
+    logNodeFn.foreach { nodeFn =>
+      logger(nodeFn(node))
     }
   }
 

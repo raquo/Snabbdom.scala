@@ -14,7 +14,7 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
 
   var container: dom.Element = null
 
-  var mountedVNode: N = _
+  var mountedNode: N = _
 
   private[this] var jsPatch: PatchFn[N, D] = noopPatchFn _
 
@@ -69,11 +69,11 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
     }
   }
 
-  def mount(clue: String, vnode: N): Unit = {
-    mount(vnode, clue)
+  def mount(clue: String, node: N): Unit = {
+    mount(node, clue)
   }
 
-  def mount(vnode: N, clue: String = defaultMountedElementClue): Unit = {
+  def mount(node: N, clue: String = defaultMountedElementClue): Unit = {
     doAssert(
       container != null && container.parentNode == dom.document.body,
       "ASSERT FAIL [mount]: Container is null or not mounted to <body> (what did you do!?)"
@@ -95,38 +95,38 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
     mountedElementClue = clue
     container.appendChild(entry)
 
-    patch(entry, vnode)
+    patch(entry, node)
   }
 
-  def patch(elementOrVNode: N | dom.Element, newVNode: N): N = {
+  def patch(nodeOrDOMElement: N | dom.Element, newNode: N): N = {
 
     // When a patch happens on a mounted node (e.g. because its AttrReceiver patches it)
     // we get a new VNode reference that we need to save if we want to properly unmount it later.
     // @TODO This looks a bit dangerous – is it safe around mount() / unmount() and async operations? Do we need any assert()-s?
-    if (newVNode.data.hooks.isEmpty) {
-      newVNode.data.hooks = new NodeHooks[N, D]()
+    if (newNode.data.hooks.isEmpty) {
+      newNode.data.hooks = new NodeHooks[N, D]()
     }
-    newVNode.data.hooks.get.addPostPatchHook((oldVNode: N, newVNode: N) => {
+    newNode.data.hooks.get.addPostPatchHook((oldNode: N, newNode: N) => {
 //      dom.console.log("updating patched node")
-      mountedVNode = newVNode
+      mountedNode = newNode
     })
 
-    mountedVNode = jsPatch(elementOrVNode, newVNode)
-    mountedVNode
+    mountedNode = jsPatch(nodeOrDOMElement, newNode)
+    mountedNode
   }
 
-  def patchMounted(newVNode: N): N = {
+  def patchMounted(newNode: N): N = {
     doAssert(
-      mountedVNode != null,
+      mountedNode != null,
       "ASSERT FAIL [patchMounted]: Nothing to patch. You need to mount() before trying to patchMounted()."
     )
-    patch(mountedVNode, newVNode)
+    patch(mountedNode, newNode)
   }
 
   /** Ensure that any previously used snabbdom node is destroyed before we attempt to mount a new node */
   def unmount(): Unit = {
     doAssert(
-      mountedVNode != null,
+      mountedNode != null,
       "ASSERT FAIL [unmount]: Nothing to unmount. You need to mount() before trying to unmount()"
     )
     patchMounted(node("div"))
@@ -145,7 +145,7 @@ trait MountOps[N <: Node[N, D], D <: NodeData[N, D]] { this: Builders[N, D] =>
     }
   }
 
-  private def noopPatchFn(elementOrVNode: N | dom.Element, newVNode: N): N = {
+  private def noopPatchFn(nodeOrDOMElement: N | dom.Element, newNode: N): N = {
     doFail("Patch function is not defined in the test suite. Somehow, resetDocument() was not called. Normally this is done automatically in beforeEach()")
   }
 }

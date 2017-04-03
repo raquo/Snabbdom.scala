@@ -6,7 +6,7 @@ import org.scalajs.dom
 
 import scala.collection.mutable
 
-class ExpectedNode[N <: Node[N, D], D <: NodeData[N, D]](private val emptyVNode: N) {
+class ExpectedNode[N <: Node[N, D], D <: NodeData[N, D]](private val emptyNode: N) {
 
   import ExpectedNode._
 
@@ -35,12 +35,12 @@ class ExpectedNode[N <: Node[N, D], D <: NodeData[N, D]](private val emptyVNode:
   }
 
   def checkTagName(actualNode: dom.Node): MaybeError = {
-    val isComment = emptyVNode.sel.get == "!"
+    val isComment = emptyNode.sel.get == "!"
     val expectedNodeType = if (isComment) "dom.Comment" else "dom.Element"
     actualNode match {
       case element: dom.Element if !isComment =>
-        if (element.tagName.toLowerCase != emptyVNode.sel.get) {
-          Some(s"Element tag name is incorrect: actual ${repr(element.tagName.toLowerCase)}, expected ${repr(emptyVNode.sel)}")
+        if (element.tagName.toLowerCase != emptyNode.sel.get) {
+          Some(s"Element tag name is incorrect: actual ${repr(element.tagName.toLowerCase)}, expected ${repr(emptyNode.sel)}")
         } else {
           None
         }
@@ -77,13 +77,13 @@ class ExpectedNode[N <: Node[N, D], D <: NodeData[N, D]](private val emptyVNode:
   }
 
   override def toString: String = {
-    emptyVNode.sel.toOption match {
+    emptyNode.sel.toOption match {
       case Some(sel) =>
         s"ExpectedNode[tag=$sel]"
       case None =>
         // Must be a text node then
-        val text = emptyVNode.text.orElse(
-          emptyVNode.maybeChildren.filter(_.nonEmpty).map(children => children(0).text)
+        val text = emptyNode.text.orElse(
+          emptyNode.maybeChildren.filter(_.nonEmpty).map(children => children(0).text)
         )
         s"ExpectedNode[text=${repr(text)}]"
     }

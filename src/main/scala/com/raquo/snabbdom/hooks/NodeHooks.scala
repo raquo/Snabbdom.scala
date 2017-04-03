@@ -11,13 +11,13 @@ import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
 @ScalaJSDefined
 class NodeHooks[N <: Node[N, D], D <: NodeData[N, D]] extends CommonHooks[N, D] { self =>
 
-  type RawInitHook = js.Function1[NewVNode, Any]
+  type RawInitHook = js.Function1[NewNode, Any]
 
-  type RawInsertHook = js.Function1[NewVNode, Any]
+  type RawInsertHook = js.Function1[NewNode, Any]
 
-  type RawPrePatchHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawPrePatchHook = js.Function2[OldNode, NewNode, Any]
 
-  type RawPostPatchHook = js.Function2[OldVNode, NewVNode, Any]
+  type RawPostPatchHook = js.Function2[OldNode, NewNode, Any]
 
   /** Init hook – a vnode has been added
     *
@@ -63,9 +63,9 @@ class NodeHooks[N <: Node[N, D], D <: NodeData[N, D]] extends CommonHooks[N, D] 
     init = js.defined(
       if (init.isDefined) {
         val oldHook = init.get
-        (vnode: N) => {
-          oldHook(vnode)
-          hook(vnode)
+        (node: N) => {
+          oldHook(node)
+          hook(node)
         }
       } else {
         hook
@@ -74,13 +74,13 @@ class NodeHooks[N <: Node[N, D], D <: NodeData[N, D]] extends CommonHooks[N, D] 
     this
   }
 
-  def addInsertHook(hook: NewVNode => Any): this.type = {
+  def addInsertHook(hook: NewNode => Any): this.type = {
     insert = js.defined(
       if (insert.isDefined) {
         val oldHook = insert.get
-        (vnode: N) => {
-          oldHook(vnode)
-          hook(vnode)
+        (node: N) => {
+          oldHook(node)
+          hook(node)
         }
       } else {
         hook
@@ -89,13 +89,13 @@ class NodeHooks[N <: Node[N, D], D <: NodeData[N, D]] extends CommonHooks[N, D] 
     this
   }
 
-  def addPrePatchHook(hook: (OldVNode, NewVNode) => Any): this.type = {
+  def addPrePatchHook(hook: (OldNode, NewNode) => Any): this.type = {
     prePatch = js.defined(
       if (prePatch.isDefined) {
         val oldHook = prePatch.get
-        (oldVNode: N, vnode: N) => {
-          oldHook(oldVNode, vnode)
-          hook(oldVNode, vnode)
+        (oldNode: N, node: N) => {
+          oldHook(oldNode, node)
+          hook(oldNode, node)
         }
       } else {
         hook
@@ -104,13 +104,13 @@ class NodeHooks[N <: Node[N, D], D <: NodeData[N, D]] extends CommonHooks[N, D] 
     this
   }
 
-  def addPostPatchHook(hook: (OldVNode, NewVNode) => Any): this.type = {
+  def addPostPatchHook(hook: (OldNode, NewNode) => Any): this.type = {
     postPatch = js.defined(
       if (postPatch.isDefined) {
         val oldHook = postPatch.get
-        (oldVNode: N, vnode: N) => {
-          oldHook(oldVNode, vnode)
-          hook(oldVNode, vnode)
+        (oldNode: N, node: N) => {
+          oldHook(oldNode, node)
+          hook(oldNode, node)
         }
       } else {
         hook

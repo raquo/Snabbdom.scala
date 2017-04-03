@@ -17,11 +17,11 @@ object Conversions {
   }
 
   def nodeToChildNode[N <: Node[N, D], D <: NodeData[N, D]](
-    vnode: N
+    node: N
   )(
     implicit builders: Builders[N, D]
   ): ChildNode[N, D] = {
-    new ChildNode[N, D](vnode)
+    new ChildNode[N, D](node)
   }
 
   def toIterableNode[N <: Node[N, D], D <: NodeData[N, D]](
@@ -34,7 +34,7 @@ object Conversions {
   private def noModifier[N <: Node[N, D], D <: NodeData[N, D]]: Modifier[N, D] = {
     new Modifier[N, D] {
       // @TODO Should this apply a Null child instead?
-      @inline def applyTo(vnode: N): Unit = ()
+      @inline def applyTo(node: N): Unit = ()
     }
   }
 

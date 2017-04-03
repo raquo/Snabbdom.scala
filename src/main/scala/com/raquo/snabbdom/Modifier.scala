@@ -16,5 +16,5 @@ trait Modifier[N <: Node[N, D], D <: NodeData[N, D]] {
     * Applies this modifier to the specified [[Node]], such that when
     * rendering is complete the effect of adding this modifier can be seen.
     */
-  def applyTo(vnode: N): Unit
+  def applyTo(node: N): Unit
 }
