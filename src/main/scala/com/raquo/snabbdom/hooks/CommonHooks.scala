@@ -28,7 +28,9 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
   /** Note: you must eventually call RemoveNode callback to remove the node from the DOM */
   type RawRemoveHook = js.Function2[OldVNode, RemoveNode, Any]
 
-  /** Create Hook – a DOM element has been created based on a vnode */
+  /** Create Hook – a DOM element has been created based on a vnode
+    * Note: this hook is not called on comment nodes.
+    */
   var create: js.UndefOr[RawCreateHook] = js.undefined
 
   /** Update Hook – an element is being updated */

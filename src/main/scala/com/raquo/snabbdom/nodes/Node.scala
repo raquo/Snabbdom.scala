@@ -67,7 +67,6 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
   def copyInto(node: N): Unit = {
     node.sel = sel
     node.data = data.copy()
-    elm.foreach(_elm => node.elm = _elm)
     key.foreach(_key => node.key = _key)
     text.foreach(_text => node.text = _text)
     maybeChildren.foreach(children => node.maybeChildren = copyChildren(children))
