@@ -7,7 +7,7 @@ import com.raquo.snabbdom.collections.Builders
 
 object Conversions {
 
-  // @TODO add similar conversions for numbers and nulls – see what snabbdom supports
+  // @TODO[API] add similar conversions for numbers and nulls – see what snabbdom supports
   def textToChildNode[N <: Node[N, D], D <: NodeData[N, D]](
     text: String
   )(
@@ -33,7 +33,7 @@ object Conversions {
   /** Represents lack of a modifier */
   private def noModifier[N <: Node[N, D], D <: NodeData[N, D]]: Modifier[N, D] = {
     new Modifier[N, D] {
-      // @TODO Should this apply a Null child instead?
+      // @TODO[API] Should this apply a Null child instead?
       @inline def applyTo(node: N): Unit = ()
     }
   }

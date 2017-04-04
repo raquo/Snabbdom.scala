@@ -5,7 +5,6 @@ import com.raquo.snabbdom.setters.{Attr, EventProp, Prop, Style}
 
 import scala.scalajs.js
 
-// @TODO[Api] Do we need type params for other stuff? So far we only wanted to customize the nodes...
 trait Builders[N <: Node[N, D], D <: NodeData[N, D]] {
 
   @inline def attr[Value](key: String): Attr[Value, N, D] = {
