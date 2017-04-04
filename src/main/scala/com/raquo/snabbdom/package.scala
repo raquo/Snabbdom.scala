@@ -2,7 +2,7 @@ package com.raquo
 
 import com.raquo.snabbdom.collections.Builders
 import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
-import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, KeyboardEventProps, MouseEventProps}
+import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, FormEventProps, KeyboardEventProps, MouseEventProps}
 import com.raquo.snabbdom.collections.props.Props
 import com.raquo.snabbdom.collections.styles.Styles
 import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
@@ -48,7 +48,12 @@ package object snabbdom extends {
 
   object props extends Props[VNode, VNodeData] with VNodeBuilders // @TODO add more `with`?
 
-  object events extends MouseEventProps[VNode, VNodeData] with KeyboardEventProps[VNode, VNodeData] with ClipboardEventProps[VNode, VNodeData] with VNodeBuilders
+  object events
+    extends MouseEventProps[VNode, VNodeData]
+    with FormEventProps[VNode, VNodeData]
+    with KeyboardEventProps[VNode, VNodeData]
+    with ClipboardEventProps[VNode, VNodeData]
+    with VNodeBuilders
 
   object styles extends Styles[VNode, VNodeData] with VNodeBuilders
 
