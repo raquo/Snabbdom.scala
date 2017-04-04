@@ -4,6 +4,10 @@ import com.raquo.snabbdom.allTags.{article, comment, div, hr, p, span}
 
 class ElementSpec extends UnitSpec {
 
+  val text1 = randomString("text1_")
+  val text2 = randomString("text2_")
+  val text3 = randomString("text3_")
+
   it("renders empty elements") {
     mount("empty <div>", div())
     expectNode(div likeEmpty)
@@ -29,24 +33,21 @@ class ElementSpec extends UnitSpec {
   }
 
   it("renders elements with text Content") {
-    val text = randomString("text_")
-
-    mount("span", span(text))
-    expectNode(span like text)
+    mount("span", span(text1))
+    expectNode(span like text1)
     unmount()
 
-    mount("article (fancy element from Tags2)", article(text))
-    expectNode(article like text)
+    mount("article (fancy element from Tags2)", article(text1))
+    expectNode(article like text1)
     unmount()
+  }
 
-    // @TODO[Integrity] Test with two text nodes in one element once we fix that behaviour
+  it("renders two text nodes") {
+    mount(div(text1, text2))
+    expectNode(article like (text1, text2))
   }
 
   it("renders nested elements") {
-    val text1 = randomString("text1_")
-    val text2 = randomString("text2_")
-    val text3 = randomString("text3_")
-
     mount("div > span", div(span(text1)))
     expectNode(div like (span like text1))
     unmount()
@@ -80,5 +81,13 @@ class ElementSpec extends UnitSpec {
       hr likeEmpty
     ))
     unmount()
+  }
+
+  /** Node.text requires too many manipulations to deal with given the way we construct
+    * nodes by adding modifiers. It's just easier to create text nodes instead.
+    */
+  it("creates child nodes instead of populating .text") {
+    mount(div(text1))
+    mountedNode.text.isDefined shouldBe false
   }
 }
