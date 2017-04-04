@@ -5,6 +5,8 @@ import com.raquo.snabbdom.nodes.{Node, NodeData}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
 
+// @TODO[Convenience] Move doc comments into add* methods?
+
 /** Note: most scaladocs in this class are copied/derived from Snabbdom documentation.
   * Snabbdom is also licensed under MIT license.
   */
@@ -19,7 +21,8 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
 
   type NewNode = N
 
-  type RawCreateHook = js.Function2[EmptyNode, NewNode, Any]
+  /** This js.Object is an empty virtual node created from within snabbdom. Don't use it. */
+  type RawCreateHook = js.Function2[js.Object, NewNode, Any]
 
   type RawUpdateHook = js.Function2[OldNode, NewNode, Any]
 
@@ -71,11 +74,11 @@ class CommonHooks[N <: Node[N, D], D <: NodeData[N, D]] extends js.Object {
     */
   var remove: js.UndefOr[RawRemoveHook] = js.undefined
 
-  def addCreateHook(hook: (EmptyNode, NewNode) => Any): this.type = {
+  def addCreateHook(hook: (js.Object, NewNode) => Any): this.type = {
     create = js.defined(
       if (create.isDefined) {
         val oldHook = create.get
-        (emptyNode: N, node: N) => {
+        (emptyNode: js.Object, node: N) => {
           oldHook(emptyNode, node)
           hook(emptyNode, node)
         }

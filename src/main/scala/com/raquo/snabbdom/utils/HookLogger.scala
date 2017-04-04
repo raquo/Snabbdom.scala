@@ -29,9 +29,8 @@ object HookLogger {
           logger(prefix + ":hook:init")
           log(logger, "node:", node)
         }
-        addCreateHook { (emptyNode: N, node: N) =>
+        addCreateHook { (emptyNode: js.Object, node: N) =>
           logger(prefix + ":hook:create")
-          log(logger, "empty node:", emptyNode)
           log(logger, "node:", node)
         }
         addInsertHook { (node: N) =>
