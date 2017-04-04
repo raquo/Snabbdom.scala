@@ -14,9 +14,9 @@ scalaVersion := "2.11.8"
 
 crossScalaVersions := Seq("2.11.8", "2.12.1")
 
-homepage := Some(url("https://github.com/raquo/snabbdom-scala"))
+homepage := Some(url("https://github.com/raquo/Snabbdom.scala"))
 
-licenses += ("MIT", url("https://github.com/raquo/snabbdom-scala/blob/master/LICENSE.md"))
+licenses += ("MIT", url("https://github.com/raquo/Snabbdom.scala/blob/master/LICENSE.txt"))
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
