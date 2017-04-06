@@ -47,3 +47,13 @@ class Style[V, N <: Node[N, D], D <: NodeData[N, D]] (
   override def := (value: V): StyleSetter[V, N, D] =
     new StyleSetter[V, N, D](this, value)
 }
+
+/** Represents the key to set the special snabbdom property `key` */
+class KeyKey[N <: Node[N, D], D <: NodeData[N, D]]
+  extends Key[String, N, D, KeySetter[N, D]] {
+
+  override val name: String = "key"
+
+  override def := (nodeKey: String): KeySetter[N, D] =
+    new KeySetter[N, D](this, nodeKey)
+}

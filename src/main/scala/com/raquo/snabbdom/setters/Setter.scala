@@ -20,7 +20,7 @@ trait Setter[K <: Key[V, N, D, Self], V, N <: Node[N, D], D <: NodeData[N, D], S
   val value: V
 }
 
-class AttrSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+class AttrSetter[V, N <: Node[N, D], D <: NodeData[N, D]](
   val key: Attr[V, N, D],
   val value: V
 ) extends Setter[Attr[V, N, D], V, N, D, AttrSetter[V, N, D]] {
@@ -39,7 +39,7 @@ class AttrSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
   }
 }
 
-class EventPropSetter[V <: js.Function, N <: Node[N, D], D <: NodeData[N, D]] (
+class EventPropSetter[V <: js.Function, N <: Node[N, D], D <: NodeData[N, D]](
   val key: EventProp[V, N, D],
   val value: V
 ) extends Setter[EventProp[V, N, D], V, N, D, EventPropSetter[V, N, D]] {
@@ -53,7 +53,7 @@ class EventPropSetter[V <: js.Function, N <: Node[N, D], D <: NodeData[N, D]] (
   }
 }
 
-class PropSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+class PropSetter[V, N <: Node[N, D], D <: NodeData[N, D]](
   val key: Prop[V, N, D],
   val value: V
 ) extends Setter[Prop[V, N, D], V, N, D, PropSetter[V, N, D]] {
@@ -67,7 +67,7 @@ class PropSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
   }
 }
 
-class StyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
+class StyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]](
   val key: Style[V, N, D],
   val value: V
 ) extends Setter[Style[V, N, D], V, N, D, StyleSetter[V, N, D]] {
@@ -78,5 +78,16 @@ class StyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]] (
     } else {
       node.data.styles.get.update(key.name, value)
     }
+  }
+}
+
+class KeySetter[N <: Node[N, D], D <: NodeData[N, D]](
+  val key: KeyKey[N, D],
+  val value: String
+)
+  extends Setter[KeyKey[N, D], String, N, D, KeySetter[N, D]] {
+
+  def applyTo(node: N): Unit = {
+    node.key = value
   }
 }

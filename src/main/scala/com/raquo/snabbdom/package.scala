@@ -8,6 +8,7 @@ import com.raquo.snabbdom.collections.styles.Styles
 import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
 import com.raquo.snabbdom.hooks.ModuleHooks
 import com.raquo.snabbdom.nodes.{ChildNode, Conversions, IterableNode, Node, NodeData}
+import com.raquo.snabbdom.setters.KeyKey
 import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
@@ -56,6 +57,9 @@ package object snabbdom extends {
     with VNodeBuilders
 
   object styles extends Styles[VNode, VNodeData] with VNodeBuilders
+
+  /** Setter of snabbdom's special key property */
+  val key = new KeyKey[VNode, VNodeData]
 
   @inline implicit def textToChildNode(
     text: String
