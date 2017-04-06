@@ -32,8 +32,8 @@ class PropSpec extends UnitSpec {
     unmount()
   }
 
-  // @TODO[Integrity] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
-  it("sets non-string props") {
+  // @TODO[Test] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
+  ignore("sets non-string props") {
     mount("input [disabled=false]", input(disabled := false))
     expectNode(input like(disabled is false, colSpan isEmpty))
     unmount()
@@ -79,8 +79,8 @@ class PropSpec extends UnitSpec {
     unmount()
   }
 
-  // @TODO[Integrity] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
-  it("sets props in nested elements") {
+  // @TODO[Test] In jsdom, this fails because of https://github.com/tmpvar/jsdom/issues/1745
+  ignore("sets props in nested elements") {
     val expectedRel1 = randomString("rel1_")
     val expectedRel2 = randomString("rel2_")
     val expectedText1 = randomString("text1_")
