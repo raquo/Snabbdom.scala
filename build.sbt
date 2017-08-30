@@ -10,20 +10,18 @@ organization := "com.raquo"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.11"
 
-crossScalaVersions := Seq("2.11.8", "2.12.1")
+crossScalaVersions := Seq("2.11.11", "2.12.3")
 
 homepage := Some(url("https://github.com/raquo/Snabbdom.scala"))
 
 licenses += ("MIT", url("https://github.com/raquo/Snabbdom.scala/blob/master/LICENSE.txt"))
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "org.scalatest" %%% "scalatest" % "3.0.1" // % "test" @TODO[Elegance] We have reusable test helpers. Create a separate SnabbdomTestUtils package.
+  "org.scala-js" %%% "scalajs-dom" % "0.9.3",
+  "org.scalatest" %%% "scalatest" % "3.0.3" // % "test" @TODO[Elegance] We have reusable test helpers. Create a separate SnabbdomTestUtils package.
 )
-
-persistLauncher in Test := false
 
 npmDependencies in Compile ++= Seq(
   "snabbdom" -> "0.6.7",
@@ -34,21 +32,6 @@ useYarn := true
 
 requiresDOM in Test := true
 
-// @TODO[Integrity] Selenium does not work because of @see https://github.com/scalacenter/scalajs-bundler/issues/89
-// jsEnv in Test := new org.scalajs.jsenv.selenium.SeleniumJSEnv(org.scalajs.jsenv.selenium.Chrome())
-
-// @TODO[Convenience] run Chrome headlessly (or maybe try firefox-x11) (or maybe just switch to ubuntu...)
-
-// Workaround for this bug (I think?): @see https://github.com/scalacenter/scalajs-bundler/issues/89
-//fastOptJS in Test := {
-//  val f = (fastOptJS in Test).value
-//  val fd = new File(f.data.getPath.stripSuffix(".js") + "-bundle.js")
-//  f.copy(fd)(f.metadata)
-//}
-
-//parallelExecution in Test := false
-
-// Webpack bundle is not being generated?
-// Remember that you need to run `sbt fastOptJS::webpack`, not just `sbt fastOptJS`.
-
 emitSourceMaps in fastOptJS := false
+
+emitSourceMaps in fullOptJS := false
