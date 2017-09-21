@@ -1,7 +1,7 @@
 package com.raquo.snabbdom.nodes
 
 import com.raquo.snabbdom.Modifier
-import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.builders.Builders
 import org.scalajs.dom
 
 import scala.scalajs.js
@@ -14,13 +14,14 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
   implicit builders: Builders[N, D]
 ) extends js.Object { self: N =>
 
+  // @TODO This could be a specific DOM type with the new Scala DOM Types
   var elm: js.UndefOr[dom.Node] = js.undefined
 
   var sel: js.UndefOr[String] = tagName
 
   var key: js.UndefOr[String] = js.undefined
 
-  var data: D = builders.nodeData() // @TODO[Perf] this initialization is excessive, but it saves a lot of boilerplate
+  var data: D = builders.nodeData()
 
   //@TODO[API] Enforce this with types?
   /** Note: only text nodes should have [[text]] defined.

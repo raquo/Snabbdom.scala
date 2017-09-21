@@ -19,8 +19,10 @@ homepage := Some(url("https://github.com/raquo/Snabbdom.scala"))
 licenses += ("MIT", url("https://github.com/raquo/Snabbdom.scala/blob/master/LICENSE.txt"))
 
 libraryDependencies ++= Seq(
+  "com.raquo" %%% "domtypes" % "0.1.4-SNAPSHOT",
   "org.scala-js" %%% "scalajs-dom" % "0.9.3",
-  "org.scalatest" %%% "scalatest" % "3.0.3" // % "test" @TODO[Elegance] We have reusable test helpers. Create a separate SnabbdomTestUtils package.
+  "com.raquo" %%% "domtestutils" % "0.2-SNAPSHOT" % Test,
+  "org.scalatest" %%% "scalatest" % "3.0.3" % Test
 )
 
 npmDependencies in Compile ++= Seq(
@@ -32,6 +34,8 @@ useYarn := true
 
 requiresDOM in Test := true
 
-emitSourceMaps in fastOptJS := false
+emitSourceMaps in fastOptJS := true
 
-emitSourceMaps in fullOptJS := false
+emitSourceMaps in fullOptJS := true
+
+emitSourceMaps in Test := true

@@ -1,6 +1,6 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.utils.testing.DomEnvSpec
+import com.raquo.domtestutils.scalatest.DomEnvSpec
 
 /**
   * Sanity checks on the testing environment.

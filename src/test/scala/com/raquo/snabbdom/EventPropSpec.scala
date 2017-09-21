@@ -1,8 +1,9 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.attrs.cls
-import com.raquo.snabbdom.events.onClick
-import com.raquo.snabbdom.tags.{div, span}
+import com.raquo.snabbdom.simple.implicits._
+import com.raquo.snabbdom.simple.attrs.cls
+import com.raquo.snabbdom.simple.events.onClick
+import com.raquo.snabbdom.simple.tags.{div, span}
 import org.scalajs.dom.raw.MouseEvent
 
 class EventPropSpec extends UnitSpec {
@@ -25,9 +26,9 @@ class EventPropSpec extends UnitSpec {
       )
     )
 
-    val clickableDiv = mountedElement.querySelector(".clickable")
+    val clickableDiv = containerNode.querySelector(".clickable")
     val spanInClickableDiv = clickableDiv.querySelector("span")
-    val unrelatedDiv = mountedElement.querySelector(".unrelated")
+    val unrelatedDiv = containerNode.querySelector(".unrelated")
 
     callbackCount shouldBe 0
 

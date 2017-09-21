@@ -1,14 +1,9 @@
 package com.raquo
 
-import com.raquo.snabbdom.collections.Builders
-import com.raquo.snabbdom.collections.attrs.{Attrs, GlobalAttrs, InputAttrs}
-import com.raquo.snabbdom.collections.eventProps.{ClipboardEventProps, FormEventProps, KeyboardEventProps, MouseEventProps}
-import com.raquo.snabbdom.collections.props.Props
-import com.raquo.snabbdom.collections.styles.Styles
-import com.raquo.snabbdom.collections.tags.{Tags, Tags2}
+import com.raquo.snabbdom.builders.Builders
 import com.raquo.snabbdom.hooks.ModuleHooks
 import com.raquo.snabbdom.nodes.{ChildNode, Conversions, IterableNode, Node, NodeData}
-import com.raquo.snabbdom.setters.KeyKey
+import com.raquo.snabbdom.simple.{VNode, VNodeBuilders, VNodeData}
 import org.scalajs.dom.MouseEvent
 import org.scalajs.dom.raw.Event
 
@@ -31,35 +26,14 @@ package object snabbdom extends {
     * For an example of this approach, see my Laminar project.
     *
     * Note that if you fail to include any of the following built-in modules
-    * in the init call, the types will not be adjusted to reflect their absence.
-    * I will try to fix that eventually.
+    * in the init call, the types will NOT be adjusted to reflect their absence.
     */
-  val modules: js.Array[NativeModule | ModuleHooks[VNode, VNodeData]] = js.Array(
+  def builtInModules[N <: Node[N, D], D <: NodeData[N, D]]: js.Array[NativeModule | ModuleHooks[N, D]] = js.Array(
     AttrsModule,
     PropsModule,
     EventsModule,
     StyleModule
   )
-
-  object tags extends Tags[VNode, VNodeData] with VNodeBuilders
-
-  object allTags extends Tags[VNode, VNodeData] with Tags2[VNode, VNodeData] with VNodeBuilders
-
-  object attrs extends Attrs[VNode, VNodeData] with InputAttrs[VNode, VNodeData] with GlobalAttrs[VNode, VNodeData] with VNodeBuilders
-
-  object props extends Props[VNode, VNodeData] with VNodeBuilders // @TODO add more `with`?
-
-  object events
-    extends MouseEventProps[VNode, VNodeData]
-    with FormEventProps[VNode, VNodeData]
-    with KeyboardEventProps[VNode, VNodeData]
-    with ClipboardEventProps[VNode, VNodeData]
-    with VNodeBuilders
-
-  object styles extends Styles[VNode, VNodeData] with VNodeBuilders
-
-  /** Setter of snabbdom's special key property */
-  val key = new KeyKey[VNode, VNodeData]
 
   @inline implicit def textToChildNode(
     text: String

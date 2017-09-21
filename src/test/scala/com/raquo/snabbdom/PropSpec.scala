@@ -1,13 +1,12 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.props.{alt, colSpan, disabled, href, rel, rowSpan}
-import com.raquo.snabbdom.tags.{div, input, span, td}
+import com.raquo.snabbdom.simple.implicits._
+import com.raquo.snabbdom.simple.props.{alt, colSpan, disabled, href, rel, rowSpan}
+import com.raquo.snabbdom.simple.tags.{div, input, span, td}
 
 import scala.util.Random
 
 class PropSpec extends UnitSpec {
-
-  // @TODO[Integrity] For some reason, these tests fail when running them in node.js/jsdom. Prop values return as strings instead of numbers.
 
   it("sets props") {
     val expectedRel = randomString("rel_")
@@ -121,7 +120,7 @@ class PropSpec extends UnitSpec {
             expectedText2
           )
         ),
-        span likeEmpty
+        span
       )
     )
   }

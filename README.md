@@ -4,9 +4,9 @@ This is a [Scala.js](https://github.com/scala-js/scala-js) interface to [Snabbdo
 
 The main goal of Snabbdom is to provide an easily extensible foundation for building frontend libraries that need to manipulate DOM. Other than "you need a virtual DOM", Snabbdom doesn't have an opinion on how to structure your frontend code other than, it is rather low-level. It is well suited to be used in all kinds of UI libraries including those that work on Streams and Observables.
 
-Many Javascript libraries use Snabbdom.js under the hood, for example [Cycle.js](https://github.com/cyclejs/cyclejs/), [Vue.js](https://github.com/vuejs/vue), [Kaiju](https://github.com/AlexGalays/kaiju).
+Many Javascript libraries use Snabbdom.js under the hood, for example [Vue.js](https://github.com/vuejs/vue), [Cycle.js](https://github.com/cyclejs/cyclejs/), [Kaiju](https://github.com/AlexGalays/kaiju).
 
-In Scala.js world, [Outwatch](https://github.com/OutWatch/outwatch) uses Snabbdom.js (although as of this writing, not Snabbdom.scala).
+In Scala.js world, [Outwatch](https://github.com/OutWatch/outwatch) uses Snabbdom.js (although not Snabbdom.scala).
 
 ## Basic Usage
 
@@ -52,10 +52,6 @@ Snabbdom.js is an established, well respected JS library with a long history.
 
 Snabbdom.scala is a Scala.js interface to it. Although I've just released it, I have been working on it for quite some time now, and it is pretty much feature-complete. I've been using it internally with great results.
 
-Further improvements are expected to: improve types, optimize Scala.js performance (not that there's a problem, but I see in a few places more code is generated than is ideal), make the default modules optional, expand the testing utils, etc. 
-
-As you might have noticed, I haven't published this to MavenCentral yet. This will come in a couple days. For now, you can check out Snabbdom.scala by using `sbt publishLocal`.
-
 ## Features
 
 ### Type-safe builders for virtual nodes
@@ -79,6 +75,8 @@ _I am currently wrapping up v0.1 of my FRP UI library which uses Snabbdom.scala,
 ### Testing Utils
 
 Snabbdom.Scala comes with convenient testing utils. These are generic enough that you can use them to test your Snabbdom-based UI library by simply providing a couple type params.
+
+@TODO: use the new generic [Scala DOM Test Utils](https://github.com/raquo/scala-dom-testutils) package which was based on this design
 
 Example from Snabbdom.scala's own test suite:
 
@@ -123,7 +121,7 @@ expectNode(
         expectedText2
       )
     ),
-    span likeEmpty
+    span
   )
 )
 ```
@@ -135,17 +133,13 @@ Snabbdom's own tests run with ScalaTest, but the latter is not required to use t
 ## Differences from Snabbdom.js
 
 * Snabbdom.scala does not provide an `h` function to build virtual nodes, and thus any logic that lives there is absent from Snabbdom.scala. You should use the type-safe node builders we provide instead.
-* Snabbdom.scala does not store class names and IDs in `.sel` property of the node. However, there are performance advantages to using .sel for more than just tag name because Snabbdom's `sameVnode` method uses it to decide whether to path or re-create DOM nodes. I will address this eventually, it is not yet clear which way is the best way. I'm not sure if shoving all classes into `.sel` is a good idea because in web application code it is common to toggle CSS classes just for styling (e.g. visibility).
+* Snabbdom.scala does not store class names and IDs in `.sel` property of the node. However, there are performance advantages to using .sel for more than just tag name because Snabbdom's `sameVnode` method uses it to decide whether to patch or re-create DOM nodes. It is not yet clear to me which way is the best way. I'm not sure if shoving all classes into `.sel` is a good idea because in web application code it is common to toggle CSS classes just for styling (e.g. visibility).
 * Snabbdom.scala does not use the `.text` property on nodes that have a `.sel`. Instead, we create an empty text node when given a string as a child. This makes things easier when using the builder pattern, and when you're updating the node with new children. 
 
 ## Author
 
 Nikita Gazarov – [raquo.com](http://raquo.com)
 
-## License and Credits
+## License
 
 Snabbdom.scala is provided under MIT license.
-
-As of this writing, all of its dependencies are also MIT-licensed.
-
-Files in `com/raquo/snabbdom/collections/*` directories that contain listings of DOM attributes, props, styles, etc. were adapted from ScalaTags. Most documentation in those files comes from Mozilla Developer Network.

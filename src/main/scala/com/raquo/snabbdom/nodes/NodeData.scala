@@ -1,7 +1,7 @@
 package com.raquo.snabbdom.nodes
 
 import com.raquo.interfaces.objectAssign
-import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.builders.Builders
 import com.raquo.snabbdom.hooks.NodeHooks
 
 import scala.scalajs.js

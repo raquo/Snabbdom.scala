@@ -1,6 +1,9 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.allTags.{article, comment, div, hr, p, span}
+import com.raquo.snabbdom.simple.comment
+import com.raquo.snabbdom.simple.implicits._
+import com.raquo.snabbdom.simple.tags.{div, hr, p, span}
+import com.raquo.snabbdom.simple.tags2.article
 
 class ElementSpec extends UnitSpec {
 
@@ -10,25 +13,25 @@ class ElementSpec extends UnitSpec {
 
   it("renders empty elements") {
     mount("empty <div>", div())
-    expectNode(div likeEmpty)
+    expectNode(div)
     unmount()
 
     mount("empty <span>", span())
-    expectNode(span likeEmpty)
+    expectNode(span)
     unmount()
 
-    mount("empty <p>", p)
-    expectNode(p likeEmpty)
+    mount("empty <p>", p())
+    expectNode(p)
     unmount()
 
-    mount("empty <hr>", hr)
-    expectNode(hr likeEmpty)
+    mount("empty <hr>", hr())
+    expectNode(hr)
     unmount()
   }
 
   it("renders a comment") {
-    mount(div(comment()))
-    expectNode(div like (comment likeEmpty))
+    mount(div(comment.build()))
+    expectNode(div like comment)
     unmount()
   }
 
@@ -43,7 +46,7 @@ class ElementSpec extends UnitSpec {
   }
 
   it("renders two text nodes") {
-    mount(div(text1, text2))
+    mount(article(text1, text2))
     expectNode(article like (text1, text2))
   }
 
@@ -71,14 +74,14 @@ class ElementSpec extends UnitSpec {
       div(
         span(text1),
         p(text2, span(text2), span(text3)),
-        hr
+        hr()
       )
     )
 
     expectNode(div like(
       span like text1,
       p like (text2, span like text2, span like text3),
-      hr likeEmpty
+      hr
     ))
     unmount()
   }
@@ -88,6 +91,6 @@ class ElementSpec extends UnitSpec {
     */
   it("creates child nodes instead of populating .text") {
     mount(div(text1))
-    mountedNode.text.isDefined shouldBe false
+    mountedVNode.text.isDefined shouldBe false
   }
 }

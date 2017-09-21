@@ -1,7 +1,8 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.attrs.{colSpan, href, rowSpan, selected, title}
-import com.raquo.snabbdom.tags.{div, input, span, td}
+import com.raquo.snabbdom.simple.implicits._
+import com.raquo.snabbdom.simple.attrs.{colSpan, href, rowSpan, selected, title}
+import com.raquo.snabbdom.simple.tags.{div, input, span, td}
 
 import scala.util.Random
 
@@ -13,6 +14,7 @@ class AttrSpec extends UnitSpec {
     val expectedRowSpan = 15 + Random.nextInt(7)
 
     mount("div", div(title := expectedTitle))
+
     expectNode(div like (title is expectedTitle))
     unmount()
 
@@ -118,7 +120,7 @@ class AttrSpec extends UnitSpec {
             expectedText2
           )
         ),
-        span likeEmpty
+        span
       )
     )
   }

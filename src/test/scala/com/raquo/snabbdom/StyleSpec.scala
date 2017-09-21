@@ -1,7 +1,8 @@
 package com.raquo.snabbdom
 
-import com.raquo.snabbdom.tags.div
-import com.raquo.snabbdom.styles._
+import com.raquo.snabbdom.simple.implicits._
+import com.raquo.snabbdom.simple.tags.div
+import com.raquo.snabbdom.simple.styles._
 
 import scala.util.Random
 

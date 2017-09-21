@@ -1,7 +1,7 @@
 package com.raquo.snabbdom.nodes
 
 import com.raquo.snabbdom.Modifier
-import com.raquo.snabbdom.collections.Builders
+import com.raquo.snabbdom.builders.Builders
 
 // @TODO[API] This is ugly. All these should be plain implicits, but I can't get Scala to pick them up
 
