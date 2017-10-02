@@ -2,7 +2,7 @@
 
 This is a [Scala.js](https://github.com/scala-js/scala-js) interface to [Snabbdom.js](https://github.com/snabbdom/snabbdom), a popular virtual DOM library with a focus on simplicity, modularity, powerful features and performance.
 
-    "com.raquo" %%% "snabbdom" % "0.1"
+    "com.raquo" %%% "snabbdom" % "0.1.1"
 
 The main goal of Snabbdom is to provide an easily extensible foundation for building frontend libraries that need to manipulate DOM. Other than "you need a virtual DOM", Snabbdom doesn't have an opinion on how to structure your frontend code, it is rather low-level. It is well suited to be used in all kinds of UI libraries including those that work on Streams and Observables.
 
