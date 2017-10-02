@@ -34,7 +34,7 @@ object Conversions {
   private def noModifier[N <: Node[N, D], D <: NodeData[N, D]]: Modifier[N, D] = {
     new Modifier[N, D] {
       // @TODO[API] Should this apply a Null child instead?
-      @inline def applyTo(node: N): Unit = ()
+      @inline override def apply(node: N): Unit = ()
     }
   }
 

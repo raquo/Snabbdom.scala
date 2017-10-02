@@ -6,7 +6,7 @@ import com.raquo.domtestutils.scalatest.MountSpec
 import com.raquo.snabbdom
 import com.raquo.snabbdom.Snabbdom.PatchFn
 import com.raquo.snabbdom.hooks.{ModuleHooks, NodeHooks}
-import com.raquo.snabbdom.simple.{SimpleCommentBuilder, VNode, VNodeData}
+import com.raquo.snabbdom.simple.{VNode, VNodeData}
 import org.scalajs.dom
 import org.scalatest.Suite
 
@@ -95,12 +95,7 @@ trait SnabbdomSpec
     doFail("Patch function is not defined in the test suite. Somehow, resetDocument() was not called. Normally this is done automatically in beforeEach()")
   }
 
-  implicit def makeSimpleCommentBuilderTestable(simpleCommentBuilder: SimpleCommentBuilder.type): ExpectedNode = {
+  @inline def commentNode: ExpectedNode = {
     ExpectedNode.comment()
-  }
-
-  implicit def simpleCommentBuilderAsExpectedChildRule(simpleCommentBuilder: SimpleCommentBuilder.type): Rule = (expectedParent: ExpectedNode) => {
-    val expectedChild: ExpectedNode = makeSimpleCommentBuilderTestable(simpleCommentBuilder)
-    expectedParent.addExpectedChild(expectedChild)
   }
 }

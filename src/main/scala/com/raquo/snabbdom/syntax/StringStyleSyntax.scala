@@ -6,7 +6,7 @@ import com.raquo.snabbdom.setters.StringStyleSetter
 
 class StringStyleSyntax[N <: Node[N, D], D <: NodeData[N, D]](val style: Style[String]) extends AnyVal {
 
-  def := (value: String): StringStyleSetter[String, N, D] = {
-    new StringStyleSetter[String, N, D](style, value)
+  def := (value: String): StringStyleSetter[N, D] = {
+    new StringStyleSetter[N, D](style, value)
   }
 }

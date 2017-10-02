@@ -19,14 +19,14 @@ homepage := Some(url("https://github.com/raquo/Snabbdom.scala"))
 licenses += ("MIT", url("https://github.com/raquo/Snabbdom.scala/blob/master/LICENSE.txt"))
 
 libraryDependencies ++= Seq(
-  "com.raquo" %%% "domtypes" % "0.1.4-SNAPSHOT",
+  "com.raquo" %%% "domtypes" % "0.2.1",
   "org.scala-js" %%% "scalajs-dom" % "0.9.3",
-  "com.raquo" %%% "domtestutils" % "0.2-SNAPSHOT" % Test,
+  "com.raquo" %%% "domtestutils" % "0.2" % Test,
   "org.scalatest" %%% "scalatest" % "3.0.3" % Test
 )
 
 npmDependencies in Compile ++= Seq(
-  "snabbdom" -> "0.6.7",
+  "snabbdom" -> "0.7.0",
   "object-assign" -> "4.1.1"
 )
 

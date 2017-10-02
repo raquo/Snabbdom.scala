@@ -6,12 +6,12 @@ import com.raquo.snabbdom.nodes.{Node, NodeData}
 
 import scala.scalajs.js
 
-class StringStyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]](
-  val key: Style[V],
+class StringStyleSetter[N <: Node[N, D], D <: NodeData[N, D]](
+  val key: Style[_],
   val value: String
 ) extends Modifier[N, D] {
 
-  def applyTo(node: N): Unit = {
+  override def apply(node: N): Unit = {
     if (node.data.styles.isEmpty) {
       node.data.styles = js.Dictionary[Any](key.name -> value)
     } else {

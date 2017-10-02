@@ -7,7 +7,7 @@ class ChildNode[N <: Node[N, D], D <: NodeData[N, D]](
   val node: N
 ) extends Modifier[N, D] {
 
-  @inline override def applyTo(parent: N): Unit = {
+  @inline override def apply(parent: N): Unit = {
     parent.addChild(node)
   }
 }

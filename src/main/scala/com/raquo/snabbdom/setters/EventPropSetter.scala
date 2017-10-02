@@ -12,7 +12,7 @@ class EventPropSetter[Ev <: dom.Event, N <: Node[N, D], D <: NodeData[N, D]](
   val value: js.Function1[Ev, Unit]
 ) extends Modifier[N, D] {
 
-  def applyTo(node: N): Unit = {
+  override def apply(node: N): Unit = {
     if (node.data.on.isEmpty) {
       node.data.on = js.Dictionary[js.Function](key.name -> value)
     } else {

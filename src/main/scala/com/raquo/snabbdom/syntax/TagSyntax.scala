@@ -8,7 +8,7 @@ class TagSyntax[N <: Node[N, D], D <: NodeData[N, D]](val tag: Tag[N]) extends A
 
   def apply(modifiers: Modifier[N, D]*): N = {
     val element = tag.build()
-    modifiers.foreach(_.applyTo(element))
+    modifiers.foreach(_.apply(element))
     element
   }
 }

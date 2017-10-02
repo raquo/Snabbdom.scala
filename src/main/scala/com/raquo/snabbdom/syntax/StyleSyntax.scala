@@ -10,7 +10,7 @@ class StyleSyntax[V, N <: Node[N, D], D <: NodeData[N, D]](val style: Style[V]) 
     new StyleSetter[V, N, D](style, value)
   }
 
-  def := (value: String): StringStyleSetter[V, N, D] = {
-    new StringStyleSetter[V, N, D](style, value)
+  def := (value: String): StringStyleSetter[N, D] = {
+    new StringStyleSetter[N, D](style, value)
   }
 }

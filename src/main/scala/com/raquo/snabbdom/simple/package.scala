@@ -50,15 +50,14 @@ package object simple {
     with SimpleTagBuilder
 
   object styles
-    extends Styles[SimpleStyleSetter, SimpleStringStyleSetter]
-    with SimpleStyleBuilder
+    extends Styles[Modifier[VNode, VNodeData]]
+    with SimpleStyleBuilders
 
   object styles2
-    extends Styles2[SimpleStyleSetter, SimpleStringStyleSetter]
-    with SimpleStyleBuilder
+    extends Styles2[Modifier[VNode, VNodeData]]
+    with SimpleStyleBuilders
 
-  // @TODO[API] This will make more sense when builder's main method is `apply` rather than `build`
-  val comment: SimpleCommentBuilder.type = SimpleCommentBuilder
+  val comment: () => VNode = () => new VNode("!")
 
   /** Setter of snabbdom's special key property */
   val key = new KeyKey

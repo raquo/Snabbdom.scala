@@ -11,7 +11,7 @@ class StyleSetter[V, N <: Node[N, D], D <: NodeData[N, D]](
   val value: V
 ) extends Modifier[N, D] {
 
-  def applyTo(node: N): Unit = {
+  override def apply(node: N): Unit = {
     if (node.data.styles.isEmpty) {
       node.data.styles = js.Dictionary[Any](key.name -> value)
     } else {

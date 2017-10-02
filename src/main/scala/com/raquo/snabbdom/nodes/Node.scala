@@ -38,7 +38,7 @@ class Node[N <: Node[N, D], D <: NodeData[N, D]](tagName: js.UndefOr[String])(
     // ugly while loop for speed
     var i = 0
     while (i < modifiers.length) {
-      modifiers(i).applyTo(this)
+      modifiers(i).apply(this)
       i += 1
     }
     this
