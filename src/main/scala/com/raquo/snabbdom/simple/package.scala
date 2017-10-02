@@ -10,9 +10,10 @@ import com.raquo.domtypes.jsdom.defs.eventProps.{ClipboardEventProps, ErrorEvent
 import com.raquo.domtypes.generic.defs.sameRefTags.{DocumentTags, EmbedTags, FormTags, GroupingTags, MiscTags, SectionTags, TableTags, TextTags}
 import com.raquo.snabbdom.keys.KeyKey
 
+/** Use this simple package if you intend to use Snabbdom.scala directly, without extending
+  * [[com.raquo.snabbdom.nodes.Node]] and [[com.raquo.snabbdom.nodes.NodeData]] classes.
+  */
 package object simple {
-
-  // @TODO Add types that don't need [Attr]?
 
   /** Import `implicits._` to get access to composition methods := and TagSyntax.apply */
   object implicits extends syntax.Implicits[VNode, VNodeData]

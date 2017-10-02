@@ -16,11 +16,11 @@ With minor syntactic differences, using Snabbdom.scala is just like using Snabbd
 
 ```scala
 import com.raquo.snabbdom
-import com.raquo.snabbdom.attrs.size
-import com.raquo.snabbdom.events.onChange
 import com.raquo.snabbdom.Snabbdom
-import com.raquo.snabbdom.styles.opacity
-import com.raquo.snabbdom.tags.{div, input}
+import com.raquo.snabbdom.simple.attrs.size
+import com.raquo.snabbdom.simple.events.onChange
+import com.raquo.snabbdom.simple.styles.opacity
+import com.raquo.snabbdom.simple.tags.{div, input}
 import org.scalajs.dom
  
 val foo: dom.Event => Unit = ???
