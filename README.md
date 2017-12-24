@@ -21,13 +21,14 @@ import com.raquo.snabbdom.simple.attrs.size
 import com.raquo.snabbdom.simple.events.onChange
 import com.raquo.snabbdom.simple.styles.opacity
 import com.raquo.snabbdom.simple.tags.{div, input}
+import com.raquo.snabbdom.simple.implicits._
 import org.scalajs.dom
  
 val foo: dom.Event => Unit = ???
  
 // Initialize snabbdom
 val container = dom.document.getElementById("my-app-container")
-val patch = Snabbdom.init(snabbdom.modules)
+val patch = Snabbdom.init(snabbdom.builtInModules)
  
 // Create a virtual node
 val node = div(
